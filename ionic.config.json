@@ -1,0 +1,7 @@
+{
+  "name": "formulaLeagueApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
