@@ -1,0 +1,13 @@
+:host {
+  --ion-background-color: transparent;
+}
+
+.home-content {
+  --background: linear-gradient(
+    160deg,
+    #0f2027,
+    #203a43,
+    #2c5364
+  );
+  padding-bottom: 32px;
+}

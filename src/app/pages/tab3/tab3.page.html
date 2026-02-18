@@ -1,0 +1,46 @@
+<ion-content class="menu">
+
+  <!-- USER -->
+  <div class="menu-user">
+    <div class="user-avatar">
+      <ion-icon name="person"></ion-icon>
+    </div>
+
+    <div class="user-data">
+      <h4>Juan Pérez</h4>
+      <span>120 pts</span>
+    </div>
+  </div>
+
+  <!-- NAV -->
+  <nav class="menu-nav">
+    <button routerLink="/home">
+      <ion-icon name="speedometer"></ion-icon>
+      <span>Pronóstico</span>
+    </button>
+
+    <button routerLink="/races">
+      <ion-icon name="flag"></ion-icon>
+      <span>Carreras</span>
+    </button>
+
+    <button routerLink="/ranking">
+      <ion-icon name="podium"></ion-icon>
+      <span>Ranking</span>
+    </button>
+
+    <button [routerLink]="['/tabs/myaccount']">
+      <ion-icon name="person"></ion-icon>
+      <span>Mi cuenta</span>
+    </button>
+  </nav>
+
+  <!-- LOGOUT -->
+  <div class="menu-footer">
+    <button class="logout">
+      <ion-icon name=""></ion-icon>
+      Cerrar sesión
+    </button>
+  </div>
+
+</ion-content>

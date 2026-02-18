@@ -1,2 +1,47 @@
-// For information on how to create your own theme, please refer to:
-// https://ionicframework.com/docs/theming/
+:root {
+  /** PRIMARY — Rojo Racing **/
+  --ion-color-primary: #ff3d00;
+  --ion-color-primary-rgb: 255, 61, 0;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #e03500;
+  --ion-color-primary-tint: #ff5633;
+
+  /** SECONDARY — Acero **/
+  --ion-color-secondary: #8fa1b3;
+  --ion-color-secondary-rgb: 143, 161, 179;
+  --ion-color-secondary-contrast: #0e0f1a;
+  --ion-color-secondary-contrast-rgb: 14, 15, 26;
+  --ion-color-secondary-shade: #7e8e9e;
+  --ion-color-secondary-tint: #9dadbc;
+
+  /** SUCCESS **/
+  --ion-color-success: #4caf50;
+  --ion-color-success-rgb: 76, 175, 80;
+  --ion-color-success-contrast: #ffffff;
+
+  /** WARNING **/
+  --ion-color-warning: #ffc107;
+  --ion-color-warning-rgb: 255, 193, 7;
+  --ion-color-warning-contrast: #0e0f1a;
+
+  /** DANGER **/
+  --ion-color-danger: #ff3d00;
+
+  /** BACKGROUND **/
+  --ion-background-color: #0b0d14;
+  --ion-background-color-rgb: 11, 13, 20;
+
+  /** TEXT **/
+  --ion-text-color: #ffffff;
+  --ion-text-color-rgb: 255, 255, 255;
+
+  /** CARD **/
+  --ion-card-background: #161a24;
+
+  /** ITEM **/
+  --ion-item-background: #ff3d00;
+
+  /** BORDER **/
+  --ion-border-color: rgba(255, 61, 0, 0.25);
+}

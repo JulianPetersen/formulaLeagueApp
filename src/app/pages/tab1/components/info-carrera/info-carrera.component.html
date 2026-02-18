@@ -1,0 +1,29 @@
+  <!-- HEADER -->
+  <div class="header">
+    <h2>🏁 Próxima carrera</h2>
+    <p>Armá tu pronóstico antes del cierre</p>
+      
+  </div>
+
+  <!-- CARD CARRERA -->
+  <ion-card class="race-card">
+    <ion-card-content>
+       
+      <div class="race-info">
+        <h1>{{race?.name}}</h1>
+        <p class="circuit">{{race?.circuit.name}}</p>
+      </div>
+
+      <div class="race-meta">
+        <div>
+          <span>📅</span>
+           <p>{{ race?.date | date:'dd MMM · HH:mm' }}</p>
+        </div>
+        <div>
+          <span>⏱️</span>
+          <p>Cierra en {{ remainingTime }}</p>
+        </div>
+      </div>
+
+    </ion-card-content>
+  </ion-card>

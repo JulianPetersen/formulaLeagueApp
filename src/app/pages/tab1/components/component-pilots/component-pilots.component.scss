@@ -1,0 +1,65 @@
+.pilots-card {
+  margin: 0 16px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  color: #fff;
+}
+
+.pilots-card h3 {
+  margin-bottom: 4px;
+}
+
+.hint {
+  font-size: 13px;
+  opacity: 0.7;
+  margin-bottom: 12px;
+}
+
+.pilot-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.pilot-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 12px;
+  background: #ff3d00;
+  color: white;
+
+
+
+  .position {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ff3d00, #ff9100);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+  }
+
+  .name {
+    flex: 1;
+  }
+
+  ion-icon {
+    font-size: 20px;
+    opacity: 0.6;
+  }
+}
+/* CTA */
+.submit-btn {
+  margin: 24px 16px 20px;
+  height: 52px;
+  font-size: 16px;
+  font-weight: 600;
+  --background: linear-gradient(135deg, #ff3d00, #ff9100);
+  --box-shadow: 0 10px 25px rgba(255, 61, 0, 0.4);
+}
+
