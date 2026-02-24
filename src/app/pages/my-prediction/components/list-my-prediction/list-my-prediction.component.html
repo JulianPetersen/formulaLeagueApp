@@ -1,0 +1,50 @@
+<ion-content class="home-content">
+  <div class="container">
+
+    <div 
+      class="prediction-card"
+      *ngFor="let prediction of predictions; trackBy: trackById">
+
+      <!-- HEADER -->
+      <div class="card-header">
+        <div class="points">
+          🏆 {{ prediction.points }} pts
+        </div>
+
+        <div 
+          class="status"
+          [ngClass]="prediction.processed ? 'processed' : 'pending'">
+          {{ prediction.processed ? 'Procesado' : 'Pendiente' }}
+        </div>
+      </div>
+
+      <!-- INFO -->
+      <div class="card-info">
+        <div class="info-item">
+          📅 {{ prediction.createdAt | date:'dd/MM/yyyy HH:mm' }}
+        </div>
+        <div class="info-item">
+          🏁 Posiciones cargadas: {{ prediction.positions?.length }}
+        </div>
+      </div>
+
+      <!-- POSITIONS -->
+      <div class="positions">
+        <div 
+          class="position-item"
+          *ngFor="let pos of prediction.positions; let i = index">
+          
+          <span class="position-number">
+            {{ i + 1 }}
+          </span>
+
+          <span class="position-driver">
+            {{ pos.pilot.name || 'Piloto' }}
+          </span>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</ion-content>

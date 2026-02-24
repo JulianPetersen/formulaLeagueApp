@@ -63,3 +63,12 @@
   --box-shadow: 0 10px 25px rgba(255, 61, 0, 0.4);
 }
 
+.prediction-saved {
+  text-align: center;
+  margin-top: 16px;
+  padding: 12px;
+  border-radius: 12px;
+  background: rgba(255, 61, 0, 0.1);
+  color: var(--ion-color-primary);
+  font-weight: 600;
+}

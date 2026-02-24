@@ -14,20 +14,20 @@
 
   <!-- NAV -->
   <nav class="menu-nav">
-    <button routerLink="/home">
+    <button [routerLink]="['/tabs/my-prediction']" >
       <ion-icon name="speedometer"></ion-icon>
-      <span>Pronóstico</span>
+      <span>Mis Pronósticos</span>
     </button>
 
-    <button routerLink="/races">
-      <ion-icon name="flag"></ion-icon>
-      <span>Carreras</span>
+    <button routerLink="/home">
+      <ion-icon name="gift"></ion-icon>
+      <span>Premios</span>
     </button>
 
-    <button routerLink="/ranking">
+    <!-- <button routerLink="/ranking">
       <ion-icon name="podium"></ion-icon>
       <span>Ranking</span>
-    </button>
+    </button> -->
 
     <button [routerLink]="['/tabs/myaccount']">
       <ion-icon name="person"></ion-icon>

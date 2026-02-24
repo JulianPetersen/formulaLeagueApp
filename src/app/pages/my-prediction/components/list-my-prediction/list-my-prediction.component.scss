@@ -1,0 +1,103 @@
+:host {
+  --ion-background-color: transparent;
+}
+
+.home-content {
+  --background: linear-gradient(
+    160deg,
+    #0f2027,
+    #203a43,
+    #2c5364
+  );
+  padding: 16px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.prediction-card {
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(10px);
+  border-radius: 18px;
+  padding: 18px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: transform 0.2s ease;
+}
+
+.prediction-card:hover {
+  transform: translateY(-4px);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.points {
+  font-size: 20px;
+  font-weight: bold;
+  color: #ffd700;
+}
+
+.status {
+  padding: 6px 12px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.processed {
+  background-color: rgba(0, 255, 128, 0.15);
+  color: #00ff99;
+}
+
+.pending {
+  background-color: rgba(255, 165, 0, 0.15);
+  color: #ffa500;
+}
+
+.card-info {
+  font-size: 14px;
+  opacity: 0.85;
+  margin-bottom: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.positions {
+  max-height: 200px;
+  overflow-y: auto;
+  margin-top: 10px;
+  padding-right: 4px;
+}
+
+.position-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.position-number {
+  width: 24px;
+  height: 24px;
+  background: #e10600; // rojo F1
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.position-driver {
+  font-size: 14px;
+}

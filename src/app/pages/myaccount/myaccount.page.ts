@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent,IonCard,IonCardContent,IonButton } from '@ionic/angular/standalone';
+import { UsersService } from 'src/app/services/users';
+import { User } from 'src/app/models/user';
+import { AuthService } from 'src/app/services/auth-service';
 
 @Component({
   selector: 'app-myaccount',
@@ -12,22 +15,29 @@ import { IonContent,IonCard,IonCardContent,IonButton } from '@ionic/angular/stan
 })
 export class MyaccountPage implements OnInit {
 
-  constructor() { }
+  constructor(private userService:UsersService, private auth:AuthService) { }
 
   ngOnInit() {
+    this.getInfoUSer()
   }
 
 
-  user = {
-  name: 'Julian',
-  email: 'test@test.com',
-  role: 'user',
-  points: 12,
-  createdAt: new Date()
-};
+  user:User;
+
+
+getInfoUSer(){
+  this.userService.getInfoUser()
+    .subscribe({
+      next: ((res:User)=> {
+        this.user = res;
+        console.log(res)
+      })
+    })
+}
+
 
 
 logout(){
-
+  this.auth.logout()
 }
 }

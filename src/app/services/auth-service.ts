@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { loguinResponse } from '../models/auth';
 import { GlobalService } from './global';
+import { Router } from '@angular/router';
 
 const TOKEN_KEY = 'tokenApp';
 
@@ -11,7 +12,7 @@ const TOKEN_KEY = 'tokenApp';
 })
 export class AuthService {
 
-  constructor(private http:HttpClient, private global:GlobalService){
+  constructor(private http:HttpClient, private global:GlobalService, private router:Router){
 
   }
 
@@ -29,5 +30,7 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem(TOKEN_KEY);
+    this.router.navigateByUrl('login')
   }
+
 }

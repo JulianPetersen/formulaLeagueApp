@@ -4,19 +4,15 @@
     <h3>Tu pronóstico</h3>
     <p class="hint">Arrastrá para ordenar del 1° al 10°</p>
 
-    <ion-reorder-group
-      [disabled]="false"
-      (ionItemReorder)="doReorder($event)">
+    <ion-reorder-group [disabled]="predictionAlreadyExists" (ionItemReorder)="doReorder($event)">
 
-      <ion-item
-        *ngFor="let pilot of listPilots; let i = index"
-        class="pilot-item">
+      <ion-item *ngFor="let pilot of listPilots; let i = index" class="pilot-item">
 
         <ion-label>
-          <strong>#{{ i + 1 }}</strong>  {{ pilot.name }}
+          <strong>#{{ i + 1 }}</strong> {{ pilot.name }}
         </ion-label>
         <ion-avatar>
-         <img [src]="pilot.img" [alt]="pilot.name" />
+          <img [src]="pilot.img" [alt]="pilot.name" />
         </ion-avatar>
         <ion-reorder slot="end"></ion-reorder>
 
@@ -24,15 +20,21 @@
 
     </ion-reorder-group>
 
+  <div *ngIf="predictionAlreadyExists" class="prediction-saved">
+  ✅ Pronóstico enviado
+</div>
   </ion-card-content>
+
 </ion-card>
 
-  <!-- CTA -->
-  <ion-button
-    expand="block"
-    shape="round"
-    class="submit-btn"
-    (click)="enviarData()">
-    
-    Guardar pronóstico
-  </ion-button>
+<!-- CTA -->
+<ion-button
+  *ngIf="!predictionAlreadyExists"
+  expand="block"
+  shape="round"
+  class="submit-btn"
+  (click)="enviarData()">
+
+  Guardar pronóstico
+</ion-button>
+

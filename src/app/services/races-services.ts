@@ -26,7 +26,15 @@ export class RacesServices {
     return this.http.get<RaceModel[]>(`${this.global.api}/api/race`, { headers });
   }
 
-    getAllRacesUpcoming() {
+    getAllRacesLista() {
+    const token = this.getToken();
+    const headers = new HttpHeaders({
+      'authorization': `Bearer ${token}` || '',
+    });
+    return this.http.get<RaceModel[]>(`${this.global.api}/api/race/lista`, { headers });
+  }
+
+  getAllRacesUpcoming() {
     const token = this.getToken();
     const headers = new HttpHeaders({
       'authorization': `Bearer ${token}` || '',

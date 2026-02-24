@@ -1,71 +1,75 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges, OnDestroy } from '@angular/core';
 import {
   IonCard,
   IonCardContent
 } from '@ionic/angular/standalone';
-import { DatePipe } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { RaceModel } from 'src/app/models/race-model';
-
 
 @Component({
   selector: 'app-info-carrera',
   templateUrl: './info-carrera.component.html',
-  standalone:true,
-  imports:[IonCard,IonCardContent,DatePipe],
+  standalone: true,
+  imports: [IonCard, IonCardContent, DatePipe, CommonModule],
   styleUrls: ['./info-carrera.component.scss'],
 })
-export class InfoCarreraComponent  implements OnChanges {
+export class InfoCarreraComponent implements OnChanges, OnDestroy {
 
- @Input() race!: RaceModel;
+  @Input() race!: RaceModel;
 
   remainingTime = '';
   private intervalId: any;
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['race'] && this.race?.cutoff) {
-
-      // ⛔ Evitar múltiples intervals
-      if (this.intervalId) {
-        clearInterval(this.intervalId);
-      }
-
-      this.updateRemainingTime();
-
-      this.intervalId = setInterval(() => {
-        this.updateRemainingTime();
-      }, 1000);
+      this.startTimer();
     }
   }
 
-  updateRemainingTime() {
-  const now = Date.now();
-  const cutoff = new Date(this.race.cutoff).getTime();
+  startTimer() {
+    if (this.intervalId) {
+      clearInterval(this.intervalId);
+    }
 
-  let diff = cutoff - now;
+    this.updateRemainingTime();
 
-  if (diff <= 0) {
-    this.remainingTime = 'Cerrado';
-    clearInterval(this.intervalId);
-    return;
+    this.intervalId = setInterval(() => {
+      this.updateRemainingTime();
+    }, 1000);
   }
 
-  const days = Math.floor(diff / 86_400_000);
-  diff %= 86_400_000;
+  updateRemainingTime() {
+    const now = Date.now();
+    const cutoff = new Date(this.race.cutoff).getTime();
+    let diff = cutoff - now;
 
-  const hours = Math.floor(diff / 3_600_000);
-  diff %= 3_600_000;
+    if (diff <= 0) {
+      this.remainingTime = 'Cerrado';
+      clearInterval(this.intervalId);
+      return;
+    }
 
-  const minutes = Math.floor(diff / 60_000);
-  const seconds = Math.floor((diff % 60_000) / 1000);
+    const days = Math.floor(diff / 86_400_000);
+    diff %= 86_400_000;
 
-  // 🧠 Mostrar días solo si existen
-  this.remainingTime = days > 0
-    ? `${days}d ${this.pad(hours)}:${this.pad(minutes)}:${this.pad(seconds)}`
-    : `${this.pad(hours)}:${this.pad(minutes)}:${this.pad(seconds)}`;
-}
+    const hours = Math.floor(diff / 3_600_000);
+    diff %= 3_600_000;
 
-pad(value: number) {
-  return value.toString().padStart(2, '0');
-}
+    const minutes = Math.floor(diff / 60_000);
+    const seconds = Math.floor((diff % 60_000) / 1000);
 
+    this.remainingTime = days > 0
+      ? `${days}d ${this.pad(hours)}:${this.pad(minutes)}:${this.pad(seconds)}`
+      : `${this.pad(hours)}:${this.pad(minutes)}:${this.pad(seconds)}`;
+  }
+
+  pad(value: number) {
+    return value.toString().padStart(2, '0');
+  }
+
+  ngOnDestroy() {
+    if (this.intervalId) {
+      clearInterval(this.intervalId);
+    }
+  }
 }

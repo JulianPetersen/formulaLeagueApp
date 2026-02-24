@@ -1,17 +1,24 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 2
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<!-- CARD CARRERA -->
+<ion-content class="home-content">
+    @for (race of allRacesUpcoming; track $index) {
+    <ion-card class="race-card">
+        <ion-card-content>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
+            <div class="race-info">
+                <h1>{{race?.name}}</h1>
+                <p class="circuit">{{race?.circuit.name}}</p>
+            </div>
 
+            <div class="race-meta">
+                <div>
+                    <span>📅</span>
+                    <p>{{ race?.date | date:'dd MMM · HH:mm' }}</p>
+                </div>
 
+            </div>
+
+        </ion-card-content>
+    </ion-card>
+
+    }
 </ion-content>

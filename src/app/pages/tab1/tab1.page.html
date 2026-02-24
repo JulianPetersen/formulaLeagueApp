@@ -1,6 +1,19 @@
 <ion-content class="home-content">
+    <!-- HEADER -->
+  <div class="header">
+    <h2>🏁 Próximas carreras</h2>
+    <p>Armá tu pronóstico antes del cierre</p>
+      
+  </div>
+  
+<div *ngFor="let race of allRacesUpcoming">
 
-  <!-- PILOTOS -->
-<app-info-carrera [race]="raceUpcoming" ></app-info-carrera>   
-<app-component-pilots [listPilots]="AllPilotosRace" [raceId]="raceId"></app-component-pilots>
+  <app-info-carrera [race]="race"></app-info-carrera>
+
+  <app-component-pilots 
+    [listPilots]="race.pilots"
+    [raceId]="race._id">
+  </app-component-pilots>
+
+</div>
 </ion-content>

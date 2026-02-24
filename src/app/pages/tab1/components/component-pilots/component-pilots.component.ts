@@ -1,5 +1,4 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { list } from 'ionicons/icons';
 import { PilotsModel } from 'src/app/models/pilots-model';
 import { CommonModule } from '@angular/common';
 import {
@@ -33,6 +32,8 @@ export class ComponentPilotsComponent  implements OnChanges {
  
   @Input() listPilots: PilotsModel[] = [];
   @Input() raceId: string
+  predictionAlreadyExists = false;
+  isLoadingPrediction = true;
 
   constructor(private prediction:PredictionsService,private global:GlobalService) { }
 
@@ -43,6 +44,9 @@ ngOnChanges(changes: SimpleChanges) {
         'pilotos recibidos en el hijo',
         this.listPilots
       );
+    }
+    if (changes['raceId'] && this.raceId) {
+      this.checkIfPredictionExists();
     }
     console.log('raceId desde component pilot',this.raceId)
   }
@@ -76,11 +80,42 @@ ngOnChanges(changes: SimpleChanges) {
       .subscribe({
         next: ((res:any) => {
           console.log(res)
+          this.checkIfPredictionExists()
         }),
         error: (err => {
           console.log(err)
+          this.global.presentAlert('ERROR','',err.message)
         })
       })
   }
   
+
+  checkIfPredictionExists() {
+  this.prediction.getMyPredictionByRace(this.raceId)
+    .subscribe({
+      next: (res: any) => {
+        this.predictionAlreadyExists = true;
+        this.isLoadingPrediction = false;
+
+        // Opcional: ordenar pilotos según lo guardado
+        this.applySavedOrder(res.positions);
+      },
+      error: (err) => {
+        // Si da 404 → no existe → puede pronosticar
+        if (err.status === 404) {
+          this.predictionAlreadyExists = false;
+        }
+
+        this.isLoadingPrediction = false;
+      }
+    });
+}
+
+applySavedOrder(savedPositions: any[]) {
+  this.listPilots.sort((a, b) => {
+    const posA = savedPositions.find(p => p.pilot._id === a._id)?.position;
+    const posB = savedPositions.find(p => p.pilot._id === b._id)?.position;
+    return (posA || 0) - (posB || 0);
+  });
+}
 }

@@ -16,11 +16,27 @@ export class PredictionsService {
     return localStorage.getItem('tokenApp');
   }
 
-  createPrediction(raceId:string, data: PredictionsModel) {
+  createPrediction(raceId: string, data: PredictionsModel) {
     const token = this.getToken();
     const headers = new HttpHeaders({
       'authorization': `Bearer ${token}` || '',
     });
     return this.http.post(`${this.global.api}/api/prediction/${raceId}`, data, { headers })
+  }
+
+  getMyPredictionByRace(raceId: string) {
+    const token = this.getToken();
+    const headers = new HttpHeaders({
+      'authorization': `Bearer ${token}` || '',
+    });
+    return this.http.get(`${this.global.api}/api/prediction/mi-prediction-by-race/${raceId}`, { headers })
+  }
+
+    getMyAllPredictions() {
+    const token = this.getToken();
+    const headers = new HttpHeaders({
+      'authorization': `Bearer ${token}` || '',
+    });
+    return this.http.get <PredictionsModel[]>(`${this.global.api}/api/prediction/mi-predictions`, { headers })
   }
 }

@@ -11,3 +11,42 @@
   );
   padding-bottom: 32px;
 }
+
+/* CARD CARRERA */
+.race-card {
+  margin: 20px 16px 16px;
+  border-radius: 20px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 61, 0, 0.15),
+    rgba(255, 145, 0, 0.15)
+  );
+  backdrop-filter: blur(10px);
+  color: #fff;
+}
+
+.race-info h1 {
+  font-size: 20px;
+  margin-bottom: 4px;
+}
+
+.circuit {
+  font-size: 14px;
+  opacity: 0.85;
+}
+
+.race-meta {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16px;
+
+  div {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    opacity: 0.9;
+  }
+}
+
+

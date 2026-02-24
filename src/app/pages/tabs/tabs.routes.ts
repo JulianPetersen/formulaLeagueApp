@@ -27,6 +27,10 @@ export const routes: Routes = [
         loadComponent: () => import('../myaccount/myaccount.page').then(m => m.MyaccountPage)
       },
       {
+        path: 'my-prediction',
+        loadComponent: () => import('../my-prediction/my-prediction.page').then(m => m.MyPredictionPage)
+      },
+      {
         path: '',
         redirectTo: '/tabs/tab1',
         pathMatch: 'full',

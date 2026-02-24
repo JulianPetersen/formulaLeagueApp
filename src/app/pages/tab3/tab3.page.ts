@@ -2,7 +2,7 @@ import { Component, EnvironmentInjector, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { IonContent,IonIcon} from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { speedometer,flag,podium,person, } from 'ionicons/icons';
+import { speedometer,flag,podium,person,gift } from 'ionicons/icons';
 
 @Component({
   selector: 'app-tab3',
@@ -14,11 +14,9 @@ export class Tab3Page {
     public environmentInjector = inject(EnvironmentInjector);
 
   constructor() {
-    addIcons({ speedometer,flag,podium,person});
+    addIcons({ speedometer,flag,podium,person,gift});
   }
 
 
-  goto(){
-    console.log('goto myaccount')
-  }
+
 }

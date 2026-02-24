@@ -1,24 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/angular/standalone';
-import type { ItemReorderEventDetail } from '@ionic/angular';
-import {
-  IonCard,
-  IonCardHeader,
-  IonCardTitle,
-  IonCardContent,
-  IonItem,
-  IonButton,
-  IonCardSubtitle,
-  IonLabel,
-  IonSelect,
-  IonSelectOption,
-  IonList,
-  IonListHeader,
-  IonIcon,
-  IonReorder,
-  IonReorderGroup
-} from '@ionic/angular/standalone';
+import {IonContent } from '@ionic/angular/standalone';
+
 import { RacesServices } from 'src/app/services/races-services';
 import { RaceModel } from 'src/app/models/race-model';
 import { PilotsModel } from 'src/app/models/pilots-model';
@@ -29,14 +12,12 @@ import { InfoCarreraComponent } from "./components/info-carrera/info-carrera.com
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss'],
   standalone: true,
-  imports: [IonContent, CommonModule
-    , ComponentPilotsComponent, InfoCarreraComponent],
+  imports: [CommonModule,
+    ComponentPilotsComponent, InfoCarreraComponent, IonContent],
 })
 export class Tab1Page {
 
-  AllPilotosRace: PilotsModel[] = []
-  raceUpcoming:RaceModel;
-  raceId:string;
+
   allRacesUpcoming:RaceModel[]
   constructor(private races: RacesServices) {
   }
@@ -46,12 +27,11 @@ export class Tab1Page {
   }
 
   getRace() {
-    this.races.getAllRacesUpcoming()
+    this.races.getAllRacesLista()
       .subscribe((res: RaceModel[]) => {
+        console.log(res)
         this.allRacesUpcoming = res;
-        this.raceUpcoming = res[0]
-        this.AllPilotosRace = res[0].pilots
-        this.raceId = res[0]._id
+
       })
   }
 }
