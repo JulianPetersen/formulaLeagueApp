@@ -5,6 +5,7 @@ import { IonContent,IonButton,IonSpinner,IonCard,IonInput,IonCardContent,IonItem
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth-service';
 import { loguinResponse } from 'src/app/models/auth';
+import { AdmobService } from 'src/app/services/admob-service';
 
 @Component({
   selector: 'app-login',
@@ -31,11 +32,12 @@ export class LoginPage implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private auth:AuthService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
   ) { }
 
 
-  ngOnInit() {
+   ngOnInit() {
+    
   }
 
   submit() {
@@ -64,4 +66,5 @@ export class LoginPage implements OnInit {
     }
   });
 }
+
 }

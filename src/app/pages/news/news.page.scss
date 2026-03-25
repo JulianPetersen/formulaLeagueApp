@@ -1,0 +1,103 @@
+.news-content {
+  --background: linear-gradient(
+    160deg,
+    #0f2027,
+    #203a43,
+    #2c5364
+  );
+  padding-bottom: 32px;
+}
+
+/* HEADER */
+
+.news-header {
+  margin-bottom: 24px;
+  padding: 30px;
+
+  h2 {
+    margin: 0;
+    font-weight: 700;
+  }
+
+  p {
+    margin-top: 4px;
+    font-size: 14px;
+    opacity: 0.7;
+  }
+}
+
+/* FEATURED */
+
+.featured-card {
+  overflow: hidden;
+  margin-bottom: 20px;
+  border: 1px solid rgba(255, 61, 0, 0.35);
+
+  img {
+    height: 200px;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  h2 {
+    font-size: 20px;
+    margin-bottom: 6px;
+  }
+
+  p {
+    font-size: 14px;
+    opacity: 0.8;
+    color:white
+  }
+}
+
+/* LIST */
+
+.news-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* CARD */
+
+.news-card {
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+
+  background: var(--ion-card-background);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+
+  img {
+    width: 120px;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  ion-card-content {
+    padding: 12px;
+  }
+
+  h3 {
+    font-size: 16px;
+    margin: 0 0 4px;
+  }
+
+  p {
+    font-size: 13px;
+    opacity: 0.7;
+  }
+
+  .meta {
+    margin-top: 6px;
+    font-size: 12px;
+    opacity: 0.5;
+  }
+
+  transition: 0.2s;
+
+  &:hover {
+    border: 1px solid rgba(255, 61, 0, 0.35);
+  }
+}

@@ -25,4 +25,22 @@ export class UsersService {
     });
     return this.http.get(`${this.global.api}/api/user`, { headers })
   }
+
+
+  getTopUsers() {
+    const token = this.getToken();
+    const headers = new HttpHeaders({
+      'authorization': `Bearer ${token}` || '',
+    });
+    return this.http.get(`${this.global.api}/api/user/getTopUser`, { headers })
+  }
+
+
+    addUserName(username:string) {
+    const token = this.getToken();
+    const headers = new HttpHeaders({
+      'authorization': `Bearer ${token}` || '',
+    });
+    return this.http.patch(`${this.global.api}/api/user/addUserName`,{username} ,{ headers })
+  }
 }

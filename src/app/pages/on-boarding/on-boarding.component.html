@@ -1,0 +1,119 @@
+<ion-content class="onboarding">
+
+  <swiper-container pagination="true" pagination-clickable="true" space-between="30" class="swiper">
+
+    <swiper-slide>
+
+      <div class="card">
+
+        <img src="assets/logo.png" class="logo">
+
+        <h2>Bienvenido a Formula League</h2>
+
+        <p>
+          Competí pronosticando resultados
+          de Fórmula 1.
+        </p>
+
+      </div>
+
+    </swiper-slide>
+
+    <swiper-slide>
+
+      <div class="card">
+
+        <div class="emoji">🏁</div>
+
+        <h2>Armá tu pronóstico</h2>
+
+        <p>
+          Ordená los pilotos del 1° al 22°
+          antes de cada carrera.
+        </p>
+
+      </div>
+
+    </swiper-slide>
+
+    <swiper-slide>
+
+      <div class="card">
+
+        <div class="emoji">🏆</div>
+
+        <h2>Sumá puntos</h2>
+
+        <p>
+          Cuanto más preciso sea tu pronóstico
+          más puntos ganás.
+        </p>
+
+      </div>
+
+    </swiper-slide>
+
+    <swiper-slide>
+
+      <div class="card">
+
+        <div class="emoji">🔥</div>
+
+        <h2>Competí en el ranking.</h2>
+        <p> El participante con mas puntos a la fecha de finalizacion del premio, se llevara el premio acumulado</p>
+      </div>
+
+    </swiper-slide>
+
+
+    <swiper-slide>
+      <div class="card">
+
+        <div class="emoji">💰</div>
+
+        <h2>Formula League aumenta su pozo por cantidad de usuarios.</h2>
+
+        <p> cuanto mas usuarios haya participando, mas grande
+          será el pozo, <b>no olvides recomendar la app a tus amigos</b></p>
+
+        @if (infoUser?.username) {
+        <ion-button expand="block" (click)="finish()">
+          Empezar
+        </ion-button>
+        }
+
+      </div>
+
+    </swiper-slide>
+
+
+     @if (!infoUser?.username) {
+    <swiper-slide>
+     
+      <div class="cardForm-slide">
+
+        <div class="emoji">👥</div>
+
+        <h2>Elije un nombre de usuario</h2>
+
+        <p> Para comenzar, elije un nombre de usuario.</p>
+
+        <ion-item>
+          <ion-input label="Stacked label" labelPlacement="stacked" placeholder="Enter text"
+            [(ngModel)]="username"></ion-input>
+        </ion-item>
+
+        <ion-button expand="block" (click)="addUserName()">
+          Empezar
+        </ion-button>
+
+      </div>
+ 
+    </swiper-slide>
+
+   }
+
+
+  </swiper-container>
+
+</ion-content>

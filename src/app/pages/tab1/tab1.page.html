@@ -1,19 +1,33 @@
 <ion-content class="home-content">
-    <!-- HEADER -->
+
+@if (prize?.status == 'activo'){
+  <div class="season-prize">
+    <div class="prize-icon">
+      <ion-icon name="trophy"></ion-icon>
+    </div>
+    <div class="prize-content">
+      <span class="season-label">Premio temporada 2026</span>
+      <h3> ${{prize?.amount}}</h3>
+      <p>El usuario con más puntos al final del campeonato gana.</p>
+    </div>
+  </div>
+}
+
+
+
+  <!-- HEADER -->
   <div class="header">
     <h2>🏁 Próximas carreras</h2>
     <p>Armá tu pronóstico antes del cierre</p>
-      
+
   </div>
-  
-<div *ngFor="let race of allRacesUpcoming">
 
-  <app-info-carrera [race]="race"></app-info-carrera>
+  <div *ngFor="let race of allRacesUpcoming">
 
-  <app-component-pilots 
-    [listPilots]="race.pilots"
-    [raceId]="race._id">
-  </app-component-pilots>
+    <app-info-carrera [race]="race"></app-info-carrera>
 
-</div>
+    <app-component-pilots [listPilots]="race.pilots" [raceId]="race._id">
+    </app-component-pilots>
+
+  </div>
 </ion-content>

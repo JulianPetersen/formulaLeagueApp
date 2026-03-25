@@ -7,8 +7,8 @@
     </div>
 
     <div class="user-data">
-      <h4>Juan Pérez</h4>
-      <span>120 pts</span>
+      <h4>{{userInfo?.username}}</h4>
+      <span>{{userInfo?.points}}</span>
     </div>
   </div>
 
@@ -24,20 +24,26 @@
       <span>Premios</span>
     </button>
 
-    <!-- <button routerLink="/ranking">
+    <button [routerLink]="['/tabs/user-ranking']">
       <ion-icon name="podium"></ion-icon>
       <span>Ranking</span>
-    </button> -->
+    </button>
 
     <button [routerLink]="['/tabs/myaccount']">
       <ion-icon name="person"></ion-icon>
       <span>Mi cuenta</span>
     </button>
+
+    
+    <button [routerLink]="['/tabs/news']">
+      <ion-icon name="newspaper"></ion-icon>
+      <span>Noticias</span>
+    </button>
   </nav>
 
   <!-- LOGOUT -->
   <div class="menu-footer">
-    <button class="logout">
+    <button class="logout" (click)="logout()">
       <ion-icon name=""></ion-icon>
       Cerrar sesión
     </button>

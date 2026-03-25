@@ -5,7 +5,7 @@ import { GlobalService } from './global';
 import { Router } from '@angular/router';
 
 const TOKEN_KEY = 'tokenApp';
-
+const user = 'user'
 
 @Injectable({
   providedIn: 'root',
@@ -30,7 +30,12 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem(TOKEN_KEY);
+    localStorage.removeItem(user);
     this.router.navigateByUrl('login')
   }
 
+
+  register(data: { email: string; name:string; password: string }){
+    return this.http.post<any>(`${this.global.api}/api/auth/register`, data)
+  }
 }

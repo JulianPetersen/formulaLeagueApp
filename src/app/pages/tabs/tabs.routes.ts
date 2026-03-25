@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { TabsPage } from './tabs.page';
 import { authGuard } from 'src/app/guards/auth-guard';
+import { OnboardingGuard } from 'src/app/guards/onboarding-guard';
 
 export const routes: Routes = [
   {
@@ -11,6 +12,7 @@ export const routes: Routes = [
         path: 'tab1',
         loadComponent: () =>
           import('../tab1/tab1.page').then((m) => m.Tab1Page),
+        canActivate: [OnboardingGuard]
       },
       {
         path: 'tab2',
@@ -31,10 +33,24 @@ export const routes: Routes = [
         loadComponent: () => import('../my-prediction/my-prediction.page').then(m => m.MyPredictionPage)
       },
       {
+        path: 'user-ranking',
+        loadComponent: () => import('../user-ranking/user-ranking.page').then(m => m.UserRankingPage)
+      },
+      {
         path: '',
         redirectTo: '/tabs/tab1',
         pathMatch: 'full',
       },
+      {
+        path: 'news',
+        loadComponent: () => import('../news/news.page').then(m => m.NewsPage)
+      },
+      {
+        path: 'news-detail/:slug',
+        loadComponent: () =>
+          import('../news-detail/news-detail.page')
+            .then(m => m.NewsDetailPage)
+      }
     ],
     canActivate: [authGuard]
   },

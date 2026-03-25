@@ -1,0 +1,52 @@
+<ion-content class="leaderboard home-content">
+
+  <!-- HEADER -->
+  <div class="leaderboard-header">
+    <h2>🏆 Ranking General</h2>
+    <p>Top 10 usuarios con más puntos</p>
+  </div>
+
+  <!-- PODIUM -->
+  <div class="podium" *ngIf="topUsers.length >= 3">
+
+    <!-- 2° -->
+    <div class="podium-item second">
+      <span class="position">2</span>
+      <h4>{{ topUsers[1].username }}</h4>
+      <span class="points">{{ topUsers[1].points }} pts</span>
+    </div>
+
+    <!-- 1° -->
+    <div class="podium-item first">
+      <span class="position">1</span>
+      <h3>{{ topUsers[0].username }}</h3>
+      <span class="points">{{ topUsers[0].points }} pts</span>
+    </div>
+
+    <!-- 3° -->
+    <div class="podium-item third">
+      <span class="position">3</span>
+      <h4>{{ topUsers[2].username }}</h4>
+      <span class="points">{{ topUsers[2].points }} pts</span>
+    </div>
+
+  </div>
+
+  <!-- RESTO DEL RANKING -->
+  <div class="ranking-list">
+    <div 
+      *ngFor="let user of topUsers.slice(3); let i = index"
+      class="ranking-item"
+      [class.current-user]="user._id === currentUserId">
+
+      <span class="rank-number">{{ i + 4 }}</span>
+
+      <div class="user-info">
+        <span class="user-name">{{ user.username }}</span>
+        <span class="user-points">{{ user.points }} pts</span>
+      </div>
+
+    </div>
+  </div>
+
+</ion-content>

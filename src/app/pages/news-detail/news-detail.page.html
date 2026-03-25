@@ -1,0 +1,54 @@
+<ion-header translucent="true">
+  <ion-toolbar>
+
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/news"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>Noticia</ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="news-detail-content">
+
+  <!-- HERO IMAGE -->
+  <div class="hero" *ngIf="news">
+
+    <img [src]="news.coverImage">
+
+    <div class="overlay"></div>
+
+    <div class="hero-text">
+      <h1>{{ news.title }}</h1>
+      <p class="date">
+        {{ news.createdAt | date:'dd MMM yyyy' }}
+      </p>
+    </div>
+
+  </div>
+
+  <!-- BODY -->
+  <div class="content-wrapper" *ngIf="news">
+
+    <ion-card class="summary-card" *ngIf="news.summary">
+      <ion-card-content>
+        {{ news.summary }}
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card class="content-card">
+      <ion-card-content>
+
+        <div 
+          class="article-content"
+          [innerHTML]="news.content">
+        </div>
+
+      </ion-card-content>
+    </ion-card>
+
+  </div>
+
+</ion-content>

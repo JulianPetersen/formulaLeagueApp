@@ -1,0 +1,65 @@
+
+<ion-content class="news-content">
+
+  <!-- HEADER -->
+  <div class="news-header">
+    <h2>📰 Noticias</h2>
+    <p>Últimas novedades del mundo motor</p>
+  </div>
+
+
+  
+  <!-- FEATURED -->
+<ion-card 
+  class="featured-card"
+  *ngIf="news?.length"
+  [routerLink]="['/tabs/news-detail', news[0].slug]"
+>
+
+  <img [src]="news[0].coverImage">
+
+  <ion-card-content>
+    <h2>{{ news[0].title }}</h2>
+    <p>{{ news[0].summary }}</p>
+  </ion-card-content>
+
+</ion-card>
+
+  <!-- LIST -->
+  <div class="news-list">
+
+    <ion-card 
+      class="featured-card"
+      *ngFor="let article of news.slice(1)"
+       [routerLink]="['/tabs/news-detail', article.slug]"
+      >
+
+      <img [src]="article.coverImage">
+
+      <ion-card-content>
+
+        <h3>{{ article.title }}</h3>
+
+        <p>{{ article.summary }}</p>
+
+        <div class="meta">
+          {{ article.createdAt | date:'dd/MM/yyyy' }}
+        </div>
+
+      </ion-card-content>
+
+    </ion-card>
+
+  </div>
+
+  <!-- INFINITE SCROLL -->
+  <ion-infinite-scroll (ionInfinite)="loadMore($event)">
+
+    <ion-infinite-scroll-content
+      loadingSpinner="dots"
+      loadingText="Cargando más noticias...">
+    </ion-infinite-scroll-content>
+
+  </ion-infinite-scroll>
+
+</ion-content>

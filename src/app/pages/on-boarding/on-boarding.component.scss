@@ -1,0 +1,86 @@
+.onboarding {
+  --background: linear-gradient(
+    160deg,
+    #0f2027,
+    #203a43,
+    #2c5364
+  );
+}
+
+/* botón saltar */
+
+.skip {
+  position: absolute;
+  right: 20px;
+  top: 50px;
+  z-index: 10;
+  font-size: 14px;
+  opacity: 0.7;
+}
+
+/* swiper */
+
+.swiper {
+  height: 100%;
+}
+
+/* card central */
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+  padding: 40px;
+}
+
+.logo {
+  width: 110px;
+  margin: 0 auto 25px;
+}
+
+.emoji {
+  font-size: 60px;
+  margin-bottom: 20px;
+}
+
+h2 {
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+p {
+  font-size: 15px;
+  opacity: 0.75;
+  line-height: 1.5;
+}
+
+ion-button {
+  margin-top: 40px;
+  --background: #ff3d00;
+  --border-radius: 14px;
+}
+
+
+ion-item {
+  --background: transparent;
+  --highlight-height: 0;
+  margin-bottom: 12px;
+}
+
+ion-input {
+  --color: #fff;
+  --placeholder-color: rgba(255, 255, 255, 0.6);
+}
+.cardForm-slide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 80px;
+
+  ion-item{
+    width: 80%;
+  }
+}

@@ -1,0 +1,131 @@
+:host {
+  --ion-background-color: transparent;
+}
+
+.home-content {
+  --background: linear-gradient(
+    160deg,
+    #0f2027,
+    #203a43,
+    #2c5364
+  );
+  padding-bottom: 32px;
+}
+
+
+
+.leaderboard {
+  padding: 16px;
+}
+
+/* HEADER */
+.leaderboard-header {
+  margin: 24px;
+
+  h2 {
+    margin: 0;
+    font-weight: 700;
+  }
+
+  p {
+    margin: 4px 0 0;
+    opacity: 0.6;
+    font-size: 14px;
+  }
+}
+
+/* PODIUM */
+.podium {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.podium-item {
+  background: var(--ion-card-background);
+  border-radius: 18px;
+  padding: 16px;
+  text-align: center;
+  width: 100px;
+  position: relative;
+  border: 1px solid rgba(255, 61, 0, 0.2);
+
+  .position {
+    font-size: 22px;
+    font-weight: bold;
+    color: var(--ion-color-primary);
+  }
+
+  .points {
+    display: block;
+    margin-top: 6px;
+    font-size: 13px;
+    opacity: 0.7;
+  }
+}
+
+.first {
+  transform: scale(1.1);
+  box-shadow: 0 0 25px rgba(255, 61, 0, 0.15);
+}
+
+.second {
+  opacity: 0.85;
+}
+
+.third {
+  opacity: 0.75;
+}
+
+/* LISTA RESTANTE */
+.ranking-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+}
+
+.ranking-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px;
+  border-radius: 14px;
+  background: var(--ion-card-background);
+  border: 1px solid rgba(255, 61, 0, 0.08);
+
+  transition: 0.2s ease;
+
+  &:hover {
+    background: rgba(255, 61, 0, 0.05);
+  }
+}
+
+.rank-number {
+  font-weight: 700;
+  font-size: 16px;
+  width: 28px;
+}
+
+.user-info {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.user-name {
+  font-weight: 500;
+}
+
+.user-points {
+  color: var(--ion-color-primary);
+  font-weight: 600;
+}
+
+/* Usuario actual resaltado */
+.current-user {
+  border: 1px solid var(--ion-color-primary);
+  background: rgba(255, 61, 0, 0.08);
+}

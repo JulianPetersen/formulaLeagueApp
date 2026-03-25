@@ -1,7 +1,7 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.ionic.starter',
+  appId: 'com.frigg.formulaleague',
   appName: 'formulaLeagueApp',
   webDir: 'www'
 };
