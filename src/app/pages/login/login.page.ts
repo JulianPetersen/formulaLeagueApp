@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { IonContent,IonButton,IonSpinner,IonCard,IonInput,IonCardContent,IonItem } from '@ionic/angular/standalone';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { AuthService } from 'src/app/services/auth-service';
 import { loguinResponse } from 'src/app/models/auth';
 import { AdmobService } from 'src/app/services/admob-service';
@@ -12,7 +12,7 @@ import { AdmobService } from 'src/app/services/admob-service';
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
   standalone: true,
-  imports: [IonContent,CommonModule, FormsModule,IonButton,IonSpinner,IonCard,IonCardContent,IonItem,ReactiveFormsModule,IonInput]
+  imports: [IonContent,CommonModule, FormsModule,IonButton,IonSpinner,IonCard,IonCardContent,IonItem,ReactiveFormsModule,IonInput,RouterModule]
 })
 export class LoginPage implements OnInit {
 
