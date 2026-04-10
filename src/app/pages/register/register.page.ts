@@ -5,6 +5,7 @@ import { IonContent,IonButton,IonSpinner,IonCard,IonInput,IonCardContent,IonItem
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from 'src/app/services/auth-service';
 import { loguinResponse } from 'src/app/models/auth';
+import { GlobalService } from 'src/app/services/global';
 
 
 @Component({
@@ -30,6 +31,7 @@ export class RegisterPage implements OnInit {
     private router: Router,
     private auth:AuthService,
     private cdr: ChangeDetectorRef,
+    private global:GlobalService
   ) { }
 
 
@@ -46,7 +48,7 @@ export class RegisterPage implements OnInit {
   this.auth.register(this.form.getRawValue()).subscribe({
     next: (res:any) => {
       this.loading = false;
-
+        this.global.presentAlert('ATENCION', 'Confirma tu mail', 'Hemos enviado un mail para que verifiques tu cuenta.')
         this.router.navigateByUrl('/login');
       
       this.cdr.detectChanges();

@@ -49,6 +49,7 @@ export class LoginPage implements OnInit {
   this.auth.login(this.form.getRawValue()).subscribe({
     next: (res:loguinResponse) => {
       this.loading = false;
+      console.log(res)
 
 
         localStorage.setItem('user', JSON.stringify(res.user));

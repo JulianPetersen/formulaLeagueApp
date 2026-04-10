@@ -5,4 +5,5 @@ export interface User {
         role: string,
         points:number,
         username?:string
+        verified?:boolean
 }

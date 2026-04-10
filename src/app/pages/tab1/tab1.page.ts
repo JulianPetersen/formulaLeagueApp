@@ -29,7 +29,7 @@ export class Tab1Page {
     addIcons({ trophy});
   }
 
-  ngOnInit() {
+  ionViewWillEnter() {
     this.getRace()
     this.getActivePrize()
   }
