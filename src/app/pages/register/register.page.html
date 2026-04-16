@@ -39,11 +39,22 @@
           </div>
           }
 
+          <ion-item lines="none">
+            <ion-checkbox formControlName="aceptTerms"></ion-checkbox>
+            <label style="margin-left: 8px;">
+              Acepto los
+              <a (click)="$event.stopPropagation()"  (click)="openterms()">Términos y condiciones</a>
+              y 
+              <a (click)="$event.stopPropagation()" (click)="openterms()">Politicas de privacidad</a>
+            </label>
+          </ion-item>
+
 
         </form>
-          <p>{{this.error}}</p>
+        <p>{{this.error}}</p>
       </ion-card-content>
     </ion-card>
- <p class="registrate">¿Ya tienes una cuenta? <b [routerLink]="['/login']">Logueate</b></p>
+
+    <p class="registrate">¿Ya tienes una cuenta? <b [routerLink]="['/login']">Logueate</b></p>
   </div>
 </ion-content>

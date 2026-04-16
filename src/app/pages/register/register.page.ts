@@ -1,19 +1,19 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { IonContent,IonButton,IonSpinner,IonCard,IonInput,IonCardContent,IonItem } from '@ionic/angular/standalone';
+import { IonContent,IonButton,IonSpinner,IonCard,IonInput,IonCardContent,IonItem,IonCheckbox  } from '@ionic/angular/standalone';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from 'src/app/services/auth-service';
 import { loguinResponse } from 'src/app/models/auth';
 import { GlobalService } from 'src/app/services/global';
-
+import { Browser } from '@capacitor/browser';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.page.html',
   styleUrls: ['./register.page.scss'],
   standalone: true,
-  imports: [IonContent,CommonModule, FormsModule,IonButton,IonSpinner,IonCard,IonCardContent,IonItem,ReactiveFormsModule,IonInput,RouterModule]
+  imports: [IonContent,CommonModule,FormsModule,IonButton,IonSpinner,IonCheckbox,IonCard,IonCardContent,IonItem,ReactiveFormsModule,IonInput,RouterModule]
 })
 export class RegisterPage implements OnInit {
 
@@ -24,6 +24,7 @@ export class RegisterPage implements OnInit {
     email: ['', [Validators.required, Validators.email]],
     name:['', [Validators.required]],
     password: ['', Validators.required],
+    aceptTerms: [false, Validators.requiredTrue],
   });
 
   constructor(
@@ -45,6 +46,7 @@ export class RegisterPage implements OnInit {
   this.loading = true;
   this.error = '';
 
+  console.log(this.form.getRawValue())
   this.auth.register(this.form.getRawValue()).subscribe({
     next: (res:any) => {
       this.loading = false;
@@ -62,6 +64,10 @@ export class RegisterPage implements OnInit {
   });
 }
 
+
+async openterms(){
+   await Browser.open({ url: 'https://formulaleague.site/termsandcondtions' });
+}
 }
 
 
