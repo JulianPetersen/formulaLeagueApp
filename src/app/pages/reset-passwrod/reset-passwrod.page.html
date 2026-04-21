@@ -21,22 +21,13 @@
             </ion-input>
           </ion-item>
 
-          <ion-item lines="none">
-            <ion-input
-              type="password"
-              label="Password"
-              labelPlacement="floating"
-              formControlName="password">
-            </ion-input>
-          </ion-item>
-
           <ion-button
             expand="block"
             shape="round"
             class="login-btn"
             type="submit"
             [disabled]="form.invalid || loading">
-            Entrar
+            Recuperar contraseña
           </ion-button>
 
          
@@ -51,7 +42,7 @@
         <p>{{this.error}}</p>
       </ion-card-content>
     </ion-card>
-    <p class="registrate">¿No tenes una cuenta? <b [routerLink]="['/register']">Registrate</b></p>
-    <p class="registrate">¿No tenes una cuenta? <b [routerLink]="['/reset-passwrod']">Recuperar Contraseña</b></p>    
+
+
   </div>
 </ion-content>

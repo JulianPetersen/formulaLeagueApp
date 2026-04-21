@@ -40,4 +40,9 @@ export class AuthService {
   register(data: { email: string; name:string; password: string }){
     return this.http.post<any>(`${this.global.api}/api/auth/register`, data)
   }
+
+
+  recoveryPassword(data: {email:string}){
+    return this.http.post<any>(`${this.global.api}/api/auth/forgotPassword`, data)
+  }
 }
