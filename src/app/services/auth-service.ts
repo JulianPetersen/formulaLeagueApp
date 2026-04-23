@@ -37,7 +37,7 @@ export class AuthService {
   }
 
 
-  register(data: { email: string; name:string; password: string }){
+  register(data: { email: string; username:string; password: string }){
     return this.http.post<any>(`${this.global.api}/api/auth/register`, data)
   }
 

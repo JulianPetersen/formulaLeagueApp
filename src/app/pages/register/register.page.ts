@@ -22,7 +22,7 @@ export class RegisterPage implements OnInit {
 
   form = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
-    name:['', [Validators.required]],
+    username:['', [Validators.required]],
     password: ['', Validators.required],
     aceptTerms: [false, Validators.requiredTrue],
   });
