@@ -1,5 +1,9 @@
 <ion-content class="home-content">
 
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
 @if (prize?.status == 'activo'){
   <div class="season-prize">
     <div class="prize-icon">
@@ -22,12 +26,15 @@
 
   </div>
 
-  <div *ngFor="let race of allRacesUpcoming">
 
-    <app-info-carrera [race]="race"></app-info-carrera>
+@for (race of allRacesUpcoming; track race._id) {
 
-    <app-component-pilots [listPilots]="race.pilots" [raceId]="race._id">
-    </app-component-pilots>
+  <app-info-carrera [race]="race"></app-info-carrera>
 
-  </div>
+  <app-component-pilots 
+    [listPilots]="race.pilots" 
+    [raceId]="race._id">
+  </app-component-pilots>
+
+}
 </ion-content>

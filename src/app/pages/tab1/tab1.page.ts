@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import {IonContent, IonIcon } from '@ionic/angular/standalone';
+import { IonContent, IonIcon } from '@ionic/angular/standalone';
 
 import { RacesServices } from 'src/app/services/races-services';
 import { RaceModel } from 'src/app/models/race-model';
@@ -11,6 +11,16 @@ import { trophy } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
 import { PrizesService } from 'src/app/services/prizes-service';
 import { PrizeModel } from 'src/app/models/prize-model';
+import {
+
+  IonHeader,
+  IonRefresher,
+  IonRefresherContent,
+  IonTitle,
+  IonToolbar,
+  RefresherCustomEvent,
+
+} from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-tab1',
@@ -18,15 +28,27 @@ import { PrizeModel } from 'src/app/models/prize-model';
   styleUrls: ['tab1.page.scss'],
   standalone: true,
   imports: [CommonModule,
-    ComponentPilotsComponent, InfoCarreraComponent, IonContent, IonIcon],
+    ComponentPilotsComponent, InfoCarreraComponent, IonContent, IonIcon, IonContent,
+    IonRefresher,
+    IonRefresherContent,]
+
 })
 export class Tab1Page {
 
-  prize:PrizeModel
+  prize: PrizeModel
 
-  allRacesUpcoming:RaceModel[]
-  constructor(private races: RacesServices, private prizeService:PrizesService) {
-    addIcons({ trophy});
+  allRacesUpcoming: RaceModel[]
+  constructor(private races: RacesServices, private prizeService: PrizesService) {
+    addIcons({ trophy });
+  }
+
+  handleRefresh(event: RefresherCustomEvent) {
+    this.getRace()
+    this.getActivePrize()
+      
+    event.target.complete();
+  
+    
   }
 
   ionViewWillEnter() {
@@ -44,10 +66,10 @@ export class Tab1Page {
   }
 
 
-  getActivePrize(){
+  getActivePrize() {
     this.prizeService.getAcivePrize()
-      .subscribe ({
-        next: ((res:PrizeModel) => {
+      .subscribe({
+        next: ((res: PrizeModel) => {
           console.log('prize', res)
           this.prize = res
         }),
