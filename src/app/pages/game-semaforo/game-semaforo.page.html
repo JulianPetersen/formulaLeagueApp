@@ -1,0 +1,151 @@
+<ion-content class="game-page">
+
+  <div class="wrapper">
+
+    <ion-card class="game-card">
+
+      <ion-card-header>
+        <ion-card-title>🏁 Reacción de Largada</ion-card-title>
+        <ion-card-subtitle>
+          Tocá cuando se apaguen las luces
+        </ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+
+        <!-- SEGMENT -->
+        <ion-segment
+          [(ngModel)]="segmentValue"
+          mode="ios"
+          class="custom-segment">
+
+          <ion-segment-button value="game">
+            <ion-label>Juego</ion-label>
+          </ion-segment-button>
+
+          <ion-segment-button value="ranking">
+            <ion-label>Ranking</ion-label>
+          </ion-segment-button>
+
+        </ion-segment>
+
+        <!-- ===================== -->
+        <!-- VISTA JUEGO -->
+        <!-- ===================== -->
+        <div *ngIf="segmentValue === 'game'">
+
+          <!-- Luces -->
+          <div class="lights-panel">
+
+            <div
+              *ngFor="let light of lights"
+              class="light"
+              [class.active]="light">
+            </div>
+
+          </div>
+
+          <!-- Estado -->
+          <div class="status-box">
+
+            <h1 *ngIf="state === 'idle'">
+              Preparado
+            </h1>
+
+            <h1 *ngIf="state === 'lights'">
+              ...
+            </h1>
+
+            <h1
+              *ngIf="state === 'go'"
+              class="go-text">
+
+              ¡YA!
+
+            </h1>
+
+            <h1
+              *ngIf="state === 'false'"
+              class="false-text">
+
+              ❌ Falsa largada
+
+            </h1>
+
+            <h1
+              *ngIf="state === 'finished'"
+              class="time-text">
+
+              {{ reactionTime }} ms
+
+            </h1>
+
+          </div>
+
+          <!-- Mejor tiempo -->
+          <div
+            class="best-time"
+            *ngIf="bestTime">
+
+            Mejor tiempo:
+            <strong>{{ bestTime }} ms</strong>
+
+          </div>
+
+          <!-- Botón jugar -->
+          <ion-button
+            expand="block"
+            size="large"
+            shape="round"
+            color="danger"
+            (click)="startGame()">
+
+            JUGAR
+
+          </ion-button>
+
+          <!-- Zona tap -->
+          <div
+            class="tap-zone"
+            (click)="handleTap()">
+
+            Largar
+
+          </div>
+
+        </div>
+
+        <!-- ===================== -->
+        <!-- VISTA RANKING -->
+        <!-- ===================== -->
+        <div
+          *ngIf="segmentValue === 'ranking'"
+          class="ranking-box">
+
+          <div
+            class="ranking-item"
+            *ngFor="let user of ranking; let i = index">
+
+            <div class="position">
+              #{{ i + 1 }}
+            </div>
+
+            <div class="user-name">
+              {{ user?.name }}
+            </div>
+
+            <div class="user-time">
+              {{ user?.bestResult }} ms
+            </div>
+
+          </div>
+
+        </div>
+
+      </ion-card-content>
+
+    </ion-card>
+
+  </div>
+
+</ion-content>

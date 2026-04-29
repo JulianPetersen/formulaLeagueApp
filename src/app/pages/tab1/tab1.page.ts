@@ -17,10 +17,11 @@ import {
   IonRefresher,
   IonRefresherContent,
   IonTitle,
-  IonToolbar,
+  IonButton,
   RefresherCustomEvent,
 
 } from '@ionic/angular/standalone';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tab1',
@@ -29,7 +30,7 @@ import {
   standalone: true,
   imports: [CommonModule,
     ComponentPilotsComponent, InfoCarreraComponent, IonContent, IonIcon, IonContent,
-    IonRefresher,
+    IonRefresher,IonButton,
     IonRefresherContent,]
 
 })
@@ -38,7 +39,7 @@ export class Tab1Page {
   prize: PrizeModel
 
   allRacesUpcoming: RaceModel[]
-  constructor(private races: RacesServices, private prizeService: PrizesService) {
+  constructor(private races: RacesServices, private prizeService: PrizesService,private router:Router) {
     addIcons({ trophy });
   }
 
@@ -79,4 +80,9 @@ export class Tab1Page {
       })
   }
 
+
+goToGame(){
+  this.router.navigateByUrl('tabs/game-semaforo')
 }
+}
+

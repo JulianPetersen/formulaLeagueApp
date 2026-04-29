@@ -11,30 +11,48 @@
     </div>
     <div class="prize-content">
       <span class="season-label">Premio temporada 2026</span>
-      <h3> ${{prize?.amount}}</h3>
+      <h3>${{ prize?.amount }}</h3>
       <p>El usuario con más puntos al final del campeonato gana.</p>
     </div>
   </div>
 }
 
+  <!-- NUEVO JUEGO -->
+  <div class="reaction-banner">
+    <div class="reaction-left">
+      <div class="reaction-badge">NUEVO</div>
+      <h3>🏎️ Juego de reacción</h3>
+      <p>¿Qué tan rápido largás? Probá tu tiempo.</p>
+    </div>
 
+    <div class="reaction-right">
+      <div class="lights">
+        <span></span>
+        <span></span>
+        <span class="green"></span>
+      </div>
+
+      <ion-button fill="solid" size="small" color="danger" (click)="goToGame()">
+        Jugar
+      </ion-button>
+    </div>
+  </div>
 
   <!-- HEADER -->
   <div class="header">
     <h2>🏁 Próximas carreras</h2>
     <p>Armá tu pronóstico antes del cierre</p>
-
   </div>
-
 
 @for (race of allRacesUpcoming; track race._id) {
 
   <app-info-carrera [race]="race"></app-info-carrera>
 
-  <app-component-pilots 
-    [listPilots]="race.pilots" 
+  <app-component-pilots
+    [listPilots]="race.pilots"
     [raceId]="race._id">
   </app-component-pilots>
 
 }
+
 </ion-content>

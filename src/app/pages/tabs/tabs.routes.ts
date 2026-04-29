@@ -50,7 +50,11 @@ export const routes: Routes = [
         loadComponent: () =>
           import('../news-detail/news-detail.page')
             .then(m => m.NewsDetailPage)
-      }
+      },
+      {
+        path: 'game-semaforo',
+        loadComponent: () => import('../game-semaforo/game-semaforo.page').then(m => m.GameSemaforoPage)
+      },
     ],
     canActivate: [authGuard]
   },

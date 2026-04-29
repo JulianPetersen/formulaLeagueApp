@@ -11,7 +11,7 @@ import { UsersService } from 'src/app/services/users';
   templateUrl: './on-boarding.component.html',
   styleUrls: ['./on-boarding.component.scss'],
   standalone: true,
-  imports: [IonContent, IonButton, IonInput, IonItem, FormsModule,CommonModule],
+  imports: [IonContent, IonButton, FormsModule,CommonModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class OnBoardingComponent implements OnInit {
