@@ -5,7 +5,7 @@ import { IonContent, IonLabel, IonSegment, IonSegmentButton, IonButton, IonCard,
 import { TraficLigth } from 'src/app/models/trafic-ligth';
 import { TraficLigthgameService } from 'src/app/services/trafic-ligthgame';
 type GameState = 'idle' | 'lights' | 'ready' | 'go' | 'finished' | 'false';
-
+import { AdMob} from '@capacitor-community/admob';
 @Component({
   selector: 'app-game-semaforo',
   templateUrl: './game-semaforo.page.html',
@@ -15,17 +15,18 @@ type GameState = 'idle' | 'lights' | 'ready' | 'go' | 'finished' | 'false';
 })
 export class GameSemaforoPage {
 
-  constructor(private traficGameService:TraficLigthgameService) { }
+  constructor(private traficGameService: TraficLigthgameService) { }
 
 
-  ngOnInit(){
+  async ngOnInit() {
+    await AdMob.initialize();
     this.getBestTimeUser()
   }
 
   state: GameState = 'idle';
   segmentValue = 'game';
   lights: boolean[] = [false, false, false, false, false];
-
+  gameCount: number = 0;
   startTime: number = 0;
   reactionTime: number = 0;
 
@@ -33,7 +34,7 @@ export class GameSemaforoPage {
 
   timeouts: any[] = [];
 
-  ranking:TraficLigth[] = [];
+  ranking: TraficLigth[] = [];
 
   startGame() {
     this.reset();
@@ -69,19 +70,24 @@ export class GameSemaforoPage {
     if (this.state === 'go') {
       this.reactionTime = Date.now() - this.startTime;
       this.state = 'finished';
+      this.gameCount++;
 
+      if (this.gameCount >= 3) {
+        this.showAd();
+        this.gameCount = 0;
+      }
       if (!this.bestTime || this.reactionTime < this.bestTime) {
         this.bestTime = this.reactionTime;
-        const data:TraficLigth = {
-          bestResult : this.bestTime,
+        const data: TraficLigth = {
+          bestResult: this.bestTime,
         }
         this.traficGameService.createNewRecord(data)
           .subscribe({
-            next:((res:TraficLigth[]) => {
+            next: ((res: TraficLigth[]) => {
               this.ranking = res
               console.log(res)
             }),
-            error :((err)  => {
+            error: ((err) => {
               console.log(err)
             })
           })
@@ -111,14 +117,27 @@ export class GameSemaforoPage {
   }
 
 
-  getBestTimeUser(){
+  getBestTimeUser() {
     this.traficGameService.getBestTimeByUser()
       .subscribe({
-        next: ((res:TraficLigth[])  =>{
+        next: ((res: TraficLigth[]) => {
           console.log(res)
           this.ranking = res
         }),
-        error:(err)=>{console.log}
+        error: (err) => { console.log }
       })
+  }
+
+
+
+  async showAd() {
+
+    const options = {
+      adId: 'ca-app-pub-3940256099942544/1033173712' // TEST ID
+    };
+
+    await AdMob.prepareInterstitial(options);
+    await AdMob.showInterstitial();
+
   }
 }
