@@ -22,17 +22,19 @@
     ) {}
 
     ngOnInit() {
+      
+    }
 
+    ionViewWillEnter() {
       const slug = this.route.snapshot.paramMap.get('slug');
       console.log('el slug es', slug)
       if(slug){
         this.getNews(slug);
       }
-
     }
 
 
-      ionViewDidEnter() {
+  ionViewDidEnter() {
     this.showBanner();
   }
 
@@ -55,18 +57,20 @@
 
 
 
-    async showBanner() {
-    const options: BannerAdOptions = {
-      adId: 'ca-app-pub-3940256099942544/6300978111',
-      adSize: BannerAdSize.BANNER,
-      position: BannerAdPosition.BOTTOM_CENTER,
-      isTesting: true
-    };
+async showBanner() {
+  await AdMob.removeBanner(); // limpia por si quedó alguno
 
-    await AdMob.showBanner(options);
-  }
+  const options: BannerAdOptions = {
+    adId: 'ca-app-pub-3940256099942544/6300978111',
+    adSize: BannerAdSize.BANNER,
+    position: BannerAdPosition.BOTTOM_CENTER,
+    isTesting: true
+  };
+
+  await AdMob.showBanner(options);
+}
 
   async hideBanner() {
-    await AdMob.hideBanner();
+    await AdMob.removeBanner();
   }
   }

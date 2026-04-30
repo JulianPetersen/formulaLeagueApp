@@ -72,7 +72,7 @@ export class GameSemaforoPage {
       this.state = 'finished';
       this.gameCount++;
 
-      if (this.gameCount >= 3) {
+      if (this.gameCount >= 4) {
         this.showAd();
         this.gameCount = 0;
       }
