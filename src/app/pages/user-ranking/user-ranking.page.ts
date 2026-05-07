@@ -1,16 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent} from '@ionic/angular/standalone';
+import { IonContent,IonRefresher,IonRefresherContent} from '@ionic/angular/standalone';
 import { UsersService } from 'src/app/services/users';
 import { GlobalService } from 'src/app/services/global';
+import { RefresherCustomEvent } from '@ionic/core';
 
 @Component({
   selector: 'app-user-ranking',
   templateUrl: './user-ranking.page.html',
   styleUrls: ['./user-ranking.page.scss'],
   standalone: true,
-  imports: [IonContent,CommonModule, FormsModule]
+  imports: [IonContent,CommonModule, FormsModule,IonRefresher,IonRefresherContent]
 })
 export class UserRankingPage implements OnInit {
 
@@ -38,4 +39,12 @@ getTopUsers(){
       })
     })
 }
+
+    handleRefresh(event: RefresherCustomEvent) {
+     this.getTopUsers()
+        
+      event.target.complete();
+    
+      
+    }
 }

@@ -1,18 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent,IonCard,IonCardContent,IonCardHeader,IonCardSubtitle,IonCardTitle,IonSegmentButton,IonLabel,IonSegment } from '@ionic/angular/standalone';
+import { IonContent,IonCard,IonCardContent,IonCardHeader,IonRefresher,IonRefresherContent,IonCardTitle,IonSegmentButton,IonLabel,IonSegment } from '@ionic/angular/standalone';
 import { PilotsService } from 'src/app/services/pilots';
 import { PilotsModel } from 'src/app/models/pilots-model';
 import { TeamsService } from 'src/app/services/teams-service';
 import { TeamsModel } from 'src/app/models/teams-model';
+import { RefresherCustomEvent } from '@ionic/core';
 
 @Component({
   selector: 'app-ranking-pilots',
   templateUrl: './ranking-pilots.page.html',
   styleUrls: ['./ranking-pilots.page.scss'],
   standalone: true,
-  imports: [IonContent, IonCard, IonCardHeader, IonCardContent, CommonModule, FormsModule,IonCardSubtitle,IonCardTitle,IonSegmentButton,IonLabel,IonSegment]
+  imports: [IonContent, IonCard, IonCardHeader, IonCardContent, CommonModule, FormsModule,IonCardTitle,IonSegmentButton,IonLabel,IonSegment,IonRefresher,IonRefresherContent]
 })
 export class RankingPilotsPage implements OnInit {
 
@@ -52,4 +53,13 @@ export class RankingPilotsPage implements OnInit {
   }
 
 
+
+    handleRefresh(event: RefresherCustomEvent) {
+      this.getPilotsRanking()
+      this.getRankingTeams()
+        
+      event.target.complete();
+    
+      
+    }
 }

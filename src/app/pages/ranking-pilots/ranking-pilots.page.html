@@ -1,14 +1,14 @@
 <ion-content class="game-page">
-
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <div class="wrapper">
 
     <ion-card class="game-card">
 
       <ion-card-header>
-        <ion-card-title>🏁 Reacción de Largada</ion-card-title>
-        <ion-card-subtitle>
-          Tocá cuando se apaguen las luces
-        </ion-card-subtitle>
+        <ion-card-title>🏁 Ranking de F1 2026</ion-card-title>
+
       </ion-card-header>
 
       <ion-card-content>

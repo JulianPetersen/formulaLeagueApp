@@ -1,5 +1,7 @@
 <ion-content class="leaderboard home-content">
-
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <!-- HEADER -->
   <div class="leaderboard-header">
     <h2>🏆 Ranking General</h2>
