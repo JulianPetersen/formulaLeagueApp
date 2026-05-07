@@ -14,7 +14,7 @@
 
   <!-- NAV -->
   <nav class="menu-nav">
-    <button [routerLink]="['/tabs/my-prediction']" >
+    <button [routerLink]="['/tabs/my-prediction']">
       <ion-icon name="speedometer"></ion-icon>
       <span>Mis Pronósticos</span>
     </button>
@@ -26,15 +26,21 @@
 
     <button [routerLink]="['/tabs/user-ranking']">
       <ion-icon name="podium"></ion-icon>
-      <span>Ranking</span>
+      <span>Ranking - Formula League</span>
     </button>
+
+    <button [routerLink]="['/tabs/ranking-pilots']">
+      <ion-icon name="podium"></ion-icon>
+      <span>Ranking - Torneo F1</span>
+    </button>
+
 
     <button [routerLink]="['/tabs/myaccount']">
       <ion-icon name="person"></ion-icon>
       <span>Mi cuenta</span>
     </button>
 
-    
+
     <button [routerLink]="['/tabs/news']">
       <ion-icon name="newspaper"></ion-icon>
       <span>Noticias</span>

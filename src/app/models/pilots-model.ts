@@ -6,5 +6,6 @@ export interface PilotsModel {
     number: number
     team: TeamsModel,
     country: string,
-    img: string
+    img: string,
+    tournamentPoints?:string
 }

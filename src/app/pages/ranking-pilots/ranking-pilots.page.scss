@@ -1,0 +1,148 @@
+.game-page {
+  --background: linear-gradient(180deg, #0a0a0a, #111827);
+}
+
+.wrapper {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  min-height: 100%;
+}
+
+.game-card {
+  width: 100%;
+  border-radius: 24px;
+  background: rgba(255,255,255,0.04);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 20px 50px rgba(0,0,0,.35);
+}
+
+ion-card-title {
+  color: white;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+ion-card-subtitle {
+  color: #bdbdbd;
+}
+
+.lights-panel {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin: 30px 0;
+}
+
+.light {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: #2a0000;
+  border: 2px solid rgba(255,255,255,.08);
+  transition: all .25s ease;
+}
+
+.light.active {
+  background: #ff2b2b;
+  box-shadow:
+    0 0 12px #ff2b2b,
+    0 0 25px #ff2b2b;
+  transform: scale(1.08);
+}
+
+.status-box {
+  text-align: center;
+  min-height: 70px;
+  margin-bottom: 12px;
+}
+
+.status-box h1 {
+  color: white;
+  font-size: 34px;
+  font-weight: 800;
+}
+
+.go-text {
+  color: #00ff88;
+  animation: pulse .6s infinite;
+}
+
+.false-text {
+  color: #ff5252;
+}
+
+.time-text {
+  color: #ffd54f;
+}
+
+.best-time {
+  text-align: center;
+  color: #d1d5db;
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+.tap-zone {
+  margin-top: 18px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,.08);
+  color: white;
+  text-align: center;
+  padding: 18px;
+  border-radius: 18px;
+  font-weight: 600;
+}
+
+.tap-zone:active {
+  transform: scale(.98);
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.12); }
+  100% { transform: scale(1); }
+} 
+
+
+.custom-segment {
+  margin-bottom: 22px;
+}
+
+ion-segment-button {
+  --color: #aaa;
+  --color-checked: white;
+  --indicator-color: #e10600;
+  font-weight: 700;
+}
+
+.ranking-box {
+  margin-top: 10px;
+}
+
+.ranking-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px;
+  margin-bottom: 10px;
+  border-radius: 14px;
+  background: rgba(255,255,255,.04);
+}
+
+.position {
+  color: #ffd54f;
+  font-weight: 800;
+  width: 45px;
+}
+
+.user-name {
+  flex: 1;
+  color: white;
+  font-weight: 600;
+}
+
+.user-time {
+  color: #00ff88;
+  font-weight: 700;
+}

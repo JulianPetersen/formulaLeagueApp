@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { PushNotifications } from '@capacitor/push-notifications';
 import { PushApiService } from './push-api-service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PushService {
 
-  constructor(private api: PushApiService) {}
+  constructor(private api: PushApiService, private router: Router) { }
 
   async init() {
     const permStatus = await PushNotifications.requestPermissions();
@@ -28,7 +29,23 @@ export class PushService {
     });
 
     PushNotifications.addListener('pushNotificationActionPerformed', action => {
-      console.log('Click en notificación:', action);
+      console.log('FULL ACTION:', action);
+      this.processPayload(action.notification?.data)
     });
   }
+
+
+  processPayload(payload) {
+    if (payload.topic == 'news') {
+      if (payload.slug) {
+        console.log('HAY SLUG', payload.slug)
+        this.router.navigateByUrl(`/tabs/news-detail/${payload.slug}`)
+      } else {
+        console.log('NO HAY SLUG')
+        this.router.navigateByUrl('/tabs/news')
+      }
+    }
+  }
+
 }
+

@@ -1,0 +1,83 @@
+<ion-content class="game-page">
+
+  <div class="wrapper">
+
+    <ion-card class="game-card">
+
+      <ion-card-header>
+        <ion-card-title>🏁 Reacción de Largada</ion-card-title>
+        <ion-card-subtitle>
+          Tocá cuando se apaguen las luces
+        </ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+
+        <!-- SEGMENT -->
+        <ion-segment [(ngModel)]="segmentValue" mode="ios" class="custom-segment">
+
+          <ion-segment-button value="Pilots">
+            <ion-label>Pilotos</ion-label>
+          </ion-segment-button>
+
+          <ion-segment-button value="Costructors">
+            <ion-label>constructores</ion-label>
+          </ion-segment-button>
+
+        </ion-segment>
+
+        <!-- ===================== -->
+        <!-- VISTA JUEGO -->
+        <!-- ===================== -->
+        <div *ngIf="segmentValue === 'Pilots'">
+          
+          <div class="ranking-item" *ngFor="let pilot of allPilots; let i = index">
+
+            <div class="position">
+              #{{ i + 1 }}
+            </div>
+
+            <div class="user-name">
+              {{ pilot?.name }}
+            </div>
+
+            <div class="user-time">
+              {{ pilot.tournamentPoints }} pts
+            </div>
+
+          </div>
+
+
+
+        </div>
+
+        <!-- ===================== -->
+        <!-- VISTA RANKING -->
+        <!-- ===================== -->
+        <div *ngIf="segmentValue === 'Costructors'" class="ranking-box">
+           <div class="ranking-item" *ngFor="let teams of allTeams; let i = index">
+
+            <div class="position">
+              #{{ i + 1 }}
+            </div>
+
+            <div class="user-name">
+              {{ teams?.name }}
+            </div>
+
+            <div class="user-time">
+              {{ teams.tournamentPoints }} pts
+            </div>
+
+          </div>
+
+
+        </div>
+
+      </ion-card-content>
+
+    </ion-card>
+
+  </div>
+
+</ion-content>

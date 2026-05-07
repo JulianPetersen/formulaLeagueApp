@@ -46,6 +46,12 @@ export const routes: Routes = [
         loadComponent: () => import('../news/news.page').then(m => m.NewsPage)
       },
       {
+        path: 'ranking-pilots',
+        loadComponent: () => import('../ranking-pilots/ranking-pilots.page').then(m => m.RankingPilotsPage)
+      },
+
+
+      {
         path: 'news-detail/:slug',
         loadComponent: () =>
           import('../news-detail/news-detail.page')
