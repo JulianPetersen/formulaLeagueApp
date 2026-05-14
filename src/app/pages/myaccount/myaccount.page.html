@@ -3,7 +3,7 @@
   <!-- HEADER -->
   <div class="account-header">
     <div class="avatar">
-      {{ user?.name.charAt(0) || 'U' }}
+      {{ user?.username.charAt(0) || 'U' }}
     </div>
 
     <h2>{{ user?.name }}</h2>
@@ -15,22 +15,11 @@
     <ion-card-content>
       <p class="label">Puntos acumulados</p>
       <h1 class="points">{{ user?.points }}</h1>
-      <p class="hint">Canjeables por premios</p>
     </ion-card-content>
   </ion-card>
 
-  <!-- INFO -->
-  <ion-card class="info-card">
-    <ion-card-content>
-
-      <div class="info-row">
-        <span>Rol</span>
-        <strong>{{ user?.role }}</strong>
-      </div>
 
 
-    </ion-card-content>
-  </ion-card>
 
   <!-- ACTIONS -->
    <div class="actions">

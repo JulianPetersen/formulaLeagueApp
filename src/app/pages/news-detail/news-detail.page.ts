@@ -61,10 +61,10 @@ async showBanner() {
   await AdMob.removeBanner(); // limpia por si quedó alguno
 
   const options: BannerAdOptions = {
-    adId: 'ca-app-pub-3940256099942544/6300978111',
+    adId: 'ca-app-pub-7377639735677577/2604554594',
     adSize: BannerAdSize.BANNER,
     position: BannerAdPosition.BOTTOM_CENTER,
-    isTesting: true
+    isTesting: false
   };
 
   await AdMob.showBanner(options);

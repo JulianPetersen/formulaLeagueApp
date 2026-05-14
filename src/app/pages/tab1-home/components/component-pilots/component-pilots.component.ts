@@ -44,6 +44,10 @@ export class ComponentPilotsComponent implements OnChanges {
     this.admob.initialize();
   }
 
+  // ionViewWillEnter(){
+  //   this.checkIfPredictionExists();
+  // }
+
   ngOnChanges(changes: SimpleChanges) {
     if (changes['listPilots']) {
       console.log(
@@ -54,6 +58,7 @@ export class ComponentPilotsComponent implements OnChanges {
     if (changes['raceId'] && this.raceId) {
       this.checkIfPredictionExists();
     }
+    this.checkIfPredictionExists();
     console.log('raceId desde component pilot', this.raceId)
   }
 
@@ -108,7 +113,7 @@ export class ComponentPilotsComponent implements OnChanges {
         next: (res: any) => {
           this.predictionAlreadyExists = true;
           this.isLoadingPrediction = false;
-
+          console.log('listado de prediccion', res.positions)
           // Opcional: ordenar pilotos según lo guardado
           this.applySavedOrder(res.positions);
         },
