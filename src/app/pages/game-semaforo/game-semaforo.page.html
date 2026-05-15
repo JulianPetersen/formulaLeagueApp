@@ -14,10 +14,7 @@
       <ion-card-content>
 
         <!-- SEGMENT -->
-        <ion-segment
-          [(ngModel)]="segmentValue"
-          mode="ios"
-          class="custom-segment">
+        <ion-segment [(ngModel)]="segmentValue" mode="ios" class="custom-segment">
 
           <ion-segment-button value="game">
             <ion-label>Juego</ion-label>
@@ -37,10 +34,7 @@
           <!-- Luces -->
           <div class="lights-panel">
 
-            <div
-              *ngFor="let light of lights"
-              class="light"
-              [class.active]="light">
+            <div *ngFor="let light of lights" class="light" [class.active]="light">
             </div>
 
           </div>
@@ -56,25 +50,19 @@
               ...
             </h1>
 
-            <h1
-              *ngIf="state === 'go'"
-              class="go-text">
+            <h1 *ngIf="state === 'go'" class="go-text">
 
               ¡YA!
 
             </h1>
 
-            <h1
-              *ngIf="state === 'false'"
-              class="false-text">
+            <h1 *ngIf="state === 'false'" class="false-text">
 
               ❌ Falsa largada
 
             </h1>
 
-            <h1
-              *ngIf="state === 'finished'"
-              class="time-text">
+            <h1 *ngIf="state === 'finished'" class="time-text">
 
               {{ reactionTime }} ms
 
@@ -83,9 +71,7 @@
           </div>
 
           <!-- Mejor tiempo -->
-          <div
-            class="best-time"
-            *ngIf="bestTime">
+          <div class="best-time" *ngIf="bestTime">
 
             Mejor tiempo:
             <strong>{{ bestTime }} ms</strong>
@@ -93,21 +79,14 @@
           </div>
 
           <!-- Botón jugar -->
-          <ion-button
-            expand="block"
-            size="large"
-            shape="round"
-            color="danger"
-            (click)="startGame()">
+          <ion-button expand="block" size="large" shape="round" color="danger" (click)="startGame()">
 
             JUGAR
 
           </ion-button>
 
           <!-- Zona tap -->
-          <div
-            class="tap-zone"
-            (click)="handleTap()">
+          <div class="tap-zone" (click)="handleTap()">
 
             Largar
 
@@ -118,16 +97,56 @@
         <!-- ===================== -->
         <!-- VISTA RANKING -->
         <!-- ===================== -->
-        <div
-          *ngIf="segmentValue === 'ranking'"
-          class="ranking-box">
+        <div *ngIf="segmentValue === 'ranking'" class="ranking-box">
 
-          <div
-            class="ranking-item"
-            *ngFor="let user of ranking; let i = index">
+          <div class="reward-banner">
+
+            <div class="reward-title">
+              🏁 Ranking Semanal
+            </div>
+
+            <div class="reward-subtitle">
+              Los <strong>3 mejores tiempos</strong> ganan Puntos cada semana
+            </div>
+
+            <div class="reward-points">
+              🥇 10 pts &nbsp; 🥈 5 pts &nbsp; 🥉 2 pts
+            </div>
+
+          </div>
+
+          <!-- 🏆 PODIO -->
+          <div class="podium" *ngIf="ranking?.length >= 3">
+
+            <!-- 2do -->
+            <div class="podium-item second">
+              <div class="avatar">🥈</div>
+              <div class="name">{{ ranking[1]?.name }}</div>
+              <div class="time">{{ ranking[1]?.bestResult }} ms</div>
+            </div>
+
+            <!-- 1ro -->
+            <div class="podium-item first">
+              <div class="avatar">🥇</div>
+              <div class="name">{{ ranking[0]?.name }}</div>
+              <div class="time">{{ ranking[0]?.bestResult }} ms</div>
+            </div>
+
+            <!-- 3ro -->
+            <div class="podium-item third">
+              <div class="avatar">🥉</div>
+              <div class="name">{{ ranking[2]?.name }}</div>
+              <div class="time">{{ ranking[2]?.bestResult }} ms</div>
+            </div>
+
+          </div>
+
+          <!-- 📊 RESTO DEL RANKING -->
+          <div class="ranking-item" *ngFor="let user of ranking.slice(3); let i = index"
+            [class.me]="user.user === userLogedId._id">
 
             <div class="position">
-              #{{ i + 1 }}
+              #{{ i + 4 }}
             </div>
 
             <div class="user-name">

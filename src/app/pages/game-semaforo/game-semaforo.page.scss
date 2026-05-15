@@ -146,3 +146,114 @@ ion-segment-button {
   color: #00ff88;
   font-weight: 700;
 }
+
+
+/* ===================== */
+/* 🏆 PODIO */
+/* ===================== */
+
+.podium {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 12px;
+  margin: 30px 0;
+}
+
+.podium-item {
+  text-align: center;
+  padding: 12px;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.05);
+  width: 90px;
+  transition: all .3s ease;
+}
+
+.podium-item .avatar {
+  font-size: 28px;
+  margin-bottom: 6px;
+}
+
+.podium-item .name {
+  color: white;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.podium-item .time {
+  color: #00ff88;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+/* alturas tipo podio */
+.podium-item.first {
+  height: 140px;
+  transform: scale(1.1);
+  background: linear-gradient(180deg, #ffd70033, transparent);
+  box-shadow: 0 0 20px rgba(255,215,0,.3);
+}
+
+.podium-item.second {
+  height: 110px;
+  background: linear-gradient(180deg, #c0c0c033, transparent);
+}
+
+.podium-item.third {
+  height: 95px;
+  background: linear-gradient(180deg, #cd7f3233, transparent);
+}
+
+/* animación ganador */
+.podium-item.first {
+  animation: winnerGlow 1.5s infinite alternate;
+}
+
+@keyframes winnerGlow {
+  from {
+    box-shadow: 0 0 10px rgba(255,215,0,.3);
+  }
+  to {
+    box-shadow: 0 0 25px rgba(255,215,0,.7);
+  }
+}
+
+/* highlight usuario */
+.ranking-item.me {
+  border: 1px solid #00ff88;
+  box-shadow: 0 0 10px rgba(0,255,136,.4);
+}
+
+/* ===================== */
+/* 🎁 REWARD BANNER */
+/* ===================== */
+
+.reward-banner {
+  text-align: center;
+  padding: 14px;
+  border-radius: 16px;
+  margin-bottom: 20px;
+
+  background: linear-gradient(135deg, rgba(225,6,0,.2), rgba(255,255,255,.05));
+  border: 1px solid rgba(255,255,255,.08);
+  backdrop-filter: blur(6px);
+}
+
+.reward-title {
+  color: white;
+  font-weight: 800;
+  font-size: 18px;
+  margin-bottom: 4px;
+}
+
+.reward-subtitle {
+  color: #d1d5db;
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+
+.reward-points {
+  color: #ffd54f;
+  font-weight: 700;
+  font-size: 14px;
+}

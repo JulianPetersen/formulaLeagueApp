@@ -15,12 +15,16 @@ import { AdMob} from '@capacitor-community/admob';
 })
 export class GameSemaforoPage {
 
+  userLogedId:any;
+
   constructor(private traficGameService: TraficLigthgameService) { }
 
 
   async ngOnInit() {
     await AdMob.initialize();
     this.getBestTimeUser()
+    this.userLogedId = JSON.parse(localStorage.getItem('user'))
+    console.log(this.userLogedId)
   }
 
   state: GameState = 'idle';
@@ -85,7 +89,7 @@ export class GameSemaforoPage {
           .subscribe({
             next: ((res: TraficLigth[]) => {
               this.ranking = res
-              console.log(res)
+              console.log('el ranking es',res)
             }),
             error: ((err) => {
               console.log(err)
@@ -121,7 +125,7 @@ export class GameSemaforoPage {
     this.traficGameService.getBestTimeByUser()
       .subscribe({
         next: ((res: TraficLigth[]) => {
-          console.log(res)
+          console.log('los mejores records son',res)
           this.ranking = res
         }),
         error: (err) => { console.log }
