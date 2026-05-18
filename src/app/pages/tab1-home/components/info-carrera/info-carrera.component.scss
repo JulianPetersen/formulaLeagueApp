@@ -37,3 +37,39 @@
 }
 
 
+.race-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.predict-cta {
+  margin-top: 14px;
+  padding: 10px 14px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  border-radius: 14px;
+
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  color: #ffffffcc;
+  font-size: 14px;
+  font-weight: 600;
+
+  transition: 0.2s ease;
+}
+
+.race-card:hover .predict-cta {
+  background: rgba(255, 255, 255, 0.12);
+  transform: scale(1.02);
+  color: white;
+}
+
+.predict-cta ion-icon {
+  font-size: 18px;
+  color: #ffcc00;
+}

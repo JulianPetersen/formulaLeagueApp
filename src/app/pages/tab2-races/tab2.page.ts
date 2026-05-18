@@ -4,6 +4,8 @@ import { RaceModel } from 'src/app/models/race-model';
 import { RacesServices } from 'src/app/services/races-services';
 import { FormsModule } from "@angular/forms";
 import { CommonModule } from '@angular/common';
+import { GlobalService } from 'src/app/services/global';
+import { AuthService } from 'src/app/services/auth-service';
 
 
 
@@ -16,7 +18,7 @@ import { CommonModule } from '@angular/common';
 })
 export class Tab2Page {
 
-  constructor(private races:RacesServices) {}
+  constructor(private races:RacesServices,private global:GlobalService,private auth:AuthService) {}
   allRacesUpcoming:RaceModel[];
 
   ngOnInit(){
@@ -31,9 +33,14 @@ export class Tab2Page {
           console.log(res)
           this.allRacesUpcoming = res
         }),
-        error: ((err)  => {
-          console.log(err)
-        })
+        error: (err) => {
+          if (err.status == 401) {
+            this.global.presentConfirmAlert('ATENCION', "", "se venció la sesion, debe iniciar sesion nuevamente", () => {
+              this.auth.logout();
+            })
+          }
+        }
+
       })
   }
 

@@ -1,13 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { IonContent, IonIcon } from '@ionic/angular/standalone';
-
+import { App } from '@capacitor/app';
 import { RacesServices } from 'src/app/services/races-services';
 import { RaceModel } from 'src/app/models/race-model';
 import { PilotsModel } from 'src/app/models/pilots-model';
 import { ComponentPilotsComponent } from './components/component-pilots/component-pilots.component';
 import { InfoCarreraComponent } from "./components/info-carrera/info-carrera.component";
-import { trophy } from 'ionicons/icons';
+import { trophy,flashOutline } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
 import { PrizesService } from 'src/app/services/prizes-service';
 import { PrizeModel } from 'src/app/models/prize-model';
@@ -19,9 +19,13 @@ import {
   IonTitle,
   IonButton,
   RefresherCustomEvent,
+  IonToolbar
 
 } from '@ionic/angular/standalone';
 import { Router } from '@angular/router';
+import { GlobalService } from 'src/app/services/global';
+import { AuthService } from 'src/app/services/auth-service';
+
 
 @Component({
   selector: 'app-tab1',
@@ -30,8 +34,8 @@ import { Router } from '@angular/router';
   standalone: true,
   imports: [CommonModule,
     ComponentPilotsComponent, InfoCarreraComponent, IonContent, IonIcon, IonContent,
-    IonRefresher,IonButton,
-    IonRefresherContent,]
+    IonRefresher, IonButton,
+    IonRefresherContent, IonHeader,IonToolbar]
 
 })
 export class Tab1Page {
@@ -39,8 +43,9 @@ export class Tab1Page {
   prize: PrizeModel
 
   allRacesUpcoming: RaceModel[]
-  constructor(private races: RacesServices, private prizeService: PrizesService,private router:Router) {
-    addIcons({ trophy });
+  showPilotsMap: { [key: string]: boolean } = {};
+  constructor(private races: RacesServices, private prizeService: PrizesService,private router:Router,private global:GlobalService,private auth:AuthService) {
+    addIcons({ trophy,flashOutline });
   }
 
   handleRefresh(event: RefresherCustomEvent) {
@@ -74,9 +79,14 @@ export class Tab1Page {
           console.log('prize', res)
           this.prize = res
         }),
-        error: ((err) => {
-          console.log(err)
-        })
+        error: (err) => {
+          if (err.status == 401) {
+            this.global.presentConfirmAlert('ATENCION', "", "se venció la sesion, debe iniciar sesion nuevamente", () => {
+              this.auth.logout();
+            })
+          }
+        }
+
       })
   }
 
@@ -84,5 +94,11 @@ export class Tab1Page {
 goToGame(){
   this.router.navigateByUrl('tabs/game-semaforo')
 }
+
+togglePilots(raceId: string) {
+  this.showPilotsMap[raceId] = !this.showPilotsMap[raceId];
+}
+
+
 }
 

@@ -1,3 +1,8 @@
+<ion-header class="custom-header">
+  <ion-toolbar>
+    
+  </ion-toolbar>
+</ion-header>
 <ion-content class="home-content">
 
   
@@ -48,11 +53,12 @@
 
 @for (race of allRacesUpcoming; track race._id) {
 
-  <app-info-carrera [race]="race"></app-info-carrera>
+  <app-info-carrera [race]="race" (click)="togglePilots(race._id)"></app-info-carrera>
 
   <app-component-pilots
     [listPilots]="race.pilots"
-    [raceId]="race._id">
+    [raceId]="race._id"
+    *ngIf="showPilotsMap[race._id]">
   </app-component-pilots>
 
 }

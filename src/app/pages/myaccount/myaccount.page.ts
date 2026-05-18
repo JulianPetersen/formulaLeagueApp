@@ -5,6 +5,7 @@ import { IonContent,IonCard,IonCardContent,IonButton } from '@ionic/angular/stan
 import { UsersService } from 'src/app/services/users';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth-service';
+import { GlobalService } from 'src/app/services/global';
 
 @Component({
   selector: 'app-myaccount',
@@ -15,7 +16,7 @@ import { AuthService } from 'src/app/services/auth-service';
 })
 export class MyaccountPage implements OnInit {
 
-  constructor(private userService:UsersService, private auth:AuthService) { }
+  constructor(private userService:UsersService, private auth:AuthService, private global:GlobalService) { }
 
   ngOnInit() {
     this.getInfoUSer()
@@ -31,7 +32,14 @@ getInfoUSer(){
       next: ((res:User)=> {
         this.user = res;
         console.log(res)
-      })
+      }),
+      error: (err) => {
+        if(err.status == 401){
+            this.global.presentConfirmAlert('ATENCION', "", "se venció la sesion, debe iniciar sesion nuevamente", ()=>{
+              this.auth.logout();
+            })
+          }
+      }
     })
 }
 

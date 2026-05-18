@@ -1,7 +1,8 @@
 import { Component, Input, OnChanges, SimpleChanges, OnDestroy } from '@angular/core';
 import {
   IonCard,
-  IonCardContent
+  IonCardContent,
+  IonIcon
 } from '@ionic/angular/standalone';
 import { CommonModule, DatePipe } from '@angular/common';
 import { RaceModel } from 'src/app/models/race-model';
@@ -10,7 +11,7 @@ import { RaceModel } from 'src/app/models/race-model';
   selector: 'app-info-carrera',
   templateUrl: './info-carrera.component.html',
   standalone: true,
-  imports: [IonCard, IonCardContent, DatePipe, CommonModule],
+  imports: [IonCard, IonCardContent, DatePipe, CommonModule,IonIcon],
   styleUrls: ['./info-carrera.component.scss'],
 })
 export class InfoCarreraComponent implements OnChanges, OnDestroy {

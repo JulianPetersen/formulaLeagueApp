@@ -5,7 +5,9 @@ import { IonContent, IonLabel, IonSegment, IonSegmentButton, IonButton, IonCard,
 import { TraficLigth } from 'src/app/models/trafic-ligth';
 import { TraficLigthgameService } from 'src/app/services/trafic-ligthgame';
 type GameState = 'idle' | 'lights' | 'ready' | 'go' | 'finished' | 'false';
-import { AdMob} from '@capacitor-community/admob';
+import { AdMob } from '@capacitor-community/admob';
+import { GlobalService } from 'src/app/services/global';
+import { AuthService } from 'src/app/services/auth-service';
 @Component({
   selector: 'app-game-semaforo',
   templateUrl: './game-semaforo.page.html',
@@ -15,9 +17,9 @@ import { AdMob} from '@capacitor-community/admob';
 })
 export class GameSemaforoPage {
 
-  userLogedId:any;
+  userLogedId: any;
 
-  constructor(private traficGameService: TraficLigthgameService) { }
+  constructor(private traficGameService: TraficLigthgameService, private global: GlobalService, private auth: AuthService) { }
 
 
   async ngOnInit() {
@@ -89,10 +91,15 @@ export class GameSemaforoPage {
           .subscribe({
             next: ((res: TraficLigth[]) => {
               this.ranking = res
-              console.log('el ranking es',res)
+              console.log('el ranking es', res)
             }),
             error: ((err) => {
               console.log(err)
+              if (err.status == 401) {
+                this.global.presentConfirmAlert('ATENCION', "", "se venció la sesion, debe iniciar sesion nuevamente", () => {
+                  this.auth.logout();
+                })
+              }
             })
           })
       }
@@ -125,10 +132,17 @@ export class GameSemaforoPage {
     this.traficGameService.getBestTimeByUser()
       .subscribe({
         next: ((res: TraficLigth[]) => {
-          console.log('los mejores records son',res)
+          console.log('los mejores records son', res)
           this.ranking = res
         }),
-        error: (err) => { console.log }
+        error: (err) => {
+          console.log('El error es', err.status)
+          if (err.status == 401) {
+            this.global.presentConfirmAlert('ATENCION', "", "se venció la sesion, debe iniciar sesion nuevamente", () => {
+              this.auth.logout();
+            })
+          }
+        }
       })
   }
 

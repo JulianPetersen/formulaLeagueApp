@@ -5,6 +5,7 @@ import { IonContent,IonRefresher,IonRefresherContent} from '@ionic/angular/stand
 import { UsersService } from 'src/app/services/users';
 import { GlobalService } from 'src/app/services/global';
 import { RefresherCustomEvent } from '@ionic/core';
+import { AuthService } from 'src/app/services/auth-service';
 
 @Component({
   selector: 'app-user-ranking',
@@ -19,7 +20,8 @@ topUsers: any[] = [];
 currentUserId: string;
 
 constructor(private usersService: UsersService,
-            private global: GlobalService) {}
+            private global: GlobalService,
+          private auth:AuthService) {}
 
 
 
@@ -36,7 +38,15 @@ getTopUsers(){
       next: ((res:any) => {
         console.log(res)
         this.topUsers = res 
-      })
+      }),
+      error: (err) => {
+          if (err.status == 401) {
+            this.global.presentConfirmAlert('ATENCION', "", "se venció la sesion, debe iniciar sesion nuevamente", () => {
+              this.auth.logout();
+            })
+          }
+        }
+
     })
 }
 
