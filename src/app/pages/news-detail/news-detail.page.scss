@@ -83,35 +83,57 @@
 
 /* ARTICLE HTML */
 
-.article-content {
+/* ARTICLE HTML */
 
+.article-content {
   font-size: 15px;
   line-height: 1.7;
   color: white;
-  figure.image {
-    margin: 20px 0;
-    text-align: center;
+
+  /* 🔥 LE DECIMOS A ANGULAR QUE AFECTE AL CONTENIDO INYECTADO DINÁMICAMENTE */
+  ::ng-deep {
+    
+    /* Forzamos a que las imágenes ocupen el ancho disponible y mantengan su proporción */
+    img {
+      width: 100% !important;
+      max-width: 100% !important;
+      height: auto !important;
+      object-fit: contain; /* Evita que la imagen se deforme o estire feo */
+      border-radius: 8px;
+      margin: 16px auto;
+      display: block;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+    }
+
+    /* CKEditor envuelve las imágenes en etiquetas <figure> con clases específicas */
+    figure.image {
+      margin: 20px 0 !important;
+      width: 100% !important;  /* Resetea cualquier width inline que CKEditor le ponga al figure */
+      max-width: 100% !important;
+      text-align: center;
+      clear: both;
+    }
+
+    /* Si el usuario usó 'imageStyle:side' o alineaciones, CKEditor les mete floats que rompen el responsive en celulares */
+    figure.image-style-side {
+      float: none !important;
+      max-width: 100% !important;
+      margin: 20px 0 !important;
+    }
+    
+    figcaption {
+      font-size: 13px;
+      opacity: 0.6;
+      margin-top: 6px;
+      text-align: center;
+    }
+
+    /* BONUS: CKEditor a veces mete tablas. Esto evita que las tablas desborden el ancho del celular */
+    table {
+      width: 100% !important;
+      max-width: 100% !important;
+      overflow-x: auto;
+      display: block;
+    }
   }
-
-  figure.image img,
-  img {
-    width: 100% !important;
-    max-width: 100% !important;
-    height: auto !important;
-
-    border-radius: 8px;
-    margin: 16px auto;
-    display: block;
-
-    box-shadow: 0 6px 18px rgba(0,0,0,0.4);
-  }
-
-  figcaption {
-    font-size: 13px;
-    opacity: 0.6;
-    margin-top: 6px;
-  }
-}
-figure.image img {
-  box-shadow: 0 6px 18px rgba(0,0,0,0.4);
 }

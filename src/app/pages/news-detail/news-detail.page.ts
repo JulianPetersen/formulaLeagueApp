@@ -21,8 +21,8 @@
       private newsService: NewsServices
     ) {}
 
-    ngOnInit() {
-      
+   async ngOnInit() {
+      await AdMob.initialize({});
     }
 
     ionViewWillEnter() {
@@ -35,7 +35,9 @@
 
 
   ionViewDidEnter() {
-    this.showBanner();
+      setTimeout(async () => {
+    await this.showBanner();
+  }, 500);
   }
 
   ionViewWillLeave() {
