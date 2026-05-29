@@ -4,7 +4,8 @@
     <h3>Tu pronóstico</h3>
     <p class="hint">Arrastrá para ordenar del 1° al 10°</p>
 
-    <ion-reorder-group [disabled]="predictionAlreadyExists" (ionItemReorder)="doReorder($event)">
+    <ion-reorder-group [disabled]="predictionAlreadyExists && !isEditingPrediction"
+      (ionItemReorder)="doReorder($event)">
 
       <ion-item *ngFor="let pilot of listPilots; let i = index" class="pilot-item">
 
@@ -20,21 +21,43 @@
 
     </ion-reorder-group>
 
-  <div *ngIf="predictionAlreadyExists" class="prediction-saved">
-  ✅ Pronóstico enviado
-</div>
+
+    @if(predictionAlreadyExists){
+    <div class="prediction-saved">
+      ✅ Pronóstico enviado
+    </div>
+    }
+
+
+    <div *ngIf="predictionAlreadyExists && !isEditingPrediction" class="modify-section">
+
+      <p>
+        ⚡ Tienes {{ userCredits }} créditos
+      </p>
+
+      <ion-button expand="block" color="warning" (click)="enableEdit()">
+
+        Modificar pronóstico · 10 créditos
+      </ion-button>
+    </div>
+
+
+    <div *ngIf="isEditingPrediction" class="editing-warning">
+
+      ⚠️ Guardar cambios costará 10 créditos
+
+    </div>
   </ion-card-content>
 
 </ion-card>
 
 <!-- CTA -->
-<ion-button
-  *ngIf="!predictionAlreadyExists"
-  expand="block"
-  shape="round"
-  class="submit-btn"
-  (click)="enviarData()">
+<ion-button *ngIf="!predictionAlreadyExists" expand="block" shape="round" class="submit-btn" (click)="enviarData()">
 
   Guardar pronóstico
 </ion-button>
 
+<ion-button *ngIf="isEditingPrediction" expand="block" shape="round" color="danger" (click)="saveChanges()">
+
+  Guardar cambios (-10 créditos)
+</ion-button>

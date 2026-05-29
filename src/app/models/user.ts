@@ -6,4 +6,5 @@ export interface User {
         points:number,
         username?:string
         verified?:boolean
+        credits?:number
 }

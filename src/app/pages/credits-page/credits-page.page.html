@@ -1,0 +1,95 @@
+<ion-header class="custom-header">
+  <ion-toolbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="credits-content">
+
+  <!-- HEADER -->
+  <div class="header">
+    <h2>⚡ Centro de créditos</h2>
+    <p>Gana créditos viendo anuncios diarios</p>
+  </div>
+
+  <!-- CARD PRINCIPAL -->
+  <div class="credits-card">
+
+    <div class="credits-top">
+
+      <div>
+        <span class="credits-label">Tus créditos</span>
+        <h1>⚡ {{ userCredits }}</h1>
+      </div>
+
+      <div class="daily-box">
+        {{ adsViewedToday }}/5
+      </div>
+
+    </div>
+
+    <!-- PROGRESO -->
+    <div class="progress-wrapper">
+
+      <div class="progress-bar">
+        <div
+          class="progress-fill"
+          [style.width.%]="(adsViewedToday / 5) * 100">
+        </div>
+      </div>
+
+      <p class="progress-text">
+        Anuncios vistos hoy
+      </p>
+
+    </div>
+
+    <!-- BOTÓN -->
+    <ion-button
+      expand="block"
+      class="watch-btn"
+      [disabled]="adsViewedToday >= 5 || isLoading"
+      (click)="watchAd()">
+
+      <ion-spinner
+        *ngIf="isLoading"
+        name="crescent">
+      </ion-spinner>
+
+      <span *ngIf="!isLoading">
+        🎬 Ver anuncio (+1 crédito)
+      </span>
+
+    </ion-button>
+
+    <!-- LIMITE -->
+    <div
+      *ngIf="adsViewedToday >= 5"
+      class="limit-box">
+
+      🎉 Ya alcanzaste el límite diario
+
+    </div>
+
+  </div>
+
+  <!-- INFO -->
+  <div class="info-section">
+
+    <div class="info-item">
+      <span>💡</span>
+      <p>Cada anuncio te da 1 crédito</p>
+    </div>
+
+    <div class="info-item">
+      <span>🏁</span>
+      <p>Usa créditos para modificar pronósticos</p>
+    </div>
+
+    <div class="info-item">
+      <span>🕓</span>
+      <p>Los anuncios se reinician cada día</p>
+    </div>
+
+  </div>
+
+</ion-content>

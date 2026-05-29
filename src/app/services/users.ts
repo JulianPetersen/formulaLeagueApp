@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { GlobalService } from './global';
+import { User } from '../models/user';
 
 @Injectable({
   providedIn: 'root',
@@ -23,7 +24,7 @@ export class UsersService {
     const headers = new HttpHeaders({
       'authorization': `Bearer ${token}` || '',
     });
-    return this.http.get(`${this.global.api}/api/user`, { headers })
+    return this.http.get<User>(`${this.global.api}/api/user`, { headers })
   }
 
 
@@ -33,6 +34,15 @@ export class UsersService {
       'authorization': `Bearer ${token}` || '',
     });
     return this.http.get(`${this.global.api}/api/user/getTopUser`, { headers })
+  }
+
+
+    getCreditsByUser() {
+    const token = this.getToken();
+    const headers = new HttpHeaders({
+      'authorization': `Bearer ${token}` || '',
+    });
+    return this.http.get<number>(`${this.global.api}/api/user/getcredits`, { headers })
   }
 
 

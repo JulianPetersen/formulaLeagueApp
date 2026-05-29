@@ -39,4 +39,12 @@ export class PredictionsService {
     });
     return this.http.get <PredictionsModel[]>(`${this.global.api}/api/prediction/mi-predictions`, { headers })
   }
+
+  modifyPrediction(raceId,data){
+  const token = this.getToken();
+    const headers = new HttpHeaders({
+      'authorization': `Bearer ${token}` || '',
+    });
+    return this.http.put(`${this.global.api}/api/prediction/${raceId}/modify`, data,{ headers })
+  }
 }

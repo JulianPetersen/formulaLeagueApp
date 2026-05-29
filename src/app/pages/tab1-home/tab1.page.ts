@@ -25,6 +25,8 @@ import {
 import { Router } from '@angular/router';
 import { GlobalService } from 'src/app/services/global';
 import { AuthService } from 'src/app/services/auth-service';
+import { UsersService } from 'src/app/services/users';
+import { CreditsBannerComponent } from "./components/credits-banner/credits-banner.component";
 
 
 @Component({
@@ -35,7 +37,7 @@ import { AuthService } from 'src/app/services/auth-service';
   imports: [CommonModule,
     ComponentPilotsComponent, InfoCarreraComponent, IonContent, IonIcon, IonContent,
     IonRefresher, IonButton,
-    IonRefresherContent, IonHeader,IonToolbar]
+    IonRefresherContent, IonHeader, IonToolbar, CreditsBannerComponent]
 
 })
 export class Tab1Page {
@@ -44,7 +46,8 @@ export class Tab1Page {
 
   allRacesUpcoming: RaceModel[]
   showPilotsMap: { [key: string]: boolean } = {};
-  constructor(private races: RacesServices, private prizeService: PrizesService,private router:Router,private global:GlobalService,private auth:AuthService) {
+  userCredits = 0;
+  constructor(private races: RacesServices, private prizeService: PrizesService,private router:Router,private global:GlobalService,private auth:AuthService,private userService:UsersService) {
     addIcons({ trophy,flashOutline });
   }
 
@@ -60,6 +63,8 @@ export class Tab1Page {
   ionViewWillEnter() {
     this.getRace()
     this.getActivePrize()
+    this.getUserCredits()
+    this. getUserCredits()
   }
 
   getRace() {
@@ -87,6 +92,20 @@ export class Tab1Page {
           }
         }
 
+      })
+  }
+
+
+  getUserCredits(){
+    this.userService.getCreditsByUser()
+      .subscribe({
+        next: ((res)=>{
+          this.userCredits = res;
+          console.log(res)
+        }),
+        error: ((err) => {
+          console.log(err)
+        })
       })
   }
 

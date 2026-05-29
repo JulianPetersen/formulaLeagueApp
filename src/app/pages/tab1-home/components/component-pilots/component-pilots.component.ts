@@ -11,15 +11,15 @@ import {
   IonReorderGroup,
   IonAvatar
 } from '@ionic/angular/standalone';
-
-
-
 import { ItemReorderEventDetail } from '@ionic/core/components';
 import { PredictionsService } from 'src/app/services/predictions';
 import { PredictionsModel } from 'src/app/models/predictions';
 import { GlobalService } from 'src/app/services/global';
 import { AdmobService } from 'src/app/services/admob-service';
 import { Router } from '@angular/router';
+import { UsersService } from 'src/app/services/users';
+
+
 @Component({
   selector: 'app-component-pilots',
   templateUrl: './component-pilots.component.html',
@@ -29,6 +29,9 @@ import { Router } from '@angular/router';
     IonCardContent, IonItem, IonButton, IonLabel, IonReorder, IonReorderGroup, IonAvatar
   ],
 })
+
+
+
 export class ComponentPilotsComponent implements OnChanges {
 
 
@@ -37,29 +40,37 @@ export class ComponentPilotsComponent implements OnChanges {
   predictionAlreadyExists = false;
   isLoadingPrediction = true;
 
+
+  //editing
+  isEditingPrediction = false;
+  isSaving = false;
+
+  userCredits = 0;
+
+  modificationCost = 10;
+
+  predictionData: any;
+
   constructor(private prediction: PredictionsService,
-    private global: GlobalService, private admob: AdmobService, private router: Router) { }
+    private global: GlobalService, private admob: AdmobService, private router: Router, private userService:UsersService) { }
 
   ngOnInit() {
     this.admob.initialize();
+    this.getUserCredits();
   }
 
   // ionViewWillEnter(){
   //   this.checkIfPredictionExists();
   // }
-
   ngOnChanges(changes: SimpleChanges) {
+
     if (changes['listPilots']) {
-      console.log(
-        'pilotos recibidos en el hijo',
-        this.listPilots
-      );
+      console.log('pilotos recibidos', this.listPilots);
     }
+
     if (changes['raceId'] && this.raceId) {
       this.checkIfPredictionExists();
     }
-    this.checkIfPredictionExists();
-    console.log('raceId desde component pilot', this.raceId)
   }
 
 
@@ -135,4 +146,84 @@ export class ComponentPilotsComponent implements OnChanges {
       return (posA || 0) - (posB || 0);
     });
   }
+
+
+
+    getUserCredits(){
+    this.userService.getCreditsByUser()
+      .subscribe({
+        next: ((res)=>{
+          this.userCredits = res;
+          console.log(res)
+        }),
+        error: ((err) => {
+          console.log(err)
+        })
+      })
+  }
+
+
+
+  enableEdit() {
+
+  if (this.userCredits < this.modificationCost) {
+
+    this.global.presentAlert(
+      'Créditos insuficientes',
+      '',
+      'Necesitas 10 créditos'
+    );
+
+    return;
+  }
+
+  this.isEditingPrediction = true;
+}
+
+
+saveChanges() {
+
+  if (this.isSaving) return;
+
+  this.isSaving = true;
+
+  const payload = {
+    positions: this.buildPredictionPayload()
+  };
+
+  this.prediction.modifyPrediction(
+    this.raceId,
+    payload
+  ).subscribe({
+
+    next: (res:any) => {
+
+      this.userCredits = res.creditsLeft;
+
+      //this.global.setCredits(res.creditsLeft);
+
+      this.isEditingPrediction = false;
+
+      this.global.presentAlert(
+        'Éxito',
+        '',
+        'Pronóstico actualizado'
+      );
+    },
+
+    error: (err) => {
+
+      this.global.presentAlert(
+        'Error',
+        '',
+        err.error.message
+      );
+    },
+
+    complete: () => {
+      this.isSaving = false;
+    }
+  });
+}
+
 }

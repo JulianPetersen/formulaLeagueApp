@@ -1,43 +1,43 @@
-  import { Component, OnInit } from '@angular/core';
-  import { CommonModule } from '@angular/common';
-  import { FormsModule } from '@angular/forms';
-  import { IonContent, IonHeader, IonTitle, IonToolbar,IonCard,IonCardContent,IonButtons,IonBackButton } from '@ionic/angular/standalone';
-  import { ActivatedRoute } from '@angular/router';
-  import { NewsServices } from 'src/app/services/news-services';
-  import { AdMob, BannerAdOptions, BannerAdSize, BannerAdPosition } from '@capacitor-community/admob';
-  @Component({
-    selector: 'app-news-detail',
-    templateUrl: './news-detail.page.html',
-    styleUrls: ['./news-detail.page.scss'],
-    standalone: true,
-    imports: [IonContent, CommonModule, FormsModule,IonCard,IonCardContent,IonHeader,IonToolbar,IonTitle,IonButtons,IonBackButton]
-  })
-  export class NewsDetailPage implements OnInit {
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonCard, IonCardContent, IonButtons, IonBackButton } from '@ionic/angular/standalone';
+import { ActivatedRoute } from '@angular/router';
+import { NewsServices } from 'src/app/services/news-services';
+import { AdMob, BannerAdOptions, BannerAdSize, BannerAdPosition } from '@capacitor-community/admob';
+@Component({
+  selector: 'app-news-detail',
+  templateUrl: './news-detail.page.html',
+  styleUrls: ['./news-detail.page.scss'],
+  standalone: true,
+  imports: [IonContent, CommonModule, FormsModule, IonCard, IonCardContent, IonHeader, IonToolbar, IonTitle, IonButtons, IonBackButton]
+})
+export class NewsDetailPage implements OnInit {
 
-    news: any;
+  news: any;
 
-    constructor(
-      private route: ActivatedRoute,
-      private newsService: NewsServices
-    ) {}
+  constructor(
+    private route: ActivatedRoute,
+    private newsService: NewsServices
+  ) { }
 
-   async ngOnInit() {
-      await AdMob.initialize({});
+  async ngOnInit() {
+    await AdMob.initialize({});
+  }
+
+  ionViewWillEnter() {
+    const slug = this.route.snapshot.paramMap.get('slug');
+    console.log('el slug es', slug)
+    if (slug) {
+      this.getNews(slug);
     }
-
-    ionViewWillEnter() {
-      const slug = this.route.snapshot.paramMap.get('slug');
-      console.log('el slug es', slug)
-      if(slug){
-        this.getNews(slug);
-      }
-    }
+  }
 
 
   ionViewDidEnter() {
-      setTimeout(async () => {
-    await this.showBanner();
-  }, 500);
+    setTimeout(async () => {
+      await this.showBanner();
+    }, 500);
   }
 
   ionViewWillLeave() {
@@ -45,34 +45,33 @@
   }
 
 
+  getNews(slug: string) {
 
-    getNews(slug:string){
+    this.newsService.getNewsBySlug(slug)
+      .subscribe((res: any) => {
 
-      this.newsService.getNewsBySlug(slug)
-        .subscribe((res:any)=>{
+        this.news = res;
 
-          this.news = res;
+      });
 
-        });
-
-    }
-
+  }
 
 
-async showBanner() {
-  await AdMob.removeBanner(); // limpia por si quedó alguno
 
-  const options: BannerAdOptions = {
-    adId: 'ca-app-pub-7377639735677577/2604554594',
-    adSize: BannerAdSize.BANNER,
-    position: BannerAdPosition.BOTTOM_CENTER,
-    isTesting: false
-  };
+  async showBanner() {
+    await AdMob.removeBanner(); // limpia por si quedó alguno
 
-  await AdMob.showBanner(options);
-}
+    const options: BannerAdOptions = {
+      adId: 'ca-app-pub-7377639735677577/2604554594',
+      adSize: BannerAdSize.BANNER,
+      position: BannerAdPosition.BOTTOM_CENTER,
+      isTesting: false
+    };
+
+    await AdMob.showBanner(options);
+  }
 
   async hideBanner() {
     await AdMob.removeBanner();
   }
-  }
+}
