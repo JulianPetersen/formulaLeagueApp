@@ -1,16 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonCard, IonCardContent, IonButtons, IonBackButton } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar,IonIcon ,IonCard, IonCardContent, IonButtons, IonBackButton } from '@ionic/angular/standalone';
 import { ActivatedRoute } from '@angular/router';
 import { NewsServices } from 'src/app/services/news-services';
 import { AdMob, BannerAdOptions, BannerAdSize, BannerAdPosition } from '@capacitor-community/admob';
+import { Share } from '@capacitor/share';
+import { addIcons } from 'ionicons';
+import { trophy,flashOutline,shareOutline,shareSocial } from 'ionicons/icons';
+
 @Component({
   selector: 'app-news-detail',
   templateUrl: './news-detail.page.html',
   styleUrls: ['./news-detail.page.scss'],
   standalone: true,
-  imports: [IonContent, CommonModule, FormsModule, IonCard, IonCardContent, IonHeader, IonToolbar, IonTitle, IonButtons, IonBackButton]
+  imports: [IonContent, CommonModule, FormsModule, IonCard,IonIcon, IonCardContent, IonHeader, IonToolbar, IonTitle, IonButtons, IonBackButton]
 })
 export class NewsDetailPage implements OnInit {
 
@@ -19,7 +23,10 @@ export class NewsDetailPage implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private newsService: NewsServices
-  ) { }
+  ) { 
+
+    addIcons({ trophy,flashOutline,shareOutline,shareSocial });
+  }
 
   async ngOnInit() {
     await AdMob.initialize({});
@@ -56,7 +63,18 @@ export class NewsDetailPage implements OnInit {
 
   }
 
+async shareNews() {
 
+  if (!this.news) return;
+
+  await Share.share({
+    title: this.news.title,
+    text: this.news.summary,
+    url: `https://formulaleague.site/news/${this.news.slug}`,
+    dialogTitle: 'Compartir noticia'
+  });
+
+}
 
   async showBanner() {
     await AdMob.removeBanner(); // limpia por si quedó alguno

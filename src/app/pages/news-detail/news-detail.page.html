@@ -38,16 +38,30 @@
       </ion-card-content>
     </ion-card>
 
+    <ion-card class="share-card">
+
+      <ion-card-content>
+
+
+      </ion-card-content>
+
+    </ion-card>
+
     <ion-card class="content-card">
       <ion-card-content>
 
-        <div 
-          class="article-content"
-          [innerHTML]="news.content">
+        <div class="article-content" [innerHTML]="news.content">
         </div>
 
       </ion-card-content>
     </ion-card>
+
+
+    <button class="share-button" (click)="shareNews()">
+      <ion-icon name="share-social"></ion-icon>
+      Compartir noticia
+
+    </button>
 
   </div>
 

@@ -137,3 +137,40 @@
     }
   }
 }
+
+.share-card {
+  background: transparent;
+  box-shadow: none;
+  margin-top: 12px;
+}
+
+.share-button {
+
+  width: 100%;
+
+  border: none;
+
+  padding: 14px;
+
+  border-radius: 12px;
+
+  background: linear-gradient(
+    135deg,
+    #ff3d00,
+    #e10600
+  );
+
+  color: white;
+
+  font-size: 16px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition: .2s;
+}
+
+.share-button:active {
+  transform: scale(.98);
+}
