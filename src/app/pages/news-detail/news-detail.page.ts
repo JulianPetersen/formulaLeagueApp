@@ -8,6 +8,7 @@ import { AdMob, BannerAdOptions, BannerAdSize, BannerAdPosition } from '@capacit
 import { Share } from '@capacitor/share';
 import { addIcons } from 'ionicons';
 import { trophy,flashOutline,shareOutline,shareSocial } from 'ionicons/icons';
+import { AdmobService } from 'src/app/services/admob-service';
 
 @Component({
   selector: 'app-news-detail',
@@ -19,10 +20,11 @@ import { trophy,flashOutline,shareOutline,shareSocial } from 'ionicons/icons';
 export class NewsDetailPage implements OnInit {
 
   news: any;
-
+ 
   constructor(
     private route: ActivatedRoute,
-    private newsService: NewsServices
+    private newsService: NewsServices,
+    private admob:AdmobService
   ) { 
 
     addIcons({ trophy,flashOutline,shareOutline,shareSocial });
@@ -38,6 +40,8 @@ export class NewsDetailPage implements OnInit {
     if (slug) {
       this.getNews(slug);
     }
+    this.showAddperViews()
+   
   }
 
 
@@ -91,5 +95,20 @@ async shareNews() {
 
   async hideBanner() {
     await AdMob.removeBanner();
+  }
+
+
+showAddperViews(){
+    let cuantitiAdd = parseInt(localStorage.getItem('newsAdd')) 
+    if(cuantitiAdd) {
+      cuantitiAdd = cuantitiAdd + 1
+      localStorage.setItem("newsAdd", cuantitiAdd.toString())
+      if(cuantitiAdd == 5){
+        localStorage.setItem('newsAdd',"0")
+        this.admob.showInterstitial()
+      } 
+    }else{
+      localStorage.setItem("newsAdd",'1')
+    }
   }
 }

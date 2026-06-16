@@ -50,7 +50,7 @@ export class RegisterPage implements OnInit {
   this.auth.register(this.form.getRawValue()).subscribe({
     next: (res:any) => {
       this.loading = false;
-        this.global.presentAlert('ATENCION', 'Confirma tu mail', 'Hemos enviado un mail para que verifiques tu cuenta.')
+        this.global.presentAlert('ATENCION', 'Confirma tu mail', 'Hemos enviado un mail para que verifiques tu cuenta., si el mail no te llega revisa la bandeja de correo no deseado')
         this.router.navigateByUrl('/login');
       
       this.cdr.detectChanges();
