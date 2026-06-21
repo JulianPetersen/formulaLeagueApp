@@ -31,6 +31,7 @@
     "@capacitor/keyboard": "8.0.0",
     "@capacitor/push-notifications": "^8.0.3",
     "@capacitor/share": "^8.0.1",
+    "@capawesome/capacitor-google-sign-in": "^0.1.2",
     "@ionic/angular": "^8.0.0",
     "compare-versions": "^6.1.1",
     "ionicons": "^7.0.0",

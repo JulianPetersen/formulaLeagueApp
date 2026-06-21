@@ -12,7 +12,7 @@ const user = 'user'
 })
 export class AuthService {
 
-  constructor(private http:HttpClient, private global:GlobalService, private router:Router){
+  constructor(private http: HttpClient, private global: GlobalService, private router: Router) {
 
   }
 
@@ -37,12 +37,19 @@ export class AuthService {
   }
 
 
-  register(data: { email: string; username:string; password: string }){
+  register(data: { email: string; username: string; password: string }) {
     return this.http.post<any>(`${this.global.api}/api/auth/register`, data)
   }
 
 
-  recoveryPassword(data: {email:string}){
+  recoveryPassword(data: { email: string }) {
     return this.http.post<any>(`${this.global.api}/api/auth/forgotPassword`, data)
+  }
+
+
+  loginGoogle(idToken: string) {
+    return this.http.post(`${this.global.api}/api/auth/google`, {
+      idToken
+    });
   }
 }

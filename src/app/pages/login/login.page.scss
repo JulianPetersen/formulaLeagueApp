@@ -97,3 +97,31 @@ ion-input {
 .registrate{
   text-align: center ;
 }
+
+.google-btn {
+  height: 52px;
+  margin-top: 14px;
+
+  --background: #ffffff;
+  --color: #1f1f1f;
+  --border-radius: 14px;
+  --box-shadow: 0 8px 22px rgba(0, 0, 0, 0.28);
+
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  text-transform: none;
+
+  img {
+    width: 22px;
+    height: 22px;
+    margin-right: 10px;
+  }
+
+  span {
+    font-size: 15px;
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}

@@ -7,7 +7,7 @@ import { VersionAppModel } from './models/version-app';
 import { Browser } from '@capacitor/browser';
 import { compare } from 'compare-versions';
 import { AlertController } from '@ionic/angular';
-
+import { GoogleSignIn } from '@capawesome/capacitor-google-sign-in';
 
 @Component({
   selector: 'app-root',
@@ -23,13 +23,17 @@ export class AppComponent {
 
   ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
 
     setTimeout(() => {
       this.pushService.init();
     }, 2000);
 
     this.getLatestVersionApp();
+
+    await GoogleSignIn.initialize({
+      clientId: '56438973951-n0j2puj0fiav8104vggpoim9i116j9e0.apps.googleusercontent.com',
+    });
   }
 
   async checkInfo(): Promise<string> {
