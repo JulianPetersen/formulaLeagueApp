@@ -47,6 +47,28 @@
 
 <app-credits-banner></app-credits-banner>
 
+  <div class="ranking-banner" (click)="goToRanking()">
+    <div class="ranking-icon">
+      <ion-icon name="podium"></ion-icon>
+    </div>
+
+    <div class="ranking-content">
+      <span class="ranking-label">Ranking Race Mind</span>
+     <p>Tu posicion es:</p>
+      @if (rankingPosition) {
+        <h3>#{{ rankingPosition.position }}</h3>
+        <p>{{ rankingPosition.points }} pts en el campeonato.</p>
+      } @else {
+        <h3>Consulta tu posicion</h3>
+        <p>Mira como venis contra otros jugadores.</p>
+      }
+    </div>
+
+    <ion-button fill="clear" size="small" (click)="goToRanking(); $event.stopPropagation()">
+      Ver ranking
+    </ion-button>
+  </div>
+
 
   <!-- NUEVO JUEGO -->
   <div class="reaction-banner">

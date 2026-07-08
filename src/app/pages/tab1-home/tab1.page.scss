@@ -158,6 +158,61 @@
   }
 }
 
+.ranking-banner {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 16px;
+  padding: 16px;
+  border-radius: 18px;
+  background: rgba(15, 32, 39, 0.86);
+  border: 1px solid rgba(143, 161, 179, 0.24);
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.18);
+  cursor: pointer;
+  animation: fadeSlide 0.6s ease-out;
+}
+
+.ranking-icon {
+  width: 46px;
+  height: 46px;
+  flex: 0 0 46px;
+  border-radius: 14px;
+  background: rgba(143, 161, 179, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  ion-icon {
+    font-size: 25px;
+    color: var(--ion-color-secondary);
+  }
+}
+
+.ranking-content {
+  flex: 1;
+  min-width: 0;
+
+  .ranking-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  h3 {
+    margin: 4px 0;
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  p {
+    margin: 0;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.72);
+  }
+}
+
 @keyframes fadeSlide {
   from {
     opacity: 0;
