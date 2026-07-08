@@ -61,10 +61,14 @@ export const routes: Routes = [
         path: 'game-semaforo',
         loadComponent: () => import('../game-semaforo/game-semaforo.page').then(m => m.GameSemaforoPage)
       },
-        {
-    path: 'credits-page',
-    loadComponent: () => import('../credits-page/credits-page.page').then( m => m.CreditsPagePage)
-  },
+      {
+        path: 'credits-page',
+        loadComponent: () => import('../credits-page/credits-page.page').then( m => m.CreditsPagePage)
+      },
+      {
+        path: 'wallet',
+        loadComponent: () => import('../wallet/wallet.page').then(m => m.WalletPage)
+      },
 
     ],
     canActivate: [authGuard]

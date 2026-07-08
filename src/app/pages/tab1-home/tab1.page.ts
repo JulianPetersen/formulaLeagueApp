@@ -65,6 +65,7 @@ export class Tab1Page {
     this.getActivePrize()
     this.getUserCredits()
     this. getUserCredits()
+    
   }
 
   getRace() {
@@ -114,10 +115,13 @@ goToGame(){
   this.router.navigateByUrl('tabs/game-semaforo')
 }
 
+goToWallet(){
+  this.router.navigateByUrl('tabs/wallet')
+}
+
 togglePilots(raceId: string) {
   this.showPilotsMap[raceId] = !this.showPilotsMap[raceId];
 }
 
 
 }
-

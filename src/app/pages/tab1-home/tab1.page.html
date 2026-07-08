@@ -20,6 +20,26 @@
       <span class="season-label">Premio temporada 2026</span>
       <h3>U$D {{ prize?.amount }}</h3>
       <p>El usuario con más puntos al final del campeonato gana.</p>
+      <ion-button fill="clear" size="small" (click)="goToWallet(); $event.stopPropagation()">
+        Ver billetera
+      </ion-button>
+    </div>
+  </div>
+}
+
+
+@if (prize?.status == 'cerrado'){
+  <div class="season-prize">
+    <div class="prize-icon">
+      <ion-icon name="trophy"></ion-icon>
+    </div>
+    <div class="prize-content">
+      <span class="season-label">Aún no Hay premio para la proxima temporada</span>
+      <!-- <h3>U$D {{ prize?.amount }}</h3> -->
+      <!-- <p>El usuario con más puntos al final del campeonato gana.</p> -->
+      <ion-button fill="clear" size="small" (click)="goToWallet(); $event.stopPropagation()">
+        Ver billetera
+      </ion-button>
     </div>
   </div>
 }

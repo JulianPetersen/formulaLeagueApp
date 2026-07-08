@@ -1,0 +1,120 @@
+﻿<ion-header class="custom-header">
+  <ion-toolbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="wallet-content">
+
+  <div class="wallet-header">
+    <div class="wallet-kicker">Billetera</div>
+    <h2>Mi billetera</h2>
+    <p>{{ getWalletSubtitle() || 'Consulta tu saldo y solicitudes de cobro' }}</p>
+  </div>
+
+  <div *ngIf="isLoading && !wallet" class="loading-state">
+    <ion-spinner name="crescent"></ion-spinner>
+  </div>
+
+  <div *ngIf="errorMessage && !isLoading" class="error-box">
+    <h3>No pudimos cargar la billetera</h3>
+    <p>{{ errorMessage }}</p>
+    <ion-button size="small" (click)="loadWallet()">Reintentar</ion-button>
+  </div>
+
+  <ng-container *ngIf="wallet">
+    <section class="balance-card">
+      <div class="balance-top">
+        <div>
+          <span>Saldo disponible</span>
+          <h1>{{ wallet.availableBalance | currency: wallet.currency : 'symbol' : '1.0-0' }}</h1>
+        </div>
+
+        <div class="season-pill">
+          {{ wallet.season }}
+        </div>
+      </div>
+
+      <div class="balance-grid">
+        <div>
+          <span>Total ganado</span>
+          <strong>{{ wallet.accumulatedPrize | currency: wallet.currency : 'symbol' : '1.0-0' }}</strong>
+        </div>
+
+        <div>
+          <span>En revision</span>
+          <strong>{{ wallet.pendingBalance | currency: wallet.currency : 'symbol' : '1.0-0' }}</strong>
+        </div>
+
+        <div>
+          <span>Total pagado</span>
+          <strong>{{ wallet.totalPaid | currency: wallet.currency : 'symbol' : '1.0-0' }}</strong>
+        </div>
+
+        <div>
+          <span>Ultima solicitud</span>
+          <strong>{{ getClaimStatusLabel() }}</strong>
+        </div>
+      </div>
+    </section>
+
+    <ion-card class="custody-card">
+      <ion-card-content>
+        <h3>Movimientos de premios</h3>
+        <p>
+          Cada premio que ganes se acredita automaticamente en tu billetera. Las solicitudes de cobro reservan el saldo hasta que administracion confirme el pago.
+        </p>
+      </ion-card-content>
+    </ion-card>
+
+    <section *ngIf="wallet.canClaim" class="claim-card">
+      <h3>Solicitar cobro</h3>
+
+      <p class="claim-hint">
+        Vas a solicitar el cobro de {{ wallet.availableBalance | currency: wallet.currency : 'symbol' : '1.0-0' }}.
+      </p>
+
+      <ion-item>
+        <ion-label position="stacked">Metodo de pago</ion-label>
+        <ion-select [(ngModel)]="payoutMethod" interface="popover">
+          <ion-select-option value="bank_transfer">Transferencia bancaria</ion-select-option>
+          <ion-select-option value="mercado_pago">Mercado Pago</ion-select-option>
+          <ion-select-option value="paypal">PayPal</ion-select-option>
+          <ion-select-option value="other">Otro</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Alias, CBU/CVU o cuenta</ion-label>
+        <ion-input
+          [(ngModel)]="accountAlias"
+          autocomplete="off"
+          placeholder="Ingresa tus datos de cobro">
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Nota opcional</ion-label>
+        <ion-textarea
+          [(ngModel)]="claimNote"
+          autoGrow="true"
+          placeholder="Aclaraciones para validar el pago">
+        </ion-textarea>
+      </ion-item>
+
+      <ion-button
+        expand="block"
+        class="claim-button"
+        [disabled]="isSubmitting || !accountAlias.trim()"
+        (click)="requestClaim()">
+        <ion-spinner *ngIf="isSubmitting" name="crescent"></ion-spinner>
+        <span *ngIf="!isSubmitting">Solicitar cobro</span>
+      </ion-button>
+    </section>
+
+    <section *ngIf="!wallet.canClaim" class="status-card">
+      <h3>{{ getClaimStatusLabel() }}</h3>
+      <p>{{ getClaimMessage() }}</p>
+    </section>
+  </ng-container>
+
+</ion-content>

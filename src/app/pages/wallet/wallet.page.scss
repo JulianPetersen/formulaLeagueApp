@@ -1,0 +1,142 @@
+﻿:host {
+  --ion-background-color: transparent;
+}
+
+.custom-header ion-toolbar {
+  --background: #0f2027;
+  --color: white;
+  --min-height: 20px;
+}
+
+.wallet-content {
+  --background: linear-gradient(160deg, #0f2027, #203a43, #2c5364);
+  padding-bottom: 32px;
+}
+
+.wallet-header {
+  padding: 24px;
+  color: white;
+}
+
+.wallet-header h2 {
+  margin: 4px 0;
+  font-size: 22px;
+}
+
+.wallet-header p,
+.error-box p,
+.status-card p,
+.claim-hint,
+.custody-card p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.45;
+  opacity: 0.75;
+}
+
+.wallet-kicker {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #facc15;
+}
+
+.loading-state {
+  display: flex;
+  justify-content: center;
+  padding: 40px 0;
+}
+
+.error-box,
+.balance-card,
+.claim-card,
+.status-card,
+.custody-card {
+  margin: 16px;
+  padding: 20px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #111827, #1f2937);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: white;
+}
+
+.custody-card {
+  background: rgba(17, 24, 39, 0.72);
+  border-color: rgba(250, 204, 21, 0.16);
+}
+
+.error-box h3,
+.claim-card h3,
+.status-card h3,
+.custody-card h3 {
+  margin: 0 0 12px;
+  font-size: 18px;
+}
+
+.balance-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.balance-top span,
+.balance-grid span {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.68);
+}
+
+.balance-top h1 {
+  margin: 0;
+  font-size: 38px;
+  color: #facc15;
+}
+
+.season-pill {
+  height: 34px;
+  min-width: 64px;
+  padding: 0 12px;
+  border-radius: 999px;
+  background: rgba(250, 204, 21, 0.12);
+  color: #facc15;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+
+.balance-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.balance-grid div {
+  padding: 14px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.claim-hint {
+  margin-bottom: 16px;
+  color: rgba(255, 255, 255, 0.74);
+}
+
+.claim-card ion-item {
+  --background: rgba(255, 255, 255, 0.05);
+  --border-color: rgba(255, 255, 255, 0.08);
+  --color: white;
+  border-radius: 12px;
+  margin-bottom: 12px;
+}
+
+.claim-button {
+  height: 52px;
+  margin-top: 16px;
+  --border-radius: 16px;
+  --background: linear-gradient(90deg, #dc2626, #f59e0b);
+  font-weight: 700;
+}

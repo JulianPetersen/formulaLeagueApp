@@ -2,7 +2,7 @@ import { Component, EnvironmentInjector, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { IonContent,IonIcon} from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { speedometer,flag,podium,person,gift,newspaper } from 'ionicons/icons';
+import { speedometer,flag,podium,person,newspaper,wallet } from 'ionicons/icons';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth-service';
 import { GlobalService } from 'src/app/services/global';
@@ -18,7 +18,7 @@ export class Tab3Page {
     public environmentInjector = inject(EnvironmentInjector);
 
   constructor(private auth:AuthService, private user:UsersService, private global:GlobalService) {
-    addIcons({ speedometer,flag,podium,person,gift,newspaper});
+    addIcons({ speedometer,flag,podium,person,newspaper,wallet});
   }
 
   userInfo:User;

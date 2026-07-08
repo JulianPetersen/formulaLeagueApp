@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">formulaLeagueApp</string>
-    <string name="title_activity_main">formulaLeagueApp</string>
+    <string name="app_name">Race Mind</string>
+    <string name="title_activity_main">Race mind</string>
     <string name="package_name">com.frigg.formulaleague2</string>
     <string name="custom_url_scheme">com.frigg.formulaleague2</string>
 </resources>

@@ -50,7 +50,7 @@ export class RegisterPage implements OnInit {
   this.auth.register(this.form.getRawValue()).subscribe({
     next: (res:any) => {
       this.loading = false;
-        this.global.presentAlert('ATENCION', 'Cuenta creada con éxito', 'Logueate para descubrir Formula League')
+        this.global.presentAlert('ATENCION', 'Cuenta creada con éxito', 'Logueate para descubrir Race Mind')
           this.router.navigateByUrl('/tabs/tab1');
       
       this.cdr.detectChanges();
