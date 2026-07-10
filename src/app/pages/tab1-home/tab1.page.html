@@ -19,7 +19,6 @@
     <div class="prize-content">
       <span class="season-label">Premio temporada 2026</span>
       <h3>U$D {{ prize?.amount }}</h3>
-      <p>El usuario con más puntos al final del campeonato gana.</p>
       <ion-button fill="clear" size="small" (click)="goToWallet(); $event.stopPropagation()">
         Ver billetera
       </ion-button>
@@ -54,13 +53,20 @@
 
     <div class="ranking-content">
       <span class="ranking-label">Ranking Race Mind</span>
-     <p>Tu posicion es:</p>
       @if (rankingPosition) {
-        <h3>#{{ rankingPosition.position }}</h3>
-        <p>{{ rankingPosition.points }} pts en el campeonato.</p>
+        <div class="ranking-metrics">
+          <div>
+            <small>Posicion</small>
+            <strong>#{{ rankingPosition.position }}</strong>
+          </div>
+
+          <div>
+            <small>Puntos</small>
+            <strong>{{ rankingPosition.points }}</strong>
+          </div>
+        </div>
       } @else {
         <h3>Consulta tu posicion</h3>
-        <p>Mira como venis contra otros jugadores.</p>
       }
     </div>
 
@@ -75,7 +81,6 @@
     <div class="reaction-left">
       <div class="reaction-badge">NUEVO</div>
       <h3>🏎️ Juego de reacción</h3>
-      <p>¿Qué tan rápido largás? Probá tu tiempo.</p>
     </div>
 
     <div class="reaction-right">
@@ -86,6 +91,23 @@
       </div>
 
       <ion-button fill="solid" size="small" color="danger" (click)="goToGame()">
+        Jugar
+      </ion-button>
+    </div>
+  </div>
+
+  <div class="reaction-banner reflex-banner" (click)="goToReflexGame()">
+    <div class="reaction-left">
+      <div class="reaction-badge reflex-badge">NUEVO</div>
+      <h3>Reflejos Pit Stop</h3>
+    </div>
+
+    <div class="reaction-right">
+      <div class="reflex-target-preview">
+        <span></span>
+      </div>
+
+      <ion-button fill="solid" size="small" color="danger" (click)="goToReflexGame(); $event.stopPropagation()">
         Jugar
       </ion-button>
     </div>

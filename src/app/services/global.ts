@@ -28,7 +28,7 @@ export class GlobalService {
       message: messagge,
       buttons: ['OK'],
     });
-
+// 
     await alert.present();
   }
 

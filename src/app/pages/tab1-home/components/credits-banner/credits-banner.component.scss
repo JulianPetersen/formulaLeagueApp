@@ -1,6 +1,59 @@
-.credits-banner{
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-    
+.credits-banner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 10px 16px;
+  padding: 11px 14px;
+  border-radius: 15px;
+  background: rgba(15, 32, 39, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.14);
+  cursor: pointer;
+}
+
+.credits-icon {
+  width: 34px;
+  height: 34px;
+  flex: 0 0 34px;
+  border-radius: 11px;
+  background: rgba(255, 209, 102, 0.14);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 14px rgba(255, 209, 102, 0.16);
+}
+
+.credits-icon span {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.credits-copy {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
+}
+
+.credits-label {
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+strong {
+  color: #fff;
+  font-size: 17px;
+  font-weight: 800;
+}
+
+ion-button {
+  --color: #ffd166;
+  min-height: 28px;
+  margin: 0;
+  font-size: 12px;
+  font-weight: 700;
 }

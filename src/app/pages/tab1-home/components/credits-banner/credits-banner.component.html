@@ -1,24 +1,17 @@
-<div class="credits-banner">
-<div>
-    <div class="credits-left">
-    ⚡ {{ userData?.credits }} créditos
+<div class="credits-banner" (click)="goToGetCredits()">
+  <div class="credits-icon">
+    <span>⚡</span>
+  </div>
+
+  <div class="credits-copy">
+    <span class="credits-label">Creditos disponibles</span>
+    <strong>{{ userData?.credits || 0 }}</strong>
   </div>
 
   <ion-button
     size="small"
-    color="warning"
-    (click)="goToGetCredits()"
-   >
-
-    Ganar más
+    fill="clear"
+    (click)="goToGetCredits(); $event.stopPropagation()">
+    Ganar mas
   </ion-button>
-</div>
-
-
-
-  
-  <div class="credits-left">
-    🏆 {{ userData?.points }} puntos
-  </div>
-
 </div>

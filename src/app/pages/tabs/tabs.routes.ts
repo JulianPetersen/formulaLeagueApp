@@ -62,6 +62,10 @@ export const routes: Routes = [
         loadComponent: () => import('../game-semaforo/game-semaforo.page').then(m => m.GameSemaforoPage)
       },
       {
+        path: 'reflex-game',
+        loadComponent: () => import('../reflex-game/reflex-game.page').then(m => m.ReflexGamePage)
+      },
+      {
         path: 'credits-page',
         loadComponent: () => import('../credits-page/credits-page.page').then( m => m.CreditsPagePage)
       },

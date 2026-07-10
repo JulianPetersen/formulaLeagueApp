@@ -18,17 +18,18 @@
 
 /* HEADER */
 .header {
-  padding: 24px;
+  padding: 18px 16px 20px;
   color: #fff;
 
   h2 {
-    font-size: 22px;
-    margin-bottom: 4px;
+    font-size: 20px;
+    margin: 0 0 3px;
   }
 
   p {
+    margin: 0;
     opacity: 0.8;
-    font-size: 14px;
+    font-size: 13px;
   }
 }
 
@@ -37,17 +38,17 @@
 ===================== */
 
 .reaction-banner {
-  margin: 16px;
-  padding: 18px;
-  border-radius: 20px;
+  margin: 10px 16px;
+  padding: 12px 14px;
+  border-radius: 16px;
   background: linear-gradient(135deg, #111827, #1f2937);
   border: 1px solid rgba(255, 255, 255, 0.08);
   display: flex;
   justify-content: space-between;
-  gap: 16px;
+  gap: 12px;
   align-items: center;
   cursor: pointer;
-  box-shadow: 0 10px 30px rgba(0,0,0,.22);
+  box-shadow: 0 8px 22px rgba(0,0,0,.18);
   animation: fadeSlide 0.6s ease-out;
 }
 
@@ -55,9 +56,9 @@
   flex: 1;
 
   h3 {
-    margin: 6px 0 4px;
+    margin: 4px 0 0;
     color: white;
-    font-size: 18px;
+    font-size: 15px;
     font-weight: 700;
   }
 
@@ -73,7 +74,7 @@
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 1px;
-  padding: 5px 8px;
+  padding: 3px 7px;
   border-radius: 999px;
   background: rgba(255, 61, 0, 0.15);
   color: #ff5b2e;
@@ -82,7 +83,7 @@
 .reaction-right {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 7px;
   align-items: center;
 }
 
@@ -91,8 +92,8 @@
   gap: 6px;
 
   span {
-    width: 14px;
-    height: 14px;
+    width: 11px;
+    height: 11px;
     border-radius: 50%;
     background: #ff2d55;
     box-shadow: 0 0 8px rgba(255,45,85,.5);
@@ -104,6 +105,36 @@
   }
 }
 
+.reflex-banner {
+  background: linear-gradient(135deg, #0b111a, #263241);
+}
+
+.reflex-badge {
+  background: rgba(34, 197, 94, 0.15);
+  color: #22c55e;
+}
+
+.reflex-target-preview {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #e10600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow:
+    0 0 0 4px rgba(225, 6, 0, 0.14),
+    0 0 14px rgba(225, 6, 0, 0.5);
+
+  span {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: inset 0 0 0 5px #111827;
+  }
+}
+
 /* =====================
    SEASON PRIZE
 ===================== */
@@ -111,44 +142,50 @@
 .season-prize {
   display: flex;
   align-items: center;
-  gap: 16px;
-  margin: 16px;
-  padding: 18px;
-  border-radius: 18px;
+  gap: 12px;
+  margin: 10px 16px;
+  padding: 12px 14px;
+  border-radius: 15px;
   background: var(--ion-card-background);
   border: 1px solid rgba(255, 61, 0, 0.25);
   box-shadow: 0 0 20px rgba(255, 61, 0, 0.05);
 }
 
 .prize-icon {
-  width: 48px;
-  height: 48px;
-  border-radius: 14px;
+  width: 38px;
+  height: 38px;
+  flex: 0 0 38px;
+  border-radius: 12px;
   background: rgba(255, 61, 0, 0.12);
   display: flex;
   align-items: center;
   justify-content: center;
 
   ion-icon {
-    font-size: 26px;
+    font-size: 21px;
     color: var(--ion-color-primary);
   }
 }
 
 .prize-content {
   flex: 1;
+  min-width: 0;
 
   .season-label {
-    font-size: 12px;
+    display: block;
+    font-size: 10px;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
     opacity: 0.6;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   h3 {
-    margin: 4px 0 6px 0;
+    margin: 2px 0 0;
     font-size: 16px;
-    font-weight: 600;
+    font-weight: 700;
   }
 
   p {
@@ -161,29 +198,29 @@
 .ranking-banner {
   display: flex;
   align-items: center;
-  gap: 14px;
-  margin: 16px;
-  padding: 16px;
-  border-radius: 18px;
+  gap: 12px;
+  margin: 10px 16px;
+  padding: 12px 14px;
+  border-radius: 15px;
   background: rgba(15, 32, 39, 0.86);
   border: 1px solid rgba(143, 161, 179, 0.24);
-  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.18);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.16);
   cursor: pointer;
   animation: fadeSlide 0.6s ease-out;
 }
 
 .ranking-icon {
-  width: 46px;
-  height: 46px;
-  flex: 0 0 46px;
-  border-radius: 14px;
+  width: 38px;
+  height: 38px;
+  flex: 0 0 38px;
+  border-radius: 12px;
   background: rgba(143, 161, 179, 0.15);
   display: flex;
   align-items: center;
   justify-content: center;
 
   ion-icon {
-    font-size: 25px;
+    font-size: 21px;
     color: var(--ion-color-secondary);
   }
 }
@@ -193,14 +230,14 @@
   min-width: 0;
 
   .ranking-label {
-    font-size: 11px;
+    font-size: 10px;
     text-transform: uppercase;
     letter-spacing: 1px;
     color: rgba(255, 255, 255, 0.6);
   }
 
   h3 {
-    margin: 4px 0;
+    margin: 2px 0 0;
     font-size: 16px;
     font-weight: 700;
     color: #fff;
@@ -211,6 +248,48 @@
     font-size: 13px;
     color: rgba(255, 255, 255, 0.72);
   }
+}
+
+.ranking-metrics {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 5px;
+  max-width: 190px;
+}
+
+.ranking-metrics div {
+  min-width: 0;
+  padding: 6px 8px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.ranking-metrics small {
+  display: block;
+  margin-bottom: 1px;
+  color: rgba(255, 255, 255, 0.56);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+
+.ranking-metrics strong {
+  display: block;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.season-prize ion-button,
+.ranking-banner ion-button,
+.reaction-banner ion-button {
+  min-height: 28px;
+  margin: 0;
+  font-size: 12px;
 }
 
 @keyframes fadeSlide {

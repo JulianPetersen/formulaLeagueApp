@@ -11,6 +11,7 @@ import {
 import { GlobalService } from 'src/app/services/global';
 import { AdmobService } from 'src/app/services/admob-service';
 import { UsersService } from 'src/app/services/users';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-credits-page',
@@ -37,7 +38,8 @@ export class CreditsPagePage implements OnInit {
   constructor(
     private global: GlobalService,
     private admob: AdmobService,
-    private userService:UsersService
+    private userService:UsersService,
+    private router:Router
   ) {}
 
   ngOnInit() {
@@ -144,5 +146,10 @@ loadRewardStatus() {
         console.log(err);
       }
     });
+}
+
+
+goToGame(){
+  this.router.navigateByUrl('tabs/game-semaforo')
 }
 }

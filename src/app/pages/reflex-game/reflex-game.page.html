@@ -1,0 +1,122 @@
+<ion-content class="reflex-page">
+  <div class="wrapper">
+    <ion-card class="reflex-card">
+      <ion-card-header>
+        <ion-card-title>Reflejos Pit Stop</ion-card-title>
+        <ion-card-subtitle>
+          Toca el objetivo apenas aparezca
+        </ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-segment [(ngModel)]="segmentValue" mode="ios" class="custom-segment">
+          <ion-segment-button value="game">
+            <ion-label>Juego</ion-label>
+          </ion-segment-button>
+
+          <ion-segment-button value="ranking">
+            <ion-label>Ranking</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+
+        <div *ngIf="segmentValue === 'game'" class="game-view">
+          <div class="round-strip">
+            <span>Ronda {{ round < totalRounds ? round + 1 : totalRounds }} de {{ totalRounds }}</span>
+            <span>{{ misses }} fallos</span>
+          </div>
+
+          <div class="reflex-board" (click)="handleBoardTap()">
+            <div class="board-message" *ngIf="state === 'idle'">
+              Preparado
+            </div>
+
+            <div class="board-message waiting" *ngIf="state === 'waiting'">
+              Espera...
+            </div>
+
+            <button
+              *ngIf="state === 'target'"
+              class="target"
+              type="button"
+              [style.top.%]="targetTop"
+              [style.left.%]="targetLeft"
+              (click)="handleTargetTap($event)"
+              aria-label="Objetivo">
+              <span></span>
+            </button>
+
+            <div class="board-message hit" *ngIf="state === 'hit'">
+              {{ reactionTime }} ms
+            </div>
+
+            <div class="board-message miss" *ngIf="state === 'miss'">
+              Fallo
+            </div>
+
+            <div class="board-message finished" *ngIf="state === 'finished'">
+              Partida completa
+            </div>
+          </div>
+
+          <div class="stats-grid">
+            <div>
+              <span>Mejor</span>
+              <strong>{{ bestTime ? bestTime + ' ms' : '-' }}</strong>
+            </div>
+
+            <div>
+              <span>Promedio</span>
+              <strong>{{ averageTime ? averageTime + ' ms' : '-' }}</strong>
+            </div>
+          </div>
+
+          <div class="save-status" *ngIf="state === 'finished'">
+            <span *ngIf="saveState === 'saving'">Guardando resultado...</span>
+            <span *ngIf="saveState === 'saved'">Resultado guardado en el ranking semanal.</span>
+            <span *ngIf="saveState === 'skipped'">Partida sin intentos validos para rankear.</span>
+            <span *ngIf="saveState === 'error'">No se pudo guardar el resultado.</span>
+          </div>
+
+          <ion-button
+            *ngIf="state === 'idle' || state === 'finished'"
+            expand="block"
+            size="large"
+            shape="round"
+            color="danger"
+            (click)="startGame()">
+            Jugar
+          </ion-button>
+
+          <ion-button
+            *ngIf="state !== 'idle' && state !== 'finished'"
+            expand="block"
+            fill="clear"
+            color="light"
+            (click)="resetGame()">
+            Reiniciar
+          </ion-button>
+        </div>
+
+        <div *ngIf="segmentValue === 'ranking'" class="results-view">
+          <div class="result-summary">
+            <span>Tu mejor partida semanal</span>
+            <h3>{{ myBestRecord ? myBestRecord.averageResult + ' ms' : 'Sin registro' }}</h3>
+            <p>
+              {{ myBestRecord ? 'Mejor toque: ' + myBestRecord.bestResult + ' ms' : 'Completa una partida para rankear' }}
+            </p>
+          </div>
+
+          <div class="result-row" *ngFor="let user of ranking; let i = index" [class.me]="user.userId === userLogedId?._id">
+            <div class="position">#{{ i + 1 }}</div>
+            <div class="result-name">{{ user.name }}</div>
+            <div class="result-time">{{ user.averageResult }} ms</div>
+          </div>
+
+          <div class="empty-results" *ngIf="!ranking.length">
+            Todavia no hay resultados en el ranking semanal.
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>
