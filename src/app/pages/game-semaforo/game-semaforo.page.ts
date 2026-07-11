@@ -151,7 +151,8 @@ export class GameSemaforoPage {
   async showAd() {
 
     const options = {
-      adId: 'ca-app-pub-3940256099942544/1033173712' // TEST ID
+      // adId: 'ca-app-pub-3940256099942544/1033173712' // TEST ID
+      adId: 'ca-app-pub-7377639735677577/7582767693' // TEST ID
     };
 
     await AdMob.prepareInterstitial(options);

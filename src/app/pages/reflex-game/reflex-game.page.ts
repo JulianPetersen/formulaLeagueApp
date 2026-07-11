@@ -17,6 +17,7 @@ import { ReflexGameRecord } from 'src/app/models/reflex-game';
 import { AuthService } from 'src/app/services/auth-service';
 import { GlobalService } from 'src/app/services/global';
 import { ReflexGameService } from 'src/app/services/reflex-game';
+import { AdMob } from '@capacitor-community/admob';
 
 type ReflexState = 'idle' | 'waiting' | 'target' | 'hit' | 'miss' | 'finished';
 type SaveState = 'idle' | 'saving' | 'saved' | 'error' | 'skipped';
@@ -73,10 +74,11 @@ export class ReflexGamePage implements OnInit, OnDestroy {
     private auth: AuthService
   ) { }
 
-  ngOnInit() {
+ async ngOnInit() {
     this.userLogedId = JSON.parse(localStorage.getItem('user') || 'null');
     this.getRanking();
     this.getMyBestRecord();
+    await AdMob.initialize();
   }
 
   ngOnDestroy() {
@@ -179,6 +181,7 @@ export class ReflexGamePage implements OnInit, OnDestroy {
 
     this.state = 'finished';
     this.saveFinishedGame();
+    this.showAd();
   }
 
   private randomPosition() {
@@ -255,5 +258,19 @@ export class ReflexGamePage implements OnInit, OnDestroy {
       clearTimeout(this.timeout);
       this.timeout = null;
     }
+  }
+
+
+
+    async showAd() {
+
+    const options = {
+      // adId: 'ca-app-pub-3940256099942544/1033173712' // TEST ID
+      adId: 'ca-app-pub-7377639735677577/7582767693' // PROD ID
+    };
+
+    await AdMob.prepareInterstitial(options);
+    await AdMob.showInterstitial();
+
   }
 }
