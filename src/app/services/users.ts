@@ -62,4 +62,12 @@ export class UsersService {
     });
     return this.http.patch(`${this.global.api}/api/user/addUserName`,{username} ,{ headers })
   }
+
+    updateEmail(email:string) {
+    const token = this.getToken();
+    const headers = new HttpHeaders({
+      'authorization': `Bearer ${token}` || '',
+    });
+    return this.http.patch<User>(`${this.global.api}/api/user/updateEmail`,{email} ,{ headers })
+  }
 }

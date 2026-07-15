@@ -46,6 +46,10 @@ export class AuthService {
     return this.http.post<any>(`${this.global.api}/api/auth/forgotPassword`, data)
   }
 
+  resendVerification(data: { email: string }) {
+    return this.http.post<any>(`${this.global.api}/api/auth/resendVerify`, data)
+  }
+
 
   loginGoogle(idToken: string) {
     return this.http.post(`${this.global.api}/api/auth/google`, {

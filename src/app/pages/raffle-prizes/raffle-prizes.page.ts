@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import {
   IonButton,
   IonContent,
@@ -10,6 +11,7 @@ import {
 import { RafflePrize } from 'src/app/models/raffle';
 import { GlobalService } from 'src/app/services/global';
 import { RafflesService } from 'src/app/services/raffles-service';
+import { UsersService } from 'src/app/services/users';
 
 @Component({
   selector: 'app-raffle-prizes',
@@ -33,7 +35,9 @@ export class RafflePrizesPage implements OnInit {
 
   constructor(
     private rafflesService: RafflesService,
-    private global: GlobalService
+    private global: GlobalService,
+    private router: Router,
+    private usersService: UsersService
   ) {}
 
   ngOnInit() {
@@ -64,12 +68,37 @@ export class RafflePrizesPage implements OnInit {
   claimPrize(prize: RafflePrize) {
     if (this.claimingPrizeId || prize.claimStatus !== 'unclaimed') return;
 
-    this.global.presentConfirmAlert(
-      'Reclamar premio',
-      prize.prizeName,
-      'Vamos a avisarle al equipo de Race Mind para coordinar la entrega.',
-      () => this.confirmClaimPrize(prize)
-    );
+    this.claimingPrizeId = prize._id;
+
+    this.usersService.getInfoUser()
+      .subscribe({
+        next: (user) => {
+          this.claimingPrizeId = '';
+
+          if (!user.verified) {
+            this.global.presentConfirmAlert(
+              'Email sin verificar',
+              '',
+              'Para reclamar un premio primero tenes que verificar tu email. Te llevamos a Mi cuenta para hacerlo.',
+              () => {
+                this.router.navigateByUrl('/tabs/myaccount');
+              }
+            );
+            return;
+          }
+
+          this.global.presentConfirmAlert(
+            'Reclamar premio',
+            prize.prizeName,
+            'Vamos a avisarle al equipo de Race Mind para coordinar la entrega.',
+            () => this.confirmClaimPrize(prize)
+          );
+        },
+        error: (err) => {
+          this.claimingPrizeId = '';
+          this.global.presentAlert('No se pudo validar', '', err.error?.message || 'Intentalo nuevamente');
+        }
+      });
   }
 
   private confirmClaimPrize(prize: RafflePrize) {

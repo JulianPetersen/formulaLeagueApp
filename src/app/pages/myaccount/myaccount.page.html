@@ -8,6 +8,9 @@
 
     <h2>{{ user?.name }}</h2>
     <p class="email">{{ user?.email }}</p>
+    <span class="verify-pill" [class.verified]="isEmailVerified()">
+      {{ getEmailStatusLabel() }}
+    </span>
   </div>
 
   <!-- PUNTOS -->
@@ -18,6 +21,50 @@
     </ion-card-content>
   </ion-card>
 
+
+  <ion-card class="email-card" [class.verified]="isEmailVerified()">
+    <ion-card-content>
+      <p class="label">Estado del correo</p>
+      <h3>{{ getEmailStatusLabel() }}</h3>
+      <p class="hint">{{ getEmailStatusMessage() }}</p>
+
+      <ion-button
+        *ngIf="!isEmailVerified()"
+        expand="block"
+        class="verify-button"
+        [disabled]="sendingVerification"
+        (click)="sendVerificationEmail()">
+        <ion-spinner *ngIf="sendingVerification" name="crescent"></ion-spinner>
+        <span *ngIf="!sendingVerification">Verificar mail</span>
+      </ion-button>
+
+      <button
+        *ngIf="!isEmailVerified()"
+        type="button"
+        class="change-email-link"
+        (click)="showEmailChange = !showEmailChange">
+        {{ showEmailChange ? 'Cancelar cambio de email' : 'No tengo acceso a este email' }}
+      </button>
+
+      <div *ngIf="showEmailChange && !isEmailVerified()" class="email-change-box">
+        <ion-input
+          type="email"
+          label="Nuevo email"
+          labelPlacement="floating"
+          [(ngModel)]="newEmail">
+        </ion-input>
+
+        <ion-button
+          expand="block"
+          class="verify-button"
+          [disabled]="changingEmail || sendingVerification || !newEmail.trim()"
+          (click)="changeEmailAndSendVerification()">
+          <ion-spinner *ngIf="changingEmail || sendingVerification" name="crescent"></ion-spinner>
+          <span *ngIf="!changingEmail && !sendingVerification">Cambiar y verificar</span>
+        </ion-button>
+      </div>
+    </ion-card-content>
+  </ion-card>
 
 
 
