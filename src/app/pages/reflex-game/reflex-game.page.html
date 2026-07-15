@@ -22,7 +22,7 @@
         <div *ngIf="segmentValue === 'game'" class="game-view">
           <div class="round-strip">
             <span>Ronda {{ round < totalRounds ? round + 1 : totalRounds }} de {{ totalRounds }}</span>
-            <span>{{ misses }} fallos</span>
+                <span>{{ misses }} fallos</span>
           </div>
 
           <div class="reflex-board" (click)="handleBoardTap()">
@@ -34,14 +34,8 @@
               Espera...
             </div>
 
-            <button
-              *ngIf="state === 'target'"
-              class="target"
-              type="button"
-              [style.top.%]="targetTop"
-              [style.left.%]="targetLeft"
-              (click)="handleTargetTap($event)"
-              aria-label="Objetivo">
+            <button *ngIf="state === 'target'" class="target" type="button" [style.top.%]="targetTop"
+              [style.left.%]="targetLeft" (click)="handleTargetTap($event)" aria-label="Objetivo">
               <span></span>
             </button>
 
@@ -77,36 +71,52 @@
             <span *ngIf="saveState === 'error'">No se pudo guardar el resultado.</span>
           </div>
 
-          <ion-button
-            *ngIf="state === 'idle' || state === 'finished'"
-            expand="block"
-            size="large"
-            shape="round"
-            color="danger"
-            (click)="startGame()">
+          <ion-button *ngIf="state === 'idle' || state === 'finished'" expand="block" size="large" shape="round"
+            color="danger" (click)="startGame()">
             Jugar
           </ion-button>
 
-          <ion-button
-            *ngIf="state !== 'idle' && state !== 'finished'"
-            expand="block"
-            fill="clear"
-            color="light"
+          <ion-button *ngIf="state !== 'idle' && state !== 'finished'" expand="block" fill="clear" color="light"
             (click)="resetGame()">
             Reiniciar
           </ion-button>
         </div>
 
         <div *ngIf="segmentValue === 'ranking'" class="results-view">
+
+          <div class="reward-banner">
+
+            <div class="reward-title">
+              🏁 Ranking Semanal
+            </div>
+
+            <div class="reward-subtitle">
+              Los <strong>3 mejores tiempos</strong> ganan RM cada semana
+            </div>
+
+            <div class="reward-points">
+              <span><img src="assets/rm-coins.png" alt="RM" /> 3 RM</span>
+              <span><img src="assets/rm-coins.png" alt="RM" /> 2 RM</span>
+              <span><img src="assets/rm-coins.png" alt="RM" /> 1 RM</span>
+            </div>
+
+            <div class="reward-points legacy-reward-points">
+              🥇 3 pts &nbsp; 🥈 2 pts &nbsp; 🥉 1 pts
+            </div>
+
+          </div>
+
           <div class="result-summary">
             <span>Tu mejor partida semanal</span>
             <h3>{{ myBestRecord ? myBestRecord.averageResult + ' ms' : 'Sin registro' }}</h3>
             <p>
-              {{ myBestRecord ? 'Mejor toque: ' + myBestRecord.bestResult + ' ms' : 'Completa una partida para rankear' }}
+              {{ myBestRecord ? 'Mejor toque: ' + myBestRecord.bestResult + ' ms' : 'Completa una partida para rankear'
+              }}
             </p>
           </div>
 
-          <div class="result-row" *ngFor="let user of ranking; let i = index" [class.me]="user.userId === userLogedId?._id">
+          <div class="result-row" *ngFor="let user of ranking; let i = index"
+            [class.me]="user.userId === userLogedId?._id">
             <div class="position">#{{ i + 1 }}</div>
             <div class="result-name">{{ user.name }}</div>
             <div class="result-time">{{ user.averageResult }} ms</div>

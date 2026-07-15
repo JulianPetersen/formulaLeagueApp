@@ -1,0 +1,222 @@
+<ion-header class="custom-header">
+  <ion-toolbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="raffles-content">
+  <section class="raffles-header">
+    <div>
+      <span class="kicker">RM Sorteos</span>
+      <h1>Sorteos</h1>
+    </div>
+
+    <div class="balance-pill">
+      <img src="assets/rm-coins.png" alt="RM coins" />
+      <span>{{ balance }} RM</span>
+    </div>
+  </section>
+
+  <ion-button
+    fill="clear"
+    size="small"
+    routerLink="/tabs/raffle-prizes"
+    style="margin: -12px 14px 14px; --color: #ffd71a; font-weight: 900;">
+    Mis premios
+  </ion-button>
+
+  <div *ngIf="isLoading && !featured" class="state-box">
+    <ion-spinner name="crescent"></ion-spinner>
+  </div>
+
+  <div *ngIf="errorMessage && !isLoading" class="state-box">
+    <h3>No pudimos cargar los sorteos</h3>
+    <p>{{ errorMessage }}</p>
+    <ion-button size="small" (click)="loadRaffles()">Reintentar</ion-button>
+  </div>
+
+  <div *ngIf="!isLoading && !errorMessage && !featured" class="state-box">
+    <h3>No hay sorteos activos</h3>
+    <p>Cuando haya un sorteo disponible lo vas a ver aca.</p>
+  </div>
+
+  <ng-container *ngIf="featured">
+    <section class="featured-raffle">
+      <div
+        class="prize-visual"
+        [style.background-image]="getRaffleBackground(featured)">
+        <div class="prize-copy">
+          <span>Premio destacado</span>
+          <strong>{{ featured.prizeName }}</strong>
+        </div>
+      </div>
+
+      <div class="raffle-status">Sorteo activo</div>
+
+      <h2>{{ featured.title }}</h2>
+      <p>{{ featured.description || featured.prizeName }}</p>
+
+      <div class="countdown-row">
+        <div>
+          <span>Cierra en</span>
+          <strong>{{ getCountdown(featured.endsAt) }}</strong>
+        </div>
+
+        <div>
+          <span>Costo</span>
+          <strong>{{ featured.costPerTicket }} RM coins</strong>
+        </div>
+      </div>
+
+      <div class="ticket-stats">
+        <div>
+          <span>Tus tickets</span>
+          <strong>{{ featured.userTickets }}</strong>
+        </div>
+
+        <div>
+          <span>Tickets totales</span>
+          <strong>{{ featured.totalTickets }}</strong>
+        </div>
+      </div>
+
+      <div class="quantity-row" aria-label="Cantidad de tickets">
+        <button
+          type="button"
+          [class.active]="selectedQuantity === 1"
+          (click)="setQuantity(1)">
+          1 ticket
+        </button>
+        <button
+          type="button"
+          [class.active]="selectedQuantity === 5"
+          (click)="setQuantity(5)">
+          5 tickets
+        </button>
+        <button
+          type="button"
+          [class.active]="selectedQuantity === 10"
+          (click)="setQuantity(10)">
+          10 tickets
+        </button>
+      </div>
+
+      <ion-button
+        expand="block"
+        class="buy-button"
+        [disabled]="balance < purchaseCost || isBuying"
+        (click)="buyFeaturedTicket()">
+        <ion-spinner *ngIf="isBuying" name="crescent"></ion-spinner>
+        <span *ngIf="!isBuying">Comprar ticket · {{ purchaseCost }} RM</span>
+      </ion-button>
+
+      <p *ngIf="balance < purchaseCost" class="insufficient">
+        Te faltan {{ purchaseCost - balance }} RM coins para esta compra.
+      </p>
+    </section>
+
+    <section class="section-block">
+      <div class="section-title">
+        <h3>Sorteos abiertos</h3>
+        <span>{{ activeRaffles.length }}</span>
+      </div>
+
+      <article
+        *ngFor="let raffle of activeRaffles"
+        class="compact-raffle">
+        <img
+          *ngIf="getRaffleImage(raffle)"
+          class="compact-prize"
+          [src]="getRaffleImage(raffle)"
+          (click)="openImagePreview(raffle)"
+          alt="" />
+
+        <div class="compact-copy">
+          <strong>{{ raffle.title }}</strong>
+          <span>{{ raffle.prizeName }}</span>
+          <div class="quantity-row" aria-label="Cantidad de tickets">
+            <button
+              type="button"
+              [class.active]="getRaffleQuantity(raffle) === 1"
+              (click)="setRaffleQuantity(raffle, 1)">
+              1
+            </button>
+            <button
+              type="button"
+              [class.active]="getRaffleQuantity(raffle) === 5"
+              (click)="setRaffleQuantity(raffle, 5)">
+              5
+            </button>
+            <button
+              type="button"
+              [class.active]="getRaffleQuantity(raffle) === 10"
+              (click)="setRaffleQuantity(raffle, 10)">
+              10
+            </button>
+          </div>
+          <small>{{ getCountdown(raffle.endsAt) }} · {{ raffle.userTickets }} tickets tuyos</small>
+        </div>
+
+        <div class="compact-action" style="grid-column: 2;">
+          <button
+            type="button"
+            [disabled]="balance < getRaffleCost(raffle) || isBuying"
+            (click)="buyTicket(raffle)">
+            Comprar a {{ getRaffleCost(raffle) }} RM
+          </button>
+          <small *ngIf="balance < getRaffleCost(raffle)">RM insuficientes</small>
+        </div>
+      </article>
+    </section>
+
+    <section class="section-block">
+      <div class="section-title">
+        <h3>Mis tickets</h3>
+      </div>
+
+      <div class="ticket-list" *ngIf="myTickets.length; else noTickets">
+        <div *ngFor="let raffle of myTickets">
+          <span>{{ raffle.title }}</span>
+          <strong>{{ raffle.userTickets }} tickets</strong>
+        </div>
+      </div>
+
+      <ng-template #noTickets>
+        <p class="empty-text">Todavia no compraste tickets.</p>
+      </ng-template>
+    </section>
+
+  </ng-container>
+
+  <section *ngIf="!isLoading && !errorMessage" class="section-block winners-block">
+    <div class="section-title">
+      <h3>Ganadores recientes</h3>
+    </div>
+
+    <div *ngIf="winners.length; else noWinners">
+      <div class="winner-row" *ngFor="let winner of winners">
+        <div class="winner-avatar">{{ getWinnerName(winner).slice(0, 2) }}</div>
+        <div>
+          <strong>{{ getWinnerName(winner) }}</strong>
+          <span>gano {{ winner.prizeName }}</span>
+        </div>
+        <small>{{ getWinnerDate(winner) }}</small>
+      </div>
+    </div>
+
+    <ng-template #noWinners>
+      <p class="empty-text">Aun no hay ganadores recientes.</p>
+    </ng-template>
+  </section>
+
+  <div
+    *ngIf="previewRaffle"
+    style="position: fixed; inset: 0; z-index: 9999; display: grid; place-items: center; padding: 22px; background: rgba(0,0,0,.82);"
+    (click)="closeImagePreview()">
+    <div style="position: relative; display: grid; gap: 8px; width: min(92vw, 420px); color: #fff; text-align: center;" (click)="$event.stopPropagation()">
+      <button type="button" style="position: absolute; top: -14px; right: -8px; width: 34px; height: 34px; border: 0; border-radius: 50%; background: #fff; color: #111; font-size: 24px;" (click)="closeImagePreview()">×</button>
+      <img style="width: 100%; max-height: 70vh; border-radius: 16px; object-fit: contain; background: #111;" [src]="getRaffleImage(previewRaffle)" [alt]="previewRaffle.prizeName" />
+      <strong>{{ previewRaffle.prizeName }}</strong>
+      <span>{{ previewRaffle.title }}</span>
+    </div>
+  </div>
+</ion-content>

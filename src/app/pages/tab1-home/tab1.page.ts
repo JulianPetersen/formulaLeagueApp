@@ -135,6 +135,10 @@ goToReflexGame(){
   this.router.navigateByUrl('tabs/reflex-game')
 }
 
+goToRaffles(){
+  this.router.navigateByUrl('tabs/raffles')
+}
+
 goToWallet(){
   this.router.navigateByUrl('tabs/wallet')
 }

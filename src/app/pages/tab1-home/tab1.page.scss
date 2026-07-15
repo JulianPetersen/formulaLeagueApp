@@ -105,6 +105,11 @@
   }
 }
 
+.raffles-home-banner .reaction-left h3:not(.raffles-title),
+.raffles-home-banner .lights {
+  display: none;
+}
+
 .reflex-banner {
   background: linear-gradient(135deg, #0b111a, #263241);
 }

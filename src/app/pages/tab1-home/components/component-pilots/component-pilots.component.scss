@@ -72,3 +72,20 @@
   color: var(--ion-color-primary);
   font-weight: 600;
 }
+
+.rm-coins-balance {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 16px 0 12px;
+  color: #facc15;
+  font-weight: 700;
+}
+
+.rm-coins-balance img {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+}

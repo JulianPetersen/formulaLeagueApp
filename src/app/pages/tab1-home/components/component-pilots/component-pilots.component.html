@@ -1,8 +1,8 @@
 <ion-card class="pilots-card">
   <ion-card-content>
 
-    <h3>Tu pronóstico</h3>
-    <p class="hint">Arrastrá para ordenar del 1° al 10°</p>
+    <h3>Tu pronostico</h3>
+    <p class="hint">Arrastra para ordenar del 1 al 10</p>
 
     <ion-reorder-group [disabled]="predictionAlreadyExists && !isEditingPrediction"
       (ionItemReorder)="doReorder($event)">
@@ -21,43 +21,35 @@
 
     </ion-reorder-group>
 
-
     @if(predictionAlreadyExists){
     <div class="prediction-saved">
-      ✅ Pronóstico enviado
+      Pronostico enviado
     </div>
     }
 
-
     <div *ngIf="predictionAlreadyExists && !isEditingPrediction" class="modify-section">
 
-      <p>
-        ⚡ Tienes {{ userCredits }} créditos
+      <p class="rm-coins-balance">
+        <img src="assets/rm-coins.png" alt="RM coins" />
+        Tienes {{ userCredits }} RM coins
       </p>
 
       <ion-button expand="block" color="warning" (click)="enableEdit()">
-
-        Modificar pronóstico · 10 créditos
+        Modificar pronostico · 10 RM coins
       </ion-button>
     </div>
 
-
     <div *ngIf="isEditingPrediction" class="editing-warning">
-
-      ⚠️ Guardar cambios costará 10 créditos
-
+      Guardar cambios costara 10 RM coins
     </div>
   </ion-card-content>
 
 </ion-card>
 
-<!-- CTA -->
 <ion-button *ngIf="!predictionAlreadyExists" expand="block" shape="round" class="submit-btn" (click)="enviarData()">
-
-  Guardar pronóstico
+  Guardar pronostico
 </ion-button>
 
 <ion-button *ngIf="isEditingPrediction" expand="block" shape="round" color="danger" (click)="saveChanges()">
-
-  Guardar cambios (-10 créditos)
+  Guardar cambios (-10 RM coins)
 </ion-button>

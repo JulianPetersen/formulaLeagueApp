@@ -1,0 +1,65 @@
+<ion-header class="custom-header">
+  <ion-toolbar></ion-toolbar>
+</ion-header>
+
+<ion-content class="prizes-content">
+  <div class="prizes-header">
+    <div class="prizes-kicker">RM sorteos</div>
+    <h2>Mis premios</h2>
+    <p>Premios ganados en sorteos y estado de entrega.</p>
+  </div>
+
+  <div *ngIf="isLoading && !prizes.length" class="loading-state">
+    <ion-spinner name="crescent"></ion-spinner>
+  </div>
+
+  <div *ngIf="errorMessage && !isLoading" class="message-box">
+    <h3>No pudimos cargar tus premios</h3>
+    <p>{{ errorMessage }}</p>
+    <ion-button size="small" (click)="loadPrizes()">Reintentar</ion-button>
+  </div>
+
+  <div *ngIf="!isLoading && !errorMessage && !prizes.length" class="message-box empty">
+    <h3>Todavia no ganaste premios</h3>
+    <p>Cuando un sorteo salga a tu favor, lo vas a ver aca para reclamarlo.</p>
+  </div>
+
+  <section *ngIf="prizes.length" class="prizes-list">
+    <article *ngFor="let prize of prizes" class="prize-card">
+      <div class="prize-media" [style.background-image]="getPrizeImage(prize)">
+        <span>{{ getClaimLabel(prize) }}</span>
+      </div>
+
+      <div class="prize-body">
+        <div class="prize-title">
+          <span>{{ prize.title }}</span>
+          <h3>{{ prize.prizeName }}</h3>
+        </div>
+
+        <div class="prize-meta">
+          <div>
+            <span>Ticket ganador</span>
+            <strong>#{{ prize.ticketNumber || '-' }}</strong>
+          </div>
+          <div>
+            <span>Sorteado</span>
+            <strong>{{ getPrizeDate(prize) || '-' }}</strong>
+          </div>
+        </div>
+
+        <p>{{ getClaimDetail(prize) }}</p>
+
+        <ion-button
+          expand="block"
+          class="claim-button"
+          [disabled]="claimingPrizeId === prize._id || prize.claimStatus !== 'unclaimed'"
+          (click)="claimPrize(prize)">
+          <ion-spinner *ngIf="claimingPrizeId === prize._id" name="crescent"></ion-spinner>
+          <span *ngIf="claimingPrizeId !== prize._id">
+            {{ prize.claimStatus === 'unclaimed' ? 'Reclamar premio' : getClaimLabel(prize) }}
+          </span>
+        </ion-button>
+      </div>
+    </article>
+  </section>
+</ion-content>

@@ -70,6 +70,14 @@ export const routes: Routes = [
         loadComponent: () => import('../credits-page/credits-page.page').then( m => m.CreditsPagePage)
       },
       {
+        path: 'raffles',
+        loadComponent: () => import('../raffles/raffles.page').then(m => m.RafflesPage)
+      },
+      {
+        path: 'raffle-prizes',
+        loadComponent: () => import('../raffle-prizes/raffle-prizes.page').then(m => m.RafflePrizesPage)
+      },
+      {
         path: 'wallet',
         loadComponent: () => import('../wallet/wallet.page').then(m => m.WalletPage)
       },

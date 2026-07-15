@@ -1,10 +1,10 @@
 <div class="credits-banner" (click)="goToGetCredits()">
   <div class="credits-icon">
-    <span>⚡</span>
+    <img src="assets/rm-coins.png" alt="RM coins" />
   </div>
 
   <div class="credits-copy">
-    <span class="credits-label">Creditos disponibles</span>
+    <span class="credits-label">RM coins disponibles</span>
     <strong>{{ userData?.credits || 0 }}</strong>
   </div>
 
@@ -12,6 +12,6 @@
     size="small"
     fill="clear"
     (click)="goToGetCredits(); $event.stopPropagation()">
-    Ganar mas
+    Ganar RM
   </ion-button>
 </div>

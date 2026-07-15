@@ -253,7 +253,25 @@ ion-segment-button {
 }
 
 .reward-points {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
   color: #ffd54f;
   font-weight: 700;
   font-size: 14px;
+}
+
+.reward-points span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.reward-points img {
+  width: 18px;
+  height: 18px;
+}
+
+.legacy-reward-points {
+  display: none;
 }

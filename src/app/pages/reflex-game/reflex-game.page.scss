@@ -199,6 +199,59 @@ ion-segment-button {
   color: #aab2bf;
 }
 
+
+/* ===================== */
+/* 🎁 REWARD BANNER */
+/* ===================== */
+
+.reward-banner {
+  text-align: center;
+  padding: 14px;
+  border-radius: 16px;
+  margin-bottom: 20px;
+
+  background: linear-gradient(135deg, rgba(225,6,0,.2), rgba(255,255,255,.05));
+  border: 1px solid rgba(255,255,255,.08);
+  backdrop-filter: blur(6px);
+}
+
+.reward-title {
+  color: white;
+  font-weight: 800;
+  font-size: 18px;
+  margin-bottom: 4px;
+}
+
+.reward-subtitle {
+  color: #d1d5db;
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+
+.reward-points {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  color: #ffd54f;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.reward-points span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.reward-points img {
+  width: 18px;
+  height: 18px;
+}
+
+.legacy-reward-points {
+  display: none;
+}
+
 @keyframes targetPop {
   from {
     opacity: 0;

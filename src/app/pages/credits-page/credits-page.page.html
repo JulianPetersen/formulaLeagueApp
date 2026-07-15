@@ -4,32 +4,30 @@
 </ion-header>
 
 <ion-content class="credits-content">
-
-  <!-- HEADER -->
   <div class="header">
-    <h2>⚡ Centro de créditos</h2>
-    <p>Gana créditos viendo anuncios diarios</p>
+    <div class="brand-title">
+      <img src="assets/rm-coins.png" alt="RM coins" />
+      <h2>Centro de RM coins</h2>
+    </div>
+    <p>Gana RM coins viendo anuncios diarios</p>
   </div>
 
-  <!-- CARD PRINCIPAL -->
   <div class="credits-card">
-
     <div class="credits-top">
-
       <div>
-        <span class="credits-label">Tus créditos</span>
-        <h1>⚡ {{ userCredits }}</h1>
+        <span class="credits-label">Tus RM coins</span>
+        <h1>
+          <img src="assets/rm-coins.png" alt="" />
+          {{ userCredits }}
+        </h1>
       </div>
 
       <div class="daily-box">
         {{ adsViewedToday }}/5
       </div>
-
     </div>
 
-    <!-- PROGRESO -->
     <div class="progress-wrapper">
-
       <div class="progress-bar">
         <div
           class="progress-fill"
@@ -40,10 +38,8 @@
       <p class="progress-text">
         Anuncios vistos hoy
       </p>
-
     </div>
 
-    <!-- BOTÓN -->
     <ion-button
       expand="block"
       class="watch-btn"
@@ -56,49 +52,38 @@
       </ion-spinner>
 
       <span *ngIf="!isLoading">
-        🎬 Ver anuncio (+1 crédito)
+        Ver anuncio (+1 RM coin)
       </span>
-
     </ion-button>
 
-    <!-- LIMITE -->
     <div
       *ngIf="adsViewedToday >= 5"
       class="limit-box">
-
-      🎉 Ya alcanzaste el límite diario
-
+      Ya alcanzaste el limite diario
     </div>
-
-
   </div>
 
-  <!-- INFO -->
   <div class="info-section">
-
     <div class="info-item">
-      <span>💡</span>
-      <p>Cada anuncio te da 1 crédito</p>
+      <span>RM</span>
+      <p>Cada anuncio te da 1 RM coin</p>
     </div>
 
     <div class="info-item">
-      <span>🏁</span>
-      <p>Usa créditos para modificar pronósticos</p>
+      <span>GP</span>
+      <p>Usa RM coins para modificar pronosticos</p>
     </div>
 
     <div class="info-item">
-      <span>🕓</span>
-      <p>Los anuncios se reinician cada día</p>
+      <span>24h</span>
+      <p>Los anuncios se reinician cada dia</p>
     </div>
-
   </div>
 
-
-    <div class="reaction-banner">
+  <div class="reaction-banner">
     <div class="reaction-left">
-
-      <h3>🏎️ Juego de reacción</h3>
-      <p>¿Qué tan rápido largás? Probá tu tiempo.</p>
+      <h3>Juego de reaccion</h3>
+      <p>Que tan rapido largas? Proba tu tiempo.</p>
     </div>
 
     <div class="reaction-right">
@@ -113,5 +98,4 @@
       </ion-button>
     </div>
   </div>
-
 </ion-content>

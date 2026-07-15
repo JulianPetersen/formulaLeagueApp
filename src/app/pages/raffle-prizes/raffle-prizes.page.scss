@@ -1,0 +1,132 @@
+.prizes-content {
+  --background: #071112;
+  color: #fff;
+}
+
+.prizes-header,
+.prizes-list,
+.message-box {
+  padding: 0 14px;
+}
+
+.prizes-header {
+  padding-top: 22px;
+  margin-bottom: 18px;
+}
+
+.prizes-kicker {
+  color: #ffd71a;
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.prizes-header h2 {
+  margin: 6px 0 4px;
+  font-size: 30px;
+  font-weight: 950;
+}
+
+.prizes-header p,
+.message-box p,
+.prize-body p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.66);
+  font-size: 13px;
+}
+
+.loading-state {
+  display: grid;
+  min-height: 220px;
+  place-items: center;
+}
+
+.message-box {
+  margin: 0 14px;
+  padding: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  background: #0b1719;
+}
+
+.message-box h3 {
+  margin: 0 0 8px;
+  font-size: 18px;
+}
+
+.prizes-list {
+  display: grid;
+  gap: 14px;
+  padding-bottom: 92px;
+}
+
+.prize-card {
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  background: #0b1719;
+}
+
+.prize-media {
+  min-height: 160px;
+  display: flex;
+  align-items: flex-end;
+  padding: 14px;
+  background: linear-gradient(135deg, #d90000, #ff7a18);
+  background-position: center;
+  background-size: cover;
+}
+
+.prize-media span {
+  padding: 7px 10px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.64);
+  color: #ffd71a;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.prize-body {
+  padding: 16px;
+}
+
+.prize-title span,
+.prize-meta span {
+  color: rgba(255, 255, 255, 0.58);
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.prize-title h3 {
+  margin: 4px 0 14px;
+  font-size: 22px;
+  font-weight: 950;
+}
+
+.prize-meta {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.prize-meta div {
+  padding: 12px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.prize-meta strong {
+  display: block;
+  margin-top: 3px;
+  font-size: 14px;
+}
+
+.claim-button {
+  margin-top: 14px;
+  --background: linear-gradient(90deg, #e90000, #ff7a18);
+  --border-radius: 12px;
+  min-height: 46px;
+  font-weight: 950;
+}

@@ -169,9 +169,9 @@ export class ComponentPilotsComponent implements OnChanges {
   if (this.userCredits < this.modificationCost) {
 
     this.global.presentAlert(
-      'Créditos insuficientes',
+      'RM coins insuficientes',
       '',
-      'Necesitas 10 créditos'
+      'Necesitas 10 RM coins'
     );
 
     return;

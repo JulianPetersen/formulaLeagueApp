@@ -98,9 +98,9 @@ export class CreditsPagePage implements OnInit {
           //this.global.setCredits(res.credits);
 
           this.global.presentAlert(
-            'Crédito obtenido',
+            'RM coin obtenida',
             '',
-            '⚡ Ganaste 1 crédito'
+            'Ganaste 1 RM coin'
           );
         },
 
