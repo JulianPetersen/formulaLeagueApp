@@ -1,0 +1,156 @@
+<ion-content class="road-rush-page" fullscreen>
+  <div class="game-shell">
+    <div class="top-bar">
+      <div>
+        <span>Score</span>
+        <strong>{{ score }}</strong>
+      </div>
+
+      <div>
+        <span>RM a acreditar</span>
+        <strong>{{ creditedRm }}</strong>
+      </div>
+
+      <div>
+        <span>Velocidad</span>
+        <strong>{{ speedLabel }} km/h</strong>
+      </div>
+    </div>
+
+    <div class="view-tabs">
+      <button type="button" [class.active]="segmentValue === 'game'" (click)="showGame()">Juego</button>
+      <button type="button" [class.active]="segmentValue === 'ranking'" (click)="showRanking()">Ranking</button>
+      <button
+        type="button"
+        class="sound-toggle"
+        (click)="toggleSound()"
+        [attr.aria-label]="soundEnabled ? 'Silenciar sonido' : 'Activar sonido'">
+        <ion-icon [name]="soundEnabled ? 'volume-high' : 'volume-mute'"></ion-icon>
+      </button>
+    </div>
+
+    <section *ngIf="segmentValue === 'game'" class="road-stage" [class.is-playing]="state === 'playing'">
+      <div class="road-markers">
+        <span></span>
+        <span></span>
+      </div>
+
+      <div
+        class="road-object enemy-car"
+        *ngFor="let enemy of enemies"
+        [style.left.%]="getObjectLeft(enemy)"
+        [style.top.%]="enemy.y">
+        <img src="assets/games/road-rush/player-f1-pixel.png" alt="Auto rival" />
+      </div>
+
+      <div
+        class="road-object coin"
+        *ngFor="let coin of roadCoins"
+        [style.left.%]="getObjectLeft(coin)"
+        [style.top.%]="coin.y">
+        RM
+      </div>
+
+      <div class="player-car-wrap" [style.left.%]="getPlayerLeft()" [style.top.%]="playerY">
+        <img
+          class="player-car"
+          src="assets/games/road-rush/enemy-f1-pixel.png"
+          alt="Auto protagonista" />
+      </div>
+
+      <div class="start-layer" *ngIf="state === 'idle'">
+        <h1>Race Mind Rush</h1>
+        <p>Esquiva autos, junta RM y aguanta lo mas que puedas.</p>
+        <ion-button expand="block" color="danger" size="large" (click)="startGame()">
+          PLAY
+        </ion-button>
+      </div>
+
+      <div class="start-layer game-over" *ngIf="state === 'gameOver'">
+        <h1>GAME OVER</h1>
+        <div class="summary-grid">
+          <div>
+            <span>Score</span>
+            <strong>{{ score }}</strong>
+          </div>
+
+          <div>
+            <span>RM a acreditar</span>
+            <strong>{{ creditedRm }}</strong>
+          </div>
+
+          <div>
+            <span>Distancia</span>
+            <strong>{{ distance | number: '1.0-0' }} m</strong>
+          </div>
+        </div>
+
+        <p class="sync-status" *ngIf="isSavingScore">Guardando partida...</p>
+        <p class="sync-status success" *ngIf="!isSavingScore && lastRewardResult">
+          {{ lastRewardResult.creditedRm }} RM acreditadas. Te quedan {{ dailyRemaining }} de {{ dailyLimit }} RM hoy.
+        </p>
+        <p class="sync-status error" *ngIf="saveScoreError">{{ saveScoreError }}</p>
+
+        <ion-button expand="block" color="danger" size="large" (click)="startGame()">
+          <ion-icon name="refresh" slot="start"></ion-icon>
+          Jugar de nuevo
+        </ion-button>
+      </div>
+    </section>
+
+    <div *ngIf="segmentValue === 'ranking'" class="ranking-view">
+      <div class="reward-banner">
+        <div class="reward-copy">
+          <span class="reward-kicker">Temporada semanal</span>
+          <strong>Gana RM por jugar y por quedar arriba</strong>
+          <p>El score define las RM de la partida hasta el maximo diario. Despues podes seguir corriendo para mejorar tu puesto en el ranking.</p>
+        </div>
+
+        <div class="reward-rules">
+          <div>
+            <span>Partidas</span>
+            <strong>Hasta 20 RM/dia</strong>
+          </div>
+
+          <div>
+            <span>Ranking</span>
+            <strong>Premios top 3</strong>
+          </div>
+        </div>
+
+        <div class="reward-podium">
+          <em *ngFor="let reward of rewards; let i = index">
+            <small>#{{ i + 1 }}</small>
+            +{{ reward }} RM
+          </em>
+        </div>
+      </div>
+
+      <div
+        class="ranking-row"
+        *ngFor="let record of ranking; let i = index"
+        [class.podium]="i < 3">
+        <div class="rank-position">#{{ i + 1 }}</div>
+        <div class="rank-data">
+          <strong>{{ record.name }}</strong>
+          <span>{{ record.distance }} m</span>
+        </div>
+        <div class="rank-score">{{ record.score }}</div>
+      </div>
+
+      <div class="empty-ranking" *ngIf="!ranking.length">
+        {{ isLoadingRanking ? 'Cargando ranking...' : 'Todavia no hay resultados esta semana.' }}
+      </div>
+    </div>
+
+    <div *ngIf="segmentValue === 'game'" class="controls">
+      <button type="button" (click)="moveLeft()" [disabled]="state !== 'playing'" aria-label="Mover izquierda">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+
+      <button type="button" (click)="moveRight()" [disabled]="state !== 'playing'" aria-label="Mover derecha">
+        <ion-icon name="arrow-forward"></ion-icon>
+      </button>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,382 @@
+.road-rush-page {
+  --background: #071017;
+}
+
+.game-shell {
+  display: grid;
+  grid-template-rows: auto auto minmax(0, 1fr) auto;
+  min-height: 100%;
+  padding: 14px;
+  gap: 12px;
+  background: linear-gradient(180deg, #071017, #0d1720 48%, #070a0f);
+}
+
+.view-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr 44px;
+  padding: 4px;
+  border-radius: 14px;
+  background: rgba(255,255,255,.07);
+}
+
+.view-tabs button {
+  border: 0;
+  border-radius: 11px;
+  padding: 10px;
+  color: #9ca8b8;
+  font-weight: 800;
+  background: transparent;
+}
+
+.view-tabs button.active {
+  color: #fff;
+  background: #e10600;
+}
+
+.view-tabs .sound-toggle {
+  display: grid;
+  place-items: center;
+  padding: 0;
+}
+
+.sound-toggle ion-icon {
+  font-size: 20px;
+}
+
+.top-bar {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  color: #fff;
+}
+
+.top-bar div,
+.summary-grid div {
+  min-width: 0;
+  padding: 10px;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 12px;
+  background: rgba(255,255,255,.07);
+}
+
+.top-bar span,
+.summary-grid span {
+  display: block;
+  color: #9ca8b8;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.top-bar strong,
+.summary-grid strong {
+  display: block;
+  margin-top: 3px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 900;
+}
+
+.road-stage {
+  position: relative;
+  min-height: 460px;
+  overflow: hidden;
+  border-radius: 24px;
+  background:
+    repeating-linear-gradient(180deg, rgba(255, 255, 255, 0.16) 0 34px, transparent 34px 70px),
+    linear-gradient(90deg, #151b21, #111820 50%, #151b21);
+  background-size: auto 140px, auto;
+}
+
+.road-stage.is-playing {
+  animation: roadFlow .52s linear infinite;
+}
+
+.road-markers {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.road-markers span {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: repeating-linear-gradient(180deg, rgba(255, 255, 255, 0.7) 0 26px, transparent 26px 58px);
+}
+
+.road-markers span:first-child {
+  left: 33.33%;
+}
+
+.road-markers span:last-child {
+  left: 66.66%;
+}
+
+.road-object,
+.player-car-wrap {
+  position: absolute;
+  z-index: 3;
+  transform: translate(-50%, -50%);
+}
+
+.enemy-car {
+  width: 54px;
+  height: 94px;
+}
+
+.enemy-car img,
+.player-car {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+
+.player-car-wrap {
+  width: 54px;
+  height: 94px;
+  transition: left 0.16s ease-out;
+}
+
+.player-car {
+  animation: carRun .22s infinite alternate ease-in-out;
+}
+
+.coin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  color: #5b3500;
+  font-size: 12px;
+  font-weight: 900;
+  background: #f3bc23;
+}
+
+.start-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 26px;
+  color: #fff;
+  text-align: center;
+  background: rgba(5,8,12,.76);
+}
+
+.start-layer h1 {
+  margin: 0 0 10px;
+  font-size: 32px;
+  font-weight: 950;
+}
+
+.start-layer p {
+  margin: 0 0 22px;
+  color: #c2cbd7;
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin: 8px 0 22px;
+}
+
+.game-over h1 {
+  color: #ff514b;
+}
+
+.sync-status {
+  margin: -8px 0 18px;
+  color: #c2cbd7;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.sync-status.success {
+  color: #8ff0a4;
+}
+
+.sync-status.error {
+  color: #ff8a85;
+}
+
+.controls {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.controls button {
+  height: 66px;
+  border: 0;
+  border-radius: 18px;
+  color: #fff;
+  background: linear-gradient(180deg, #e10600, #a70400);
+}
+
+.controls button:disabled {
+  opacity: 0.36;
+}
+
+.controls ion-icon {
+  font-size: 30px;
+}
+
+.ranking-view {
+  overflow: auto;
+  padding-bottom: 8px;
+}
+
+.reward-banner,.ranking-row,.empty-ranking {
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 16px;
+  background: rgba(255,255,255,.07);
+}
+
+.reward-banner {
+  position: relative;
+  overflow: hidden;
+  padding: 16px;
+  color: #fff;
+  background:
+    radial-gradient(circle at 88% 0, rgba(255,213,79,.34), transparent 28%),
+    linear-gradient(135deg, rgba(225,6,0,.38), rgba(255,255,255,.07)),
+    #111820;
+}
+
+.reward-copy,
+.reward-rules,
+.reward-podium {
+  position: relative;
+}
+
+.reward-copy strong,
+.reward-copy span,
+.reward-copy p {
+  display: block;
+}
+
+.reward-kicker {
+  color: #ffd54f;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: .8px;
+  text-transform: uppercase;
+}
+
+.reward-copy strong {
+  margin-top: 4px;
+  font-size: 20px;
+  line-height: 1.1;
+}
+
+.reward-copy p {
+  margin: 8px 0 0;
+}
+
+.reward-banner span,
+.reward-copy p,
+.rank-data span,
+.empty-ranking {
+  color: #9ca8b8;
+  font-size: 13px;
+}
+
+.reward-rules {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.reward-rules div {
+  padding: 10px;
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 12px;
+  background: rgba(0,0,0,.18);
+}
+
+.reward-rules strong {
+  display: block;
+  margin-top: 2px;
+  font-size: 13px;
+}
+
+.reward-podium {
+  display: grid;
+  grid-template-columns: 1.18fr 1fr 1fr;
+  align-items: end;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.reward-podium em {
+  min-height: 64px;
+  padding: 10px 4px;
+  border-radius: 14px 14px 8px 8px;
+  color: #fff;
+  text-align: center;
+  font-style: normal;
+  font-weight: 900;
+  box-shadow: inset 0 1px rgba(255,255,255,.28);
+  background: rgba(255,255,255,.1);
+}
+
+.reward-podium em:nth-child(1) {
+  min-height: 82px;
+  color: #2a1b00;
+  background: linear-gradient(180deg, #fff4a8, #f0b90b);
+}
+
+.reward-podium em:nth-child(2) {
+  background: linear-gradient(180deg, #cfd7df, #7f8b98);
+}
+
+.reward-podium em:nth-child(3) {
+  background: linear-gradient(180deg, #d9945a, #8c4d22);
+}
+
+.reward-podium small {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 12px;
+  opacity: .78;
+}
+
+.ranking-row {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+  padding: 12px;
+}
+
+.rank-position,.rank-score {
+  color: #ffd54f;
+  font-weight: 900;
+}
+
+.rank-data strong {
+  display: block;
+  color: #fff;
+}
+
+.empty-ranking {
+  margin-top: 10px;
+  padding: 18px;
+}
+
+@keyframes carRun {
+  from { transform: translateY(1px) rotate(-.5deg); }
+  to { transform: translateY(-2px) rotate(.5deg); }
+}
+
+@keyframes roadFlow {
+  to { background-position: 0 140px, 0 0; }
+}
