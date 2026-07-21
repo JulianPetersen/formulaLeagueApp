@@ -66,6 +66,10 @@ export const routes: Routes = [
         loadComponent: () => import('../reflex-game/reflex-game.page').then(m => m.ReflexGamePage)
       },
       {
+        path: 'road-rush',
+        loadComponent: () => import('../road-rush/road-rush.page').then(m => m.RoadRushPage)
+      },
+      {
         path: 'credits-page',
         loadComponent: () => import('../credits-page/credits-page.page').then( m => m.CreditsPagePage)
       },
