@@ -98,4 +98,38 @@
       </ion-button>
     </div>
   </div>
+
+  <div class="reaction-banner reflex-banner">
+    <div class="reaction-left">
+      <h3>Reflejos</h3>
+      <p>Toca los objetivos rapido y competi por el mejor promedio.</p>
+    </div>
+
+    <div class="reaction-right">
+      <div class="reflex-target-preview">
+        <span></span>
+      </div>
+
+      <ion-button fill="solid" size="small" color="danger" (click)="goToReflexGame()">
+        Jugar
+      </ion-button>
+    </div>
+  </div>
+
+  <div class="reaction-banner rush-banner">
+    <div class="reaction-left">
+      <h3>Race Mind Rush</h3>
+      <p>Esquiva rivales, junta RM y subi en el ranking semanal.</p>
+    </div>
+
+    <div class="reaction-right">
+      <div class="rush-preview">
+        <img src="assets/games/road-rush/player-f1-pixel.png" alt="" />
+      </div>
+
+      <ion-button fill="solid" size="small" color="danger" (click)="goToRoadRush()">
+        Jugar
+      </ion-button>
+    </div>
+  </div>
 </ion-content>

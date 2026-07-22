@@ -1,54 +1,86 @@
-<ion-content class="leaderboard home-content">
+<ion-content class="ranking-content">
   <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-  <!-- HEADER -->
-  <div class="leaderboard-header">
-    <h2>🏆 Ranking General</h2>
-    <p>Top 10 usuarios con más puntos</p>
-  </div>
 
-  <!-- PODIUM -->
-  <div class="podium" *ngIf="topUsers.length >= 3">
-
-    <!-- 2° -->
-    <div class="podium-item second">
-      <span class="position">2</span>
-      <h4>{{ topUsers[1].username }}</h4>
-      <span class="points">{{ topUsers[1].points }} pts</span>
+  <section class="ranking-hero">
+    <div class="hero-copy">
+      <span>Temporada Race Mind</span>
+      <h1>Ranking general</h1>
+      <p>Los 10 usuarios con mas puntos acumulados.</p>
     </div>
 
-    <!-- 1° -->
-    <div class="podium-item first">
-      <span class="position">1</span>
-      <h3>{{ topUsers[0].username }}</h3>
-      <span class="points">{{ topUsers[0].points }} pts</span>
+    <div class="hero-badge">
+      <ion-icon name="trophy"></ion-icon>
+      <strong>{{ topUsers[0]?.points || 0 }}</strong>
+      <small>pts lider</small>
+    </div>
+  </section>
+
+  <section class="podium-card" *ngIf="topUsers.length >= 3">
+    <div class="podium-item second" [class.current-user]="topUsers[1]._id === currentUserId">
+      <div class="avatar">{{ getInitials(topUsers[1].username) }}</div>
+      <span class="medal">02</span>
+      <strong>{{ topUsers[1].username }}</strong>
+      <small>{{ topUsers[1].points | number }} pts</small>
     </div>
 
-    <!-- 3° -->
-    <div class="podium-item third">
-      <span class="position">3</span>
-      <h4>{{ topUsers[2].username }}</h4>
-      <span class="points">{{ topUsers[2].points }} pts</span>
+    <div class="podium-item first" [class.current-user]="topUsers[0]._id === currentUserId">
+      <div class="winner-ring">
+        <ion-icon name="trophy"></ion-icon>
+      </div>
+      <div class="avatar">{{ getInitials(topUsers[0].username) }}</div>
+      <span class="medal">01</span>
+      <strong>{{ topUsers[0].username }}</strong>
+      <small>{{ topUsers[0].points | number }} pts</small>
     </div>
 
-  </div>
+    <div class="podium-item third" [class.current-user]="topUsers[2]._id === currentUserId">
+      <div class="avatar">{{ getInitials(topUsers[2].username) }}</div>
+      <span class="medal">03</span>
+      <strong>{{ topUsers[2].username }}</strong>
+      <small>{{ topUsers[2].points | number }} pts</small>
+    </div>
+  </section>
 
-  <!-- RESTO DEL RANKING -->
-  <div class="ranking-list">
-    <div 
-      *ngFor="let user of topUsers.slice(3); let i = index"
-      class="ranking-item"
-      [class.current-user]="user._id === currentUserId">
-
-      <span class="rank-number">{{ i + 4 }}</span>
-
-      <div class="user-info">
-        <span class="user-name">{{ user.username }}</span>
-        <span class="user-points">{{ user.points }} pts</span>
+  <section class="list-card">
+    <div class="section-heading">
+      <div>
+        <span>Clasificacion</span>
+        <h2>Tabla de posiciones</h2>
       </div>
 
+      <small>{{ topUsers.length }} pilotos</small>
     </div>
-  </div>
 
+    <div class="loading-state" *ngIf="isLoading">
+      <ion-icon name="radio"></ion-icon>
+      Cargando ranking...
+    </div>
+
+    <div class="empty-state" *ngIf="!isLoading && !topUsers.length">
+      <ion-icon name="flag"></ion-icon>
+      Todavia no hay usuarios en el ranking.
+    </div>
+
+    <div
+      *ngFor="let user of topUsers; let i = index"
+      class="ranking-row"
+      [class.top-three]="i < 3"
+      [class.current-user]="user._id === currentUserId">
+      <span class="rank-number">{{ getPositionLabel(i) }}</span>
+
+      <div class="row-avatar">{{ getInitials(user.username) }}</div>
+
+      <div class="user-info">
+        <strong>{{ user.username }}</strong>
+        <small>{{ user._id === currentUserId ? 'Tu posicion' : 'Competidor' }}</small>
+      </div>
+
+      <div class="points-pill">
+        <strong>{{ user.points | number }}</strong>
+        <small>pts</small>
+      </div>
+    </div>
+  </section>
 </ion-content>

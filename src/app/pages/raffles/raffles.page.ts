@@ -23,7 +23,8 @@ import { RafflesService } from 'src/app/services/raffles-service';
     IonContent,
     IonHeader,
     IonSpinner,
-    IonToolbar
+    IonToolbar,
+    RouterLink
   ]
 })
 export class RafflesPage implements OnInit, OnDestroy {

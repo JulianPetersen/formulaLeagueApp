@@ -152,4 +152,12 @@ loadRewardStatus() {
 goToGame(){
   this.router.navigateByUrl('tabs/game-semaforo')
 }
+
+goToReflexGame(){
+  this.router.navigateByUrl('tabs/reflex-game')
+}
+
+goToRoadRush(){
+  this.router.navigateByUrl('tabs/road-rush')
+}
 }

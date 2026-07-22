@@ -1,124 +1,119 @@
-.menu {
-    --background: linear-gradient(
-    160deg,
-    #0f2027,
-    #203a43,
-    #2c5364
-  );
-  display: flex;
-  flex-direction: column;
-  height: 100%;
+:host {
+  --ion-background-color: transparent;
 }
 
-/* =====================
-   USER
-===================== */
-.menu-user {
-  display: flex;
+.menu-page {
+  --background:
+    linear-gradient(135deg, rgba(225, 6, 0, .18), transparent 28%),
+    linear-gradient(180deg, #080b10 0%, #11161d 46%, #07080b 100%);
+  color: #fff;
+}
+
+.menu-page::part(scroll) {
+  padding: 18px 14px 30px;
+}
+
+button {
+  font: inherit;
+}
+
+.menu-section {
+  padding: 16px;
+  border: 1px solid rgba(255, 255, 255, .1);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(225, 6, 0, .18), rgba(255, 255, 255, .04)),
+    rgba(255, 255, 255, .06);
+  box-shadow: 0 18px 34px rgba(0, 0, 0, .28);
+}
+
+.section-title {
+  margin-bottom: 14px;
+}
+
+.section-title span {
+  color: #c7d0dc;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: .7px;
+  text-transform: uppercase;
+}
+
+.section-title h1 {
+  margin: 3px 0 0;
+  font-size: 31px;
+  font-weight: 950;
+  line-height: 1;
+}
+
+.menu-nav {
+  display: grid;
+  gap: 8px;
+}
+
+.menu-nav button {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
-  padding: 24px 20px 16px;
+  gap: 12px;
+  width: 100%;
+  min-height: 64px;
+  padding: 10px;
+  border: 1px solid rgba(255, 255, 255, .09);
+  border-radius: 8px;
+  color: #fff;
+  text-align: left;
+  background: rgba(255, 255, 255, .07);
 }
 
-.user-avatar {
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  background: rgba(255, 61, 0, 0.12);
-  display: flex;
+.menu-icon {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  color: #fff;
+  background: rgba(225, 6, 0, .18);
+}
+
+.menu-icon ion-icon {
+  color: #ff514b;
+  font-size: 21px;
+}
+
+.menu-nav button > div:not(.menu-icon) {
+  min-width: 0;
+}
+
+.menu-nav span {
+  display: block;
+  overflow: hidden;
+  font-size: 15px;
+  font-weight: 900;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.menu-nav button > ion-icon {
+  color: #9ca8b8;
+  font-size: 20px;
+}
+
+.logout {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  margin-right: 12px;
-
-  ion-icon {
-    color: var(--ion-color-primary);
-    font-size: 22px;
-  }
+  gap: 8px;
+  width: 100%;
+  min-height: 48px;
+  margin-top: 14px;
+  border: 1px solid rgba(225, 6, 0, .42);
+  border-radius: 8px;
+  color: #fff;
+  font-weight: 900;
+  background: rgba(225, 6, 0, .18);
 }
 
-.user-data {
-  h4 {
-    margin: 0;
-    font-size: 15px;
-    font-weight: 600;
-  }
-
-  span {
-    font-size: 13px;
-    color: var(--ion-color-primary);
-  }
-}
-
-/* =====================
-   NAV
-===================== */
-.menu-nav {
-  display: flex;
-  flex-direction: column;
-  padding-top: 12px;
-
-  button {
-    all: unset;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    padding: 14px 20px;
-    cursor: pointer;
-    position: relative;
-
-    span {
-      font-size: 15px;
-    }
-
-    ion-icon {
-      font-size: 20px;
-      color: var(--ion-text-color);
-      opacity: 0.8;
-    }
-
-    &:hover {
-      background: rgba(255, 61, 0, 0.05);
-    }
-
-    &::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: 3px;
-      background: transparent;
-      transition: background 0.2s;
-    }
-
-    &:hover::before {
-      background: var(--ion-color-primary);
-    }
-  }
-}
-
-/* =====================
-   FOOTER
-===================== */
-.menu-footer {
-  margin-top: auto;
-  padding: 16px 20px;
-
-  .logout {
-    all: unset;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 14px;
-    opacity: 0.6;
-    cursor: pointer;
-
-    ion-icon {
-      font-size: 18px;
-    }
-
-    &:hover {
-      opacity: 1;
-      color: #ff6e6e;
-    }
-  }
+.logout ion-icon {
+  font-size: 20px;
 }

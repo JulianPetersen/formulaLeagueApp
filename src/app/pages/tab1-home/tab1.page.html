@@ -1,137 +1,147 @@
 <ion-header class="custom-header">
-  <ion-toolbar>
-    
-  </ion-toolbar>
+  <ion-toolbar></ion-toolbar>
 </ion-header>
+
 <ion-content class="home-content">
-
-  
-
   <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-@if (prize?.status == 'activo'){
-  <div class="season-prize">
-    <div class="prize-icon">
-      <ion-icon name="trophy"></ion-icon>
-    </div>
-    <div class="prize-content">
-      <span class="season-label">Premio temporada 2026</span>
-      <h3>U$D {{ prize?.amount }}</h3>
-      <ion-button fill="clear" size="small" (click)="goToWallet(); $event.stopPropagation()">
-        Ver billetera
-      </ion-button>
-    </div>
-  </div>
-}
+  <section class="home-hero">
+    <div class="home-topline">
+      <div class="brand-lockup">
+        <img src="assets/home/logo-home.webp" alt="Race Mind" />
+      </div>
 
-
-@if (prize?.status == 'cerrado'){
-  <div class="season-prize">
-    <div class="prize-icon">
-      <ion-icon name="trophy"></ion-icon>
-    </div>
-    <div class="prize-content">
-      <span class="season-label">Aún no Hay premio para la proxima temporada</span>
-      <!-- <h3>U$D {{ prize?.amount }}</h3> -->
-      <!-- <p>El usuario con más puntos al final del campeonato gana.</p> -->
-      <ion-button fill="clear" size="small" (click)="goToWallet(); $event.stopPropagation()">
-        Ver billetera
-      </ion-button>
-    </div>
-  </div>
-}
-
-
-<app-credits-banner></app-credits-banner>
-
-  <div class="ranking-banner" (click)="goToRanking()">
-    <div class="ranking-icon">
-      <ion-icon name="podium"></ion-icon>
+      <button type="button" class="rm-pill" (click)="gotoCreditCenter()">
+        <img src="assets/rm-coins.png" alt="RM" />
+        <span>{{ userCredits || 0 }}</span>
+      </button>
     </div>
 
-    <div class="ranking-content">
-      <span class="ranking-label">Ranking Race Mind</span>
-      @if (rankingPosition) {
-        <div class="ranking-metrics">
-          <div>
-            <small>Posicion</small>
-            <strong>#{{ rankingPosition.position }}</strong>
-          </div>
+    <div class="hero-card" (click)="goToPredictionSection()">
+      <img src="assets/home/home-race-hero.webp" alt="Proxima carrera" />
+      <div class="hero-overlay"></div>
 
-          <div>
-            <small>Puntos</small>
-            <strong>{{ rankingPosition.points }}</strong>
+      <div class="hero-content">
+        <span class="eyebrow">Proxima carrera</span>
+        <h2>{{ firstUpcomingRace?.name || 'Calendario Race Mind' }}</h2>
+        <p>{{ firstUpcomingRace?.circuit?.country || 'Arma tu prediccion y suma puntos para la temporada.' }}</p>
+
+        <div class="hero-actions">
+          <button type="button" (click)="goToPredictionSection(); $event.stopPropagation()">
+            <ion-icon name="flag"></ion-icon>
+            Hacer prediccion
+          </button>
+
+          <div class="hero-stat">
+            <small>Ranking</small>
+            <strong>{{ rankingPosition ? '#' + rankingPosition.position : '--' }}</strong>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="quick-grid" aria-label="Accesos rapidos">
+    <button type="button" class="quick-card primary image-card" (click)="goToPredictionSection()">
+      <img src="assets/home/prediction-thumb.webp" alt="" />
+      <ion-icon name="flag"></ion-icon>
+      <span>Prediccion</span>
+      <small>Elegir pilotos</small>
+    </button>
+
+    <button type="button" class="quick-card game image-card" (click)="goToRoadRush()">
+      <img src="assets/home/race-mind-rush-thumb.webp" alt="" />
+      <span>Race Mind Rush</span>
+      <small>Juga por RM</small>
+    </button>
+
+    <button type="button" class="quick-card image-card" (click)="goToRanking()">
+      <img src="assets/home/ranking-thumb.webp" alt="" />
+      <ion-icon name="podium"></ion-icon>
+      <span>Ranking</span>
+      <small>{{ rankingPosition?.points || 0 }} pts</small>
+    </button>
+
+    <button type="button" class="quick-card image-card" (click)="goToRaffles()">
+      <img src="assets/home/raffles-thumb.webp" alt="" />
+      <ion-icon name="ticket"></ion-icon>
+      <span>Sorteos</span>
+      <small>Usa tus RM</small>
+    </button>
+  </section>
+
+  <section class="season-panel" (click)="goToWallet()">
+    <div class="panel-icon">
+      <ion-icon name="trophy"></ion-icon>
+    </div>
+
+    <div>
+      <span>Premio temporada</span>
+      @if (prize?.status == 'activo') {
+        <strong>U$D {{ prize?.amount }}</strong>
       } @else {
-        <h3>Consulta tu posicion</h3>
+        <strong>Proxima temporada</strong>
       }
+      <small>Tu billetera y premios acumulados</small>
     </div>
 
-    <ion-button fill="clear" size="small" (click)="goToRanking(); $event.stopPropagation()">
-      Ver ranking
-    </ion-button>
-  </div>
+    <ion-icon name="chevron-forward"></ion-icon>
+  </section>
 
-
-  <!-- NUEVO JUEGO -->
-  <div class="reaction-banner raffles-home-banner" (click)="goToRaffles()">
-    <div class="reaction-left">
-      <div class="reaction-badge">RM SORTEOS</div>
-      <h3 class="raffles-title">Sorteos activos</h3>
-      <p>Usa tus RM coins para participar por premios.</p>
-      <h3>🏎️ Juego de reacción</h3>
+  <section class="games-strip">
+    <div class="section-heading">
+      <div>
+        <span>Juegos Race Mind</span>
+        <h3>Juega para ganar RM Coins</h3>
+      </div>
     </div>
 
-    <div class="reaction-right">
-      <img style="width: 38px; height: 38px; border-radius: 50%; object-fit: cover;" src="assets/rm-coins.png" alt="RM coins" />
-      <div class="lights">
-        <span></span>
-        <span></span>
-        <span class="green"></span>
+    <div class="mini-game-row">
+      <button type="button" (click)="goToRoadRush()">
+        <ion-icon name="game-controller"></ion-icon>
+        <span>Rush</span>
+      </button>
+
+      <button type="button" (click)="goToReflexGame()">
+        <ion-icon name="flash"></ion-icon>
+        <span>Reflejos</span>
+      </button>
+
+      <button type="button" (click)="goToGame()">
+        <ion-icon name="speedometer"></ion-icon>
+        <span>Semaforo</span>
+      </button>
+    </div>
+  </section>
+
+  <section class="news-card" (click)="goToNews()">
+    <img src="assets/home/news-placeholder-racing.webp" alt="Noticias" />
+    <div>
+      <span>Noticias</span>
+      <strong>Actualidad, resultados y novedades</strong>
+      <small>Segui el campeonato desde la app</small>
+    </div>
+  </section>
+
+  <section class="races-section" id="home-predictions-section">
+    <div class="section-heading">
+      <div>
+        <span>Calendario</span>
+        <h3>Pronosticar Carreras</h3>
       </div>
 
-      <ion-button fill="solid" size="small" color="danger" (click)="goToRaffles(); $event.stopPropagation()">
-        Ver sorteos
-      </ion-button>
-    </div>
-  </div>
-
-  <div class="reaction-banner reflex-banner" (click)="goToReflexGame()">
-    <div class="reaction-left">
-      <div class="reaction-badge reflex-badge">NUEVO</div>
-      <h3>Reflejos Pit Stop</h3>
     </div>
 
-    <div class="reaction-right">
-      <div class="reflex-target-preview">
-        <span></span>
-      </div>
+    @for (race of allRacesUpcoming; track race._id) {
+      <app-info-carrera [race]="race" (click)="togglePilots(race._id)"></app-info-carrera>
 
-      <ion-button fill="solid" size="small" color="danger" (click)="goToReflexGame(); $event.stopPropagation()">
-        Jugar
-      </ion-button>
-    </div>
-  </div>
-
-  <!-- HEADER -->
-  <div class="header">
-    <h2>🏁 Próximas carreras</h2>
-    <p>Armá tu pronóstico antes del cierre</p>
-  </div>
-
-@for (race of allRacesUpcoming; track race._id) {
-
-  <app-info-carrera [race]="race" (click)="togglePilots(race._id)"></app-info-carrera>
-
-  <app-component-pilots
-    [listPilots]="race.pilots"
-    [raceId]="race._id"
-    *ngIf="showPilotsMap[race._id]">
-  </app-component-pilots>
-
-}
-
+      <app-component-pilots
+        [listPilots]="race.pilots"
+        [raceId]="race._id"
+        *ngIf="showPilotsMap[race._id]">
+      </app-component-pilots>
+    }
+  </section>
 </ion-content>

@@ -6,6 +6,8 @@ import { addIcons } from 'ionicons';
 import { arrowBack, arrowForward, refresh, volumeHigh, volumeMute } from 'ionicons/icons';
 import { RaceMindRushRecord, RaceMindRushRecordResponse } from '../../models/race-mind-rush';
 import { RaceMindRushService } from '../../services/race-mind-rush';
+import { AdMob } from '@capacitor-community/admob';
+
 
 type GameState = 'idle' | 'playing' | 'gameOver';
 type RoadObjectType = 'enemy' | 'coin';
@@ -264,6 +266,7 @@ export class RoadRushPage implements OnDestroy {
     this.playCrashSound();
     this.saveScore();
     this.crashHaptic();
+    this.showAd();
   }
 
   private saveScore() {
@@ -444,5 +447,19 @@ export class RoadRushPage implements OnDestroy {
     } catch {
       // Haptics is only available on supported devices.
     }
+  }
+
+
+
+    async showAd() {
+
+    const options = {
+      adId: 'ca-app-pub-3940256099942544/1033173712' // TEST ID
+      // adId: 'ca-app-pub-7377639735677577/7582767693' // PROD ID
+    };
+
+    await AdMob.prepareInterstitial(options);
+    await AdMob.showInterstitial();
+
   }
 }

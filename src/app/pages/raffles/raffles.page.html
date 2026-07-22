@@ -24,6 +24,19 @@
     Mis premios
   </ion-button>
 
+  <button type="button" class="earn-rm-cta" routerLink="/tabs/credits-page">
+    <div class="earn-rm-icon">
+      <img src="assets/rm-coins.png" alt="" />
+    </div>
+
+    <div>
+      <span>Te faltan RM para participar?</span>
+      <strong>GANAR MAS RM</strong>
+    </div>
+
+    <span class="earn-rm-arrow">→</span>
+  </button>
+
   <div *ngIf="isLoading && !featured" class="state-box">
     <ion-spinner name="crescent"></ion-spinner>
   </div>

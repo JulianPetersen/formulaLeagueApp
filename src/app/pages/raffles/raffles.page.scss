@@ -48,6 +48,88 @@
   object-fit: cover;
 }
 
+.earn-rm-cta {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  width: calc(100% - 32px);
+  min-height: 74px;
+  margin: 0 16px 14px;
+  padding: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(250, 204, 21, .42);
+  border-radius: 16px;
+  color: #fff;
+  text-align: left;
+  background:
+    linear-gradient(135deg, rgba(250, 204, 21, .22), rgba(225, 6, 0, .18)),
+    rgba(13, 19, 23, .94);
+  box-shadow: 0 16px 28px rgba(0, 0, 0, .24);
+}
+
+.earn-rm-cta::after {
+  content: "";
+  position: absolute;
+  inset: auto -32px -46px auto;
+  width: 112px;
+  height: 112px;
+  border-radius: 50%;
+  background: rgba(250, 204, 21, .12);
+}
+
+.earn-rm-icon {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: rgba(250, 204, 21, .16);
+}
+
+.earn-rm-icon img {
+  width: 34px;
+  height: 34px;
+}
+
+.earn-rm-cta span,
+.earn-rm-cta strong {
+  position: relative;
+  z-index: 1;
+  display: block;
+}
+
+.earn-rm-cta div {
+  min-width: 0;
+}
+
+.earn-rm-cta span {
+  color: rgba(255, 255, 255, .68);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.earn-rm-cta strong {
+  margin-top: 2px;
+  color: #facc15;
+  font-size: 18px;
+  font-weight: 950;
+  letter-spacing: .4px;
+}
+
+.earn-rm-arrow {
+  display: grid !important;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  color: #0b1114 !important;
+  font-size: 22px !important;
+  font-weight: 950 !important;
+  background: #facc15;
+}
+
 .featured-raffle,.section-block {
   margin: 14px 16px;
   border-radius: 16px;

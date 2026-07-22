@@ -1,84 +1,121 @@
 <ion-content class="account-content">
+  <section class="profile-hero">
+    <div class="profile-top">
+      <div class="avatar">{{ getInitial() }}</div>
 
-  <!-- HEADER -->
-  <div class="account-header">
-    <div class="avatar">
-      {{ user?.username.charAt(0) || 'U' }}
+      <div class="profile-copy">
+        <span>Mi cuenta</span>
+        <h1>{{ getDisplayName() }}</h1>
+        <p>{{ user?.email || 'Cargando cuenta...' }}</p>
+      </div>
     </div>
 
-    <h2>{{ user?.name }}</h2>
-    <p class="email">{{ user?.email }}</p>
-    <span class="verify-pill" [class.verified]="isEmailVerified()">
+    <div class="verify-pill" [class.verified]="isEmailVerified()">
+      <ion-icon [name]="isEmailVerified() ? 'shield-checkmark' : 'mail'"></ion-icon>
       {{ getEmailStatusLabel() }}
-    </span>
-  </div>
+    </div>
+  </section>
 
-  <!-- PUNTOS -->
-  <ion-card class="points-card">
-    <ion-card-content>
-      <p class="label">Puntos acumulados</p>
-      <h1 class="points">{{ user?.points }}</h1>
-    </ion-card-content>
-  </ion-card>
+  <section class="stats-grid">
+    <div class="stat-card points-card">
+      <span>Puntos</span>
+      <strong>{{ user?.points || 0 }}</strong>
+      <small>Temporada</small>
+    </div>
 
+    <div class="stat-card rm-card">
+      <span>RM coins</span>
+      <strong>{{ user?.credits || 0 }}</strong>
+      <small>Billetera</small>
+    </div>
+  </section>
 
-  <ion-card class="email-card" [class.verified]="isEmailVerified()">
-    <ion-card-content>
-      <p class="label">Estado del correo</p>
-      <h3>{{ getEmailStatusLabel() }}</h3>
-      <p class="hint">{{ getEmailStatusMessage() }}</p>
+  <section class="email-card" [class.verified]="isEmailVerified()">
+    <div class="email-heading">
+      <div class="mail-icon">
+        <ion-icon [name]="isEmailVerified() ? 'shield-checkmark' : 'mail'"></ion-icon>
+      </div>
+
+      <div>
+        <span>Seguridad</span>
+        <h2>{{ getEmailStatusLabel() }}</h2>
+      </div>
+    </div>
+
+    <p>{{ getEmailStatusMessage() }}</p>
+
+    <ion-button
+      *ngIf="!isEmailVerified()"
+      expand="block"
+      class="verify-button"
+      [disabled]="sendingVerification"
+      (click)="sendVerificationEmail()">
+      <ion-spinner *ngIf="sendingVerification" name="crescent"></ion-spinner>
+      <span *ngIf="!sendingVerification">Verificar mail</span>
+    </ion-button>
+
+    <button
+      *ngIf="!isEmailVerified()"
+      type="button"
+      class="change-email-link"
+      (click)="showEmailChange = !showEmailChange">
+      {{ showEmailChange ? 'Cancelar cambio de email' : 'No tengo acceso a este email' }}
+    </button>
+
+    <div *ngIf="showEmailChange && !isEmailVerified()" class="email-change-box">
+      <ion-input
+        type="email"
+        label="Nuevo email"
+        labelPlacement="floating"
+        [(ngModel)]="newEmail">
+      </ion-input>
 
       <ion-button
-        *ngIf="!isEmailVerified()"
         expand="block"
         class="verify-button"
-        [disabled]="sendingVerification"
-        (click)="sendVerificationEmail()">
-        <ion-spinner *ngIf="sendingVerification" name="crescent"></ion-spinner>
-        <span *ngIf="!sendingVerification">Verificar mail</span>
+        [disabled]="changingEmail || sendingVerification || !newEmail.trim()"
+        (click)="changeEmailAndSendVerification()">
+        <ion-spinner *ngIf="changingEmail || sendingVerification" name="crescent"></ion-spinner>
+        <span *ngIf="!changingEmail && !sendingVerification">Cambiar y verificar</span>
       </ion-button>
+    </div>
+  </section>
 
-      <button
-        *ngIf="!isEmailVerified()"
-        type="button"
-        class="change-email-link"
-        (click)="showEmailChange = !showEmailChange">
-        {{ showEmailChange ? 'Cancelar cambio de email' : 'No tengo acceso a este email' }}
+  <section class="account-actions">
+    <div class="section-title">
+      <span>Accesos</span>
+      <h2>Gestionar cuenta</h2>
+    </div>
+
+    <nav class="menu-nav">
+      <button [routerLink]="['/tabs/my-prediction']">
+        <div class="menu-icon">
+          <ion-icon name="speedometer"></ion-icon>
+        </div>
+        <span>Mis Pronosticos</span>
+        <ion-icon name="chevron-forward"></ion-icon>
       </button>
 
-      <div *ngIf="showEmailChange && !isEmailVerified()" class="email-change-box">
-        <ion-input
-          type="email"
-          label="Nuevo email"
-          labelPlacement="floating"
-          [(ngModel)]="newEmail">
-        </ion-input>
+      <button [routerLink]="['/tabs/wallet']">
+        <div class="menu-icon">
+          <ion-icon name="wallet"></ion-icon>
+        </div>
+        <span>Pozo y billetera</span>
+        <ion-icon name="chevron-forward"></ion-icon>
+      </button>
 
-        <ion-button
-          expand="block"
-          class="verify-button"
-          [disabled]="changingEmail || sendingVerification || !newEmail.trim()"
-          (click)="changeEmailAndSendVerification()">
-          <ion-spinner *ngIf="changingEmail || sendingVerification" name="crescent"></ion-spinner>
-          <span *ngIf="!changingEmail && !sendingVerification">Cambiar y verificar</span>
-        </ion-button>
-      </div>
-    </ion-card-content>
-  </ion-card>
+      <button [routerLink]="['/tabs/raffle-prizes']">
+        <div class="menu-icon">
+          <ion-icon name="gift"></ion-icon>
+        </div>
+        <span>Mis premios</span>
+        <ion-icon name="chevron-forward"></ion-icon>
+      </button>
+    </nav>
+  </section>
 
-
-
-  <!-- ACTIONS -->
-   <div class="actions">
-      <ion-button
-    expand="block"
-    shape="round"
-    color="primary"
-    class="logout-btn"
-    (click)="logout()">
-    Cerrar sesión
-  </ion-button>
-   </div>
-
-
+  <button type="button" class="logout-btn" (click)="logout()">
+    <ion-icon name="log-out"></ion-icon>
+    Cerrar sesion
+  </button>
 </ion-content>

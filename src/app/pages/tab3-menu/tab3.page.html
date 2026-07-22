@@ -1,73 +1,65 @@
-<ion-content class="menu">
-
-  <!-- USER -->
-  <div class="menu-user">
-    <div class="user-avatar">
-      <ion-icon name="person"></ion-icon>
+<ion-content class="menu-page">
+  <section class="menu-section">
+    <div class="section-title">
+      <span>Race Mind</span>
+      <h1>Menu</h1>
     </div>
 
-    <div class="user-data">
-      <h4>{{userInfo?.username}}</h4>
-      <span>{{userInfo?.points}}</span>
-    </div>
-  </div>
+    <nav class="menu-nav">
+      <button [routerLink]="['/tabs/raffles']">
+        <div class="menu-icon">
+          <ion-icon name="ticket"></ion-icon>
+        </div>
+        <div>
+          <span>Sorteos</span>
+        </div>
+        <ion-icon name="chevron-forward"></ion-icon>
+      </button>
 
-  <!-- NAV -->
-  <nav class="menu-nav">
-    <button [routerLink]="['/tabs/my-prediction']">
-      <ion-icon name="speedometer"></ion-icon>
-      <span>Mis Pronósticos</span>
-    </button>
+      <button [routerLink]="['/tabs/user-ranking']">
+        <div class="menu-icon">
+          <ion-icon name="podium"></ion-icon>
+        </div>
+        <div>
+          <span>Ranking - Race Mind</span>
+        </div>
+        <ion-icon name="chevron-forward"></ion-icon>
+      </button>
 
-    <button [routerLink]="['/tabs/wallet']">
-      <ion-icon name="wallet"></ion-icon>
-      <span>Pozo y billetera</span>
-    </button>
+      <button [routerLink]="['/tabs/ranking-pilots']">
+        <div class="menu-icon">
+          <ion-icon name="flag"></ion-icon>
+        </div>
+        <div>
+          <span>Ranking - Campeonato 2026</span>
+        </div>
+        <ion-icon name="chevron-forward"></ion-icon>
+      </button>
 
-    <button [routerLink]="['/tabs/raffles']">
-      <ion-icon name="ticket"></ion-icon>
-      <span>Sorteos</span>
-    </button>
+      <button [routerLink]="['/tabs/myaccount']">
+        <div class="menu-icon">
+          <ion-icon name="person"></ion-icon>
+        </div>
+        <div>
+          <span>Mi cuenta</span>
+        </div>
+        <ion-icon name="chevron-forward"></ion-icon>
+      </button>
 
-    <button [routerLink]="['/tabs/raffle-prizes']">
-      <ion-icon name="gift"></ion-icon>
-      <span>Mis premios</span>
-    </button>
+      <button [routerLink]="['/tabs/news']">
+        <div class="menu-icon">
+          <ion-icon name="newspaper"></ion-icon>
+        </div>
+        <div>
+          <span>Noticias</span>
+        </div>
+        <ion-icon name="chevron-forward"></ion-icon>
+      </button>
+    </nav>
+  </section>
 
-    <button [routerLink]="['/tabs/user-ranking']">
-      <ion-icon name="podium"></ion-icon>
-      <span>Ranking - Race Mind</span>
-    </button>
-
-    <button [routerLink]="['/tabs/road-rush']">
-      <ion-icon name="flag"></ion-icon>
-      <span>Race Mind Rush</span>
-    </button>
-
-    <button [routerLink]="['/tabs/ranking-pilots']">
-      <ion-icon name="podium"></ion-icon>
-      <span>Ranking - Campeonato 2026</span>
-    </button>
-
-
-    <button [routerLink]="['/tabs/myaccount']">
-      <ion-icon name="person"></ion-icon>
-      <span>Mi cuenta</span>
-    </button>
-
-
-    <button [routerLink]="['/tabs/news']">
-      <ion-icon name="newspaper"></ion-icon>
-      <span>Noticias</span>
-    </button>
-  </nav>
-
-  <!-- LOGOUT -->
-  <div class="menu-footer">
-    <button class="logout" (click)="logout()">
-      <ion-icon name=""></ion-icon>
-      Cerrar sesión
-    </button>
-  </div>
-
+  <button class="logout" type="button" (click)="logout()">
+    <ion-icon name="log-out"></ion-icon>
+    Cerrar sesion
+  </button>
 </ion-content>
